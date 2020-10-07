@@ -17,11 +17,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorNavigation"
         android:id="@+id/btm_nav"
         app:itemIconTint="@drawable/button_nav_clicked"
         app:itemTextColor="@drawable/button_nav_clicked"
-        app:menu="@menu/bottomnav_menu"
+        app:menu="@menu/bottom_nav_menu"
         />
 
 
