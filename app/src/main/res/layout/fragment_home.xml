@@ -6,17 +6,9 @@
     tools:context="edu.bluejack20_1.learn_ezo.Home">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:src="@drawable/ic_logotype"
-        />
-
-    <TextView
-        android:id="@+id/tv_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home"
-        />
+        android:layout_width="127dp"
+        android:layout_height="144dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_logotype" />
 
 </FrameLayout>
