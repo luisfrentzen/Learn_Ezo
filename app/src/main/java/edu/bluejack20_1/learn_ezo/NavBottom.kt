@@ -27,7 +27,7 @@ class NavBottom : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav)
 
-        loadFragment(Home())
+        loadFragment(Setting())
 
         btm_nav.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -35,7 +35,8 @@ class NavBottom : AppCompatActivity() {
 
                 when (p0.itemId){
                     R.id.home_menu -> {
-                        fragment = Home()
+                        //for see
+                        fragment = Setting()
                     }
                     R.id.practice_menu -> {
                         fragment = Practice()
