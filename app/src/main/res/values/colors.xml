@@ -6,4 +6,6 @@
 
     <color name="colorNavigation">#FFFFFF</color>
     <color name="colorNavigationDefault">#D3D3D3</color>
+
+    <color name="black">#000000</color>
 </resources>
