@@ -3,22 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="edu.bluejack20_1.learn_ezo.Home">
 
-    <ImageView
-        android:layout_width="94dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_logotype"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorNavigation"
+        android:gravity="center_vertical"
+        >
 
-<!--    <CalendarView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        />-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_home"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="19sp"
+            android:fontFamily="sans-serif-medium"
+            />
+
+    </RelativeLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="360dp"
+        android:layout_height="390dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="10dp"
+        >
+
+        <com.applandeo.materialcalendarview.CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:headerColor="@color/colorPrimary"
+            app:todayLabelColor="@color/colorPrimary"
+            />
+
+    </com.google.android.material.card.MaterialCardView>
 
 
 
