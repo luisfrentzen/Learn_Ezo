@@ -3,24 +3,24 @@
     <item
         android:id="@+id/home_menu"
         android:icon="@drawable/ic_home"
-        android:title="Home"
+        android:title="@string/tv_home"
     />
 
     <item
         android:id="@+id/practice_menu"
         android:icon="@drawable/ic_practice"
-        android:title="Practice"
+        android:title="@string/tv_learn"
     />
 
     <item
         android:id="@+id/game_menu"
         android:icon="@drawable/ic_game"
-        android:title="Game"
+        android:title="@string/tv_play"
     />
 
     <item
         android:id="@+id/user_menu"
         android:icon="@drawable/ic_user"
-        android:title="User"
+        android:title="@string/tv_profile"
     />
 </menu>

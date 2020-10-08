@@ -2,4 +2,7 @@
     <string name="app_name">Learn! Ezo</string>
     <string name="tv_setting">Settings</string>
     <string name="tv_home">Home</string>
+    <string name="tv_profile">Profile</string>
+    <string name="tv_play">Play</string>
+    <string name="tv_learn">Learn</string>
 </resources>
