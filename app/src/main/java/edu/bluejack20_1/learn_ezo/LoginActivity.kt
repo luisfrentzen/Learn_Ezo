@@ -1,4 +1,4 @@
-package com.example.tpa_mobile
+package edu.bluejack20_1.learn_ezo
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
