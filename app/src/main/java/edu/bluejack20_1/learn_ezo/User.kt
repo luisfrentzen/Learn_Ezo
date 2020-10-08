@@ -1,13 +1,16 @@
 package edu.bluejack20_1.learn_ezo
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_user.*
+import com.bumptech.glide.Glide
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +35,6 @@ class User : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-
     }
 
     override fun onCreateView(
@@ -46,6 +48,23 @@ class User : Fragment() {
         btnSignOut.setOnClickListener {
             Toast.makeText(view?.context, "Button Clicked", Toast.LENGTH_LONG).show()
             (activity as NavBottom?)?.signOut()
+        }
+
+        val personPhoto: Uri?
+        val personName : String?
+        val personEmail : String?
+        val personId : String?
+
+        val profilePic : ImageView = root.findViewById(R.id.profile_pic)
+
+        val acct = GoogleSignIn.getLastSignedInAccount(activity)
+        if (acct != null) {
+            personName = acct.displayName
+            personEmail = acct.email
+            personId = acct.id
+            personPhoto = acct.photoUrl
+
+            Glide.with(this).load(personPhoto).into(profilePic)
         }
 
         return root
