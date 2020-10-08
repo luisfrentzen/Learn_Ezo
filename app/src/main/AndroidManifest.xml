@@ -11,12 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".MainActivity">
-=======
+        <activity android:name="edu.bluejack20_1.learn_ezo.LoginActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name="edu.bluejack20_1.learn_ezo.NavBottom">
->>>>>>> 5fd8b26f31aa80eac2899c2e4e3ca1dddde0879f
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
