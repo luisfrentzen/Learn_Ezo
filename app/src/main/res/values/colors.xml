@@ -3,4 +3,7 @@
     <color name="colorPrimary">#5d5644</color>
     <color name="colorPrimaryDark">#fceacd</color>
     <color name="colorAccent">#fceacd</color>
+
+    <color name="colorNavigation">#FFFFFF</color>
+    <color name="colorNavigationDefault">#D3D3D3</color>
 </resources>

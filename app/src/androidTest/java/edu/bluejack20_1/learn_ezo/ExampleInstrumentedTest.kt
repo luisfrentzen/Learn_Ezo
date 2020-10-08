@@ -1,4 +1,4 @@
-package com.example.tpa_mobile
+package edu.bluejack20_1.learn_ezo
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
