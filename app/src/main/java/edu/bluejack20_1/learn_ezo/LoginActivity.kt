@@ -1,5 +1,6 @@
 package edu.bluejack20_1.learn_ezo
 
+import android.content.Context
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +39,6 @@ class LoginActivity : AppCompatActivity() {
     lateinit var firebaseAuth : FirebaseAuth
 
     lateinit var googleButton : SignInButton
-    lateinit var signOutButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,18 +46,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         googleButton = findViewById(R.id.sign_in_button)
-        signOutButton = findViewById(R.id.sign_out_button)
 
         firebaseAuth = Firebase.auth
 
         googleButton.setOnClickListener{
             signInWithGoogle()
         }
-
-        signOutButton.setOnClickListener{
-            signOutWithGoogle()
-        }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -69,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
-                Toast.makeText(this, "Google sign in failed:(", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Google authentication failed", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -80,10 +74,9 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    val user = firebaseAuth.currentUser
-                    Toast.makeText(this, "Google sign in succeed :)", Toast.LENGTH_LONG).show()
+                    startActivity(NavBottom.getLaunchIntent(this))
                 } else {
-                    Toast.makeText(this, "Google sign in failed :(", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Firebase authentication failed", Toast.LENGTH_LONG).show()
                 }
             }
     }
@@ -95,10 +88,6 @@ class LoginActivity : AppCompatActivity() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
     }
 
-    private fun signOutWithGoogle(){
-        Firebase.auth.signOut()
-    }
-
     private fun signInWithGoogle(){
         val signInIntent : Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
@@ -106,6 +95,16 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val currentUser = firebaseAuth.currentUser
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            startActivity(NavBottom.getLaunchIntent(this))
+            finish()
+        }
+    }
+
+    companion object {
+        fun getLaunchIntent(from: Context) = Intent(from, LoginActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
     }
 }
