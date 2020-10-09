@@ -37,13 +37,19 @@
         android:theme="@style/Theme.MaterialComponents.Light"
         >
 
-        <com.applandeo.materialcalendarview.CalendarView
-            android:id="@+id/calendarView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:headerColor="@color/colorPrimary"
-            app:todayLabelColor="@color/colorPrimary"
-            />
+            android:layout_height="match_parent">
+
+            <com.applandeo.materialcalendarview.CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:headerColor="@color/colorPrimary"
+                app:todayLabelColor="@color/colorPrimary"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
