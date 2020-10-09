@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -23,16 +24,16 @@ class NavBottom : AppCompatActivity() {
     lateinit var mGoogleSignInClient : GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
 
-    private fun loadFragment(fragment: Fragment?):Boolean{
-        if(fragment != null){
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fl_container, fragment)
-                .commit();
-            return true;
-        }
-
-        return false;
-    }
+//    private fun loadFragment(fragment: Fragment?):Boolean{
+//        if(fragment != null){
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.fl_container, fragment)
+//                .commit();
+//            return true;
+//        }
+//
+//        return false;
+//    }
 
     fun signOut() {
         startActivity(LoginActivity.getLaunchIntent(this))
@@ -51,29 +52,36 @@ class NavBottom : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav)
         configureSignIn()
-        loadFragment(Home())
+//        loadFragment(Home())
+        val viewPager : ViewPager2 = findViewById(R.id.viewPager)
+        viewPager.adapter = MenuFragmentAdapter(this)
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                btm_nav.getMenu().getItem(position).setChecked(true);
+
+            }
+        })
 
         btm_nav.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-                var fragment: Fragment?=null
 
                 when (p0.itemId){
                     R.id.home_menu -> {
                         //for see
-                        fragment = Home()
+                        viewPager.setCurrentItem(0)
                     }
                     R.id.practice_menu -> {
-                        fragment = Practice()
+                        viewPager.setCurrentItem(1)
                     }
                     R.id.game_menu -> {
-                        fragment = Game()
+                        viewPager.setCurrentItem(2)
                     }
                     R.id.user_menu -> {
-                        fragment = User()
+                        viewPager.setCurrentItem(3)
                     }
                 }
-
-                loadFragment(fragment)
 
                 return true
             }
