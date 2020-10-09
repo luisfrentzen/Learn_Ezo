@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import kotlinx.android.synthetic.main.fragment_user.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,6 +67,12 @@ class User : Fragment() {
             personPhoto = acct.photoUrl
 
             Glide.with(this).load(personPhoto).into(profilePic)
+
+            val tv_dname : TextView = root.findViewById(R.id.display_name)
+            tv_dname.setText(personName)
+
+            val tv_follower : TextView = root.findViewById(R.id.follower)
+            tv_follower.setText("0 Follower / 0 Following")
         }
 
         return root
