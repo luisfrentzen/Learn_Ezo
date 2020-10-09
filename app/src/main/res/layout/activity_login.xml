@@ -43,6 +43,8 @@
         android:background="@drawable/btn_rounded"
         android:elevation="2dp"
         android:text="@string/google"
+        android:drawableLeft="@drawable/ic_google_logo"
+        android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
