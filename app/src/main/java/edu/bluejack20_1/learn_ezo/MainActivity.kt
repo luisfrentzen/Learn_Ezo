@@ -1,9 +1,13 @@
 package edu.bluejack20_1.learn_ezo
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import edu.bluejack20_1.learn_ezo.LoginActivity
 
 

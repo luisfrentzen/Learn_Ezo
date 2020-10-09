@@ -5,4 +5,7 @@
     <string name="tv_profile">Profile</string>
     <string name="tv_play">Play</string>
     <string name="tv_learn">Learn</string>
+    <string name="google">Login with Google</string>
+    <string name="please_sign_in">Please sign in</string>
+    <string name="we_would_like_to_remember_you">We would like to remember you</string>
 </resources>

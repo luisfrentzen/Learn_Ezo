@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var firebaseAuth : FirebaseAuth
 
-    lateinit var googleButton : SignInButton
+    lateinit var googleButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
