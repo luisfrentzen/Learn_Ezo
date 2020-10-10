@@ -16,4 +16,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_out">Sign Out</string>
+    <string name="statistics">Statistics</string>
+    <string name="day_streak">Day streak</string>
+    <string name="league">League</string>
+    <string name="total_exp">Total EXP</string>
+    <string name="lessons_mastered">Lessons Mastered</string>
+    <string name="social">Social</string>
+    <string name="find_friends">Find Friends</string>
+    <string name="achievements">Achievements</string>
 </resources>
