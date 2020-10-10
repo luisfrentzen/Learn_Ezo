@@ -24,17 +24,6 @@ class NavBottom : AppCompatActivity() {
     lateinit var mGoogleSignInClient : GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
 
-//    private fun loadFragment(fragment: Fragment?):Boolean{
-//        if(fragment != null){
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.fl_container, fragment)
-//                .commit();
-//            return true;
-//        }
-//
-//        return false;
-//    }
-
     fun signOut() {
         startActivity(LoginActivity.getLaunchIntent(this))
         Firebase.auth.signOut();
@@ -46,15 +35,6 @@ class NavBottom : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
-    }
-
-    fun changeViewPager(fragment: Int){
-        if(fragment == 4){
-            viewPager.setCurrentItem(fragment, false)
-        }else{
-            viewPager.setCurrentItem(fragment)
-        }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,16 +64,16 @@ class NavBottom : AppCompatActivity() {
                 when (p0.itemId){
                     R.id.home_menu -> {
                         //for see
-                        changeViewPager(0)
+                        viewPager.setCurrentItem(0)
                     }
                     R.id.practice_menu -> {
-                        changeViewPager(1)
+                        viewPager.setCurrentItem(1)
                     }
                     R.id.game_menu -> {
-                        changeViewPager(2)
+                        viewPager.setCurrentItem(2)
                     }
                     R.id.user_menu -> {
-                        changeViewPager(3)
+                        viewPager.setCurrentItem(3)
                     }
                 }
 

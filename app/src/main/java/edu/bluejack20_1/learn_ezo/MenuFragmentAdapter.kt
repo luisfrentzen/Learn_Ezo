@@ -9,17 +9,13 @@ import kotlinx.android.synthetic.main.activity_nav.*
 class MenuFragmentAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
-
     override fun getItemCount(): Int {
-        return 5
+        return 4
     }
 
     override fun createFragment(position: Int): Fragment {
 
         when(position) {
-            0 -> {
-                return Home()
-            }
             1 -> {
                 return Practice()
             }
@@ -27,10 +23,10 @@ class MenuFragmentAdapter(fragmentActivity: FragmentActivity) :
                 return Game()
             }
             3 -> {
-                return User()
+                return Profile()
             }
             else -> {
-                return Setting()
+                return Home()
             }
         }
     }

@@ -7,12 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import kotlinx.android.synthetic.main.activity_nav.*
-import kotlinx.android.synthetic.main.fragment_user.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +24,6 @@ class User : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +45,12 @@ class User : Fragment() {
         btnSignOut.setOnClickListener {
             Toast.makeText(view?.context, "Button Clicked", Toast.LENGTH_LONG).show()
             (activity as NavBottom?)?.signOut()
+        }
+
+        val btnSetting : ImageButton = root.findViewById(R.id.setting_button)
+        btnSetting.setOnClickListener {
+            val fragment : Profile = this@User.getParentFragment() as Profile
+            fragment.loadFragment(Setting())
         }
 
         val personPhoto: Uri?
@@ -75,12 +76,10 @@ class User : Fragment() {
             tv_follower.setText("0 Follower / 0 Following")
         }
 
-        val activity: NavBottom = activity as NavBottom
-
-        val btnSetting : ImageButton = root.findViewById(R.id.setting_button)
-        btnSetting.setOnClickListener {
-            activity.changeViewPager(4)
-        }
+//        val btnSetting : ImageButton = root.findViewById(R.id.setting_button)
+//        btnSetting.setOnClickListener {
+//            activity.changeViewPager(4)
+//        }
 
         return root
     }
