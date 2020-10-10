@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import kotlinx.android.synthetic.main.activity_nav.*
 import kotlinx.android.synthetic.main.fragment_user.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -73,6 +73,13 @@ class User : Fragment() {
 
             val tv_follower : TextView = root.findViewById(R.id.follower)
             tv_follower.setText("0 Follower / 0 Following")
+        }
+
+        val activity: NavBottom = activity as NavBottom
+
+        val btnSetting : ImageButton = root.findViewById(R.id.setting_button)
+        btnSetting.setOnClickListener {
+            activity.changeViewPager(4)
         }
 
         return root

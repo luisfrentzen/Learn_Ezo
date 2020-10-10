@@ -8,4 +8,9 @@
     <string name="google">Login with Google</string>
     <string name="please_sign_in">Please sign in</string>
     <string name="we_would_like_to_remember_you">We would like to remember you</string>
+    <string name="tv_dark_mode">Dark Mode</string>
+    <string name="tv_practice_reminder">Practice Reminder</string>
+    <string name="tv_set_time">Set Time</string>
+    <string name="tv_user_preference">User Preference</string>
+    <string name="tv_language">Language</string>
 </resources>
