@@ -61,7 +61,7 @@ class User : Fragment() {
 
         val acct = GoogleSignIn.getLastSignedInAccount(activity)
         if (acct != null) {
-            personName = acct.displayName
+            personName = acct.givenName
             personEmail = acct.email
             personId = acct.id
             personPhoto = acct.photoUrl
