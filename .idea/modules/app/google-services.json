@@ -1,79 +1,42 @@
 {
   "project_info": {
-    "project_number": "1089560769218",
-    "firebase_url": "https://tpamobile-5d381.firebaseio.com",
-    "project_id": "tpamobile-5d381",
-    "storage_bucket": "tpamobile-5d381.appspot.com"
+    "project_number": "899182848735",
+    "firebase_url": "https://learn-ezo.firebaseio.com",
+    "project_id": "learn-ezo",
+    "storage_bucket": "learn-ezo.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1089560769218:android:ac41e0d8dbdffef20c815b",
-        "android_client_info": {
-          "package_name": "com.example.tpa_mobile"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1089560769218-sirvsvvbf1p08t1dte77bsf217u5mcpk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.tpa_mobile",
-            "certificate_hash": "bf772b398db8f1e3ade6380cb618ae2cfc4a06f3"
-          }
-        },
-        {
-          "client_id": "1089560769218-g8k73g3n83qlhnprilkh61bo40nmh47o.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBSORRD-2XTGQHu2ieJAdMHhS5lkkZyHSI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1089560769218-g8k73g3n83qlhnprilkh61bo40nmh47o.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1089560769218:android:63205e2e9463088b0c815b",
+        "mobilesdk_app_id": "1:899182848735:android:2572fd5d8a9ff2fc4d176a",
         "android_client_info": {
           "package_name": "edu.bluejack20_1.learn_ezo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1089560769218-5nlvjma04din7c6tcp2rsu11sa288ou2.apps.googleusercontent.com",
+          "client_id": "899182848735-g44r1fgogbjf2q10cb83tt1hbmstuq77.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "edu.bluejack20_1.learn_ezo",
-            "certificate_hash": "bf772b398db8f1e3ade6380cb618ae2cfc4a06f3"
+            "certificate_hash": "ea129677416d1c60ba6c8de18894cc050096fca4"
           }
         },
         {
-          "client_id": "1089560769218-g8k73g3n83qlhnprilkh61bo40nmh47o.apps.googleusercontent.com",
+          "client_id": "899182848735-vclji36nha10bk3469dci6f339fg6djb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBSORRD-2XTGQHu2ieJAdMHhS5lkkZyHSI"
+          "current_key": "AIzaSyCGCVZFFOpJjtEIbx2pFPWoPX2tUTODtP0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1089560769218-g8k73g3n83qlhnprilkh61bo40nmh47o.apps.googleusercontent.com",
+              "client_id": "899182848735-vclji36nha10bk3469dci6f339fg6djb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
