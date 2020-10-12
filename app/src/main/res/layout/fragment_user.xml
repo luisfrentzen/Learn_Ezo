@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginHorizontal="10dp"
-                    android:text="0 Days" />
+                    android:id="@+id/day_streak_count" />
 
             </androidx.cardview.widget.CardView>
 
@@ -164,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginHorizontal="10dp"
-                    android:text="0 XP" />
+                    android:id="@+id/exp_count" />
 
             </androidx.cardview.widget.CardView>
 

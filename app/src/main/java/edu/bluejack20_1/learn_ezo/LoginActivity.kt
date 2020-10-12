@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import edu.bluejack20_1.learn_ezo.R
 
@@ -54,6 +55,31 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun storeUserData(id: String, name: String, ctx: Context){
+        val p : Player = Player(id, name)
+
+        val databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
+
+//        databaseU.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                for(data in snapshot.children){
+//                    if (data.key == p.id){
+//                        Toast.makeText(ctx, "Account already exists", Toast.LENGTH_LONG).show()
+//                        return
+//                    }
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//
+//            }
+//        })
+
+        databaseU.child(id).setValue(p)
+
+        Toast.makeText(this, "Done!", Toast.LENGTH_LONG).show()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -61,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
+                storeUserData(account.id.toString(), account.displayName.toString(), this)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 Toast.makeText(this, "Google authentication failed", Toast.LENGTH_LONG).show()
@@ -74,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
+
                     startActivity(NavBottom.getLaunchIntent(this))
                 } else {
                     Toast.makeText(this, "Firebase authentication failed", Toast.LENGTH_LONG).show()
