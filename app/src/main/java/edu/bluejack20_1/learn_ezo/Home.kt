@@ -1,11 +1,16 @@
 package edu.bluejack20_1.learn_ezo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import edu.bluejack20_1.learn_ezo.R
+import com.applandeo.materialcalendarview.CalendarView
+import com.applandeo.materialcalendarview.EventDay
+import com.google.firebase.database.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,12 +35,69 @@ class Home : Fragment() {
         }
     }
 
+    var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val root = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val events = ArrayList<EventDay>()
+
+        val calendar : Calendar = Calendar.getInstance()
+
+        var databaseRecord : DatabaseReference = databaseR.child((activity as NavBottom).u?.id as String)
+
+        var day : Int
+        var month : Int
+        var year : Int
+
+        val calendarView : CalendarView = root.findViewById(R.id.calendarView) as CalendarView
+
+        databaseRecord.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(data in snapshot.children){
+
+                    Log.d("date", data.key.toString())
+
+                    val list = (data.key.toString()).split("-")
+
+                    Log.d("date", list.toString())
+
+                    day = list[0].toInt()
+                    month = list[1].toInt()
+                    year = list[2].toInt()
+
+                    calendar.set(year, month, day)
+
+                    Log.d("date", calendar.toString())
+
+                    if(data.value.toString() == "0"){
+                        Log.d("date", "0 masuk")
+                        events.add(EventDay(calendar, R.drawable.ic_dot_red))
+                    }else{
+                        Log.d("date", "1 masuk")
+                        events.add(EventDay(calendar, R.drawable.ic_dot_green))
+                    }
+
+                    Log.d("date", events.toString())
+                }
+
+                Log.d("date", "done!")
+                calendarView.setEvents(events)
+
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+
+        return root
     }
 
     companion object {
