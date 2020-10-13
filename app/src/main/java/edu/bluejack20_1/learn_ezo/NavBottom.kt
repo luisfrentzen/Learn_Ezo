@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Debug
+import android.os.Parcelable
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,8 @@ import kotlinx.android.synthetic.main.activity_nav.*
 class NavBottom : AppCompatActivity() {
     lateinit var mGoogleSignInClient : GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
+
+    var u : Player? = null
 
     fun signOut() {
         startActivity(LoginActivity.getLaunchIntent(this))
@@ -46,6 +49,7 @@ class NavBottom : AppCompatActivity() {
         configureSignIn()
 //        loadFragment(Home())
 
+        u = intent.getParcelableExtra("user") as Player?
 
         val viewPager : ViewPager2 = findViewById(R.id.viewPager)
         viewPager.adapter = MenuFragmentAdapter(this)
@@ -87,8 +91,9 @@ class NavBottom : AppCompatActivity() {
     }
 
     companion object {
-        fun getLaunchIntent(from: Context) = Intent(from, NavBottom::class.java).apply {
+        fun getLaunchIntent(from: Context, loggedUser: Player) = Intent(from, NavBottom::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            putExtra("user", loggedUser as Parcelable)
         }
     }
 }

@@ -2,6 +2,7 @@ package edu.bluejack20_1.learn_ezo
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import kotlinx.android.synthetic.main.fragment_user.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,6 +56,21 @@ class User : Fragment() {
         ach_list.add(Achievement(6, "Popular One", "Have 3 followers", 0, 3, R.drawable.ic_ach_popular, false))
         ach_list.add(Achievement(7, "Genius", "Complete a lesson with no mistake", 0, 1, R.drawable.ic_ach_genius, false))
 
+        val p : Player = (activity as NavBottom).u as Player
+
+        Log.d("desu", "Exp : " + p.exp.toString())
+        Log.d("desu", "Streak : " + p.dayStreak.toString())
+
+        val day_streak_count : TextView = root.findViewById(R.id.day_streak_count)
+        val exp_count : TextView = root.findViewById(R.id.exp_count)
+
+        day_streak_count.setText(p.dayStreak.toString())
+        exp_count.setText(p.exp.toString())
+
+        val tv_follower : TextView = root.findViewById(R.id.follower)
+        tv_follower.setText( p.follower.toString().plus(" Follower / ").plus(p.following.toString()).plus(" Following"))
+
+
         val btnSetting : ImageButton = root.findViewById(R.id.setting_button)
         btnSetting.setOnClickListener {
             val fragment : Profile = this@User.getParentFragment() as Profile
@@ -86,8 +103,7 @@ class User : Fragment() {
             val tv_dname : TextView = root.findViewById(R.id.display_name)
             tv_dname.setText(personName)
 
-            val tv_follower : TextView = root.findViewById(R.id.follower)
-            tv_follower.setText("0 Follower / 0 Following")
+
         }
 
         var ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
