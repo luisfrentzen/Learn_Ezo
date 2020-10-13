@@ -3,7 +3,9 @@ package edu.bluejack20_1.learn_ezo
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn

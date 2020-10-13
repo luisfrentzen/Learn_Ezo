@@ -1,5 +1,8 @@
 package edu.bluejack20_1.learn_ezo
 
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+
 
 class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>) : RecyclerView.Adapter<LessonNodeAdapter.ViewHolder>(){
 
@@ -33,7 +37,16 @@ class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>) : RecyclerView.Adap
         val nodeBtn = holder.btnNode
         val nodeIcon = holder.ivIcon
 
-        nodeIcon.setImageResource(R.drawable.ic_trophy)
+        nodeIcon.setImageResource(lesson.lesson_icon)
+        if(lesson.lesson_is_completed == false){
+            val matrix = ColorMatrix()
+            matrix.setSaturation(0f)
+
+            val filter = ColorMatrixColorFilter(matrix)
+
+            nodeIcon.setColorFilter(filter)
+            nodeIcon.alpha = 0.5f
+        }
 
         textView.setText(lesson.lesson_title)
     }

@@ -29,7 +29,8 @@
                     android:id="@+id/ach_icon"
                     android:layout_width="64dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginVertical="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +41,8 @@
                     android:fontFamily="@font/nunito_extra"
                     android:layout_width="240dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/ach_icon"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -50,16 +51,16 @@
                     android:id="@+id/ach_desc"
                     android:layout_width="240dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="16dp"
                     app:layout_constraintStart_toEndOf="@+id/ach_icon"
                     app:layout_constraintTop_toBottomOf="@+id/ach_title" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView5"
-                    android:layout_width="240dp"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginBottom="14dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="22dp"
                     app:cardCornerRadius="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ach_icon">
@@ -84,7 +85,7 @@
                     android:text="8/10"
                     android:textStyle="bold"
                     android:layout_marginStart="8dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="18dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/cardView5" />
 
