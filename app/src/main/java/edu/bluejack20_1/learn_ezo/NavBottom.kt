@@ -4,20 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import edu.bluejack20_1.learn_ezo.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_nav.*
-import kotlinx.android.synthetic.main.fragment_user.*
 
 
 class NavBottom : AppCompatActivity() {
@@ -35,6 +30,12 @@ class NavBottom : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
+    }
+
+    fun moveToAchievementPage(ach_list : ArrayList<Achievement>){
+        var intent = Intent(this, AchievementActivity::class.java)
+        intent.putExtra("ach", ach_list)
+        startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

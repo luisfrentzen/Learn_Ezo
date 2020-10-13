@@ -30,7 +30,7 @@ import com.google.firebase.ktx.Firebase
 import edu.bluejack20_1.learn_ezo.R
 
 
-class LoginActivity : AppCompatActivity() {
+class   LoginActivity : AppCompatActivity() {
 
     val RC_SIGN_IN : Int = 1
     lateinit var mGoogleSignInClient : GoogleSignInClient
@@ -73,7 +73,6 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     startActivity(NavBottom.getLaunchIntent(this))
                 } else {
                     Toast.makeText(this, "Firebase authentication failed", Toast.LENGTH_LONG).show()
