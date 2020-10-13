@@ -41,6 +41,10 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var googleButton : Button
 
+    var userLogged : Player? = null
+
+    var databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         configureSignIn()
@@ -58,22 +62,23 @@ class LoginActivity : AppCompatActivity() {
     private fun storeUserData(id: String, name: String, ctx: Context){
         val p : Player = Player(id, name)
 
-        val databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
 
-//        databaseU.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                for(data in snapshot.children){
-//                    if (data.key == p.id){
-//                        Toast.makeText(ctx, "Account already exists", Toast.LENGTH_LONG).show()
-//                        return
-//                    }
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//
-//            }
-//        })
+
+        databaseU.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(data in snapshot.children){
+                    if (data.key == p.id){
+
+                        userLogged = data.getValue(Player::class.java) as Player
+
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
 
         databaseU.child(id).setValue(p)
 
@@ -102,7 +107,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
 
-                    startActivity(NavBottom.getLaunchIntent(this))
+                    startActivity(NavBottom.getLaunchIntent(this, userLogged as Player))
                 } else {
                     Toast.makeText(this, "Firebase authentication failed", Toast.LENGTH_LONG).show()
                 }
@@ -123,11 +128,42 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+
+
         val user = FirebaseAuth.getInstance().currentUser
+
+
         if (user != null) {
-            startActivity(NavBottom.getLaunchIntent(this))
-            finish()
+            val acct = GoogleSignIn.getLastSignedInAccount(this)
+
+            if (acct != null) {
+
+                databaseU.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for(data in snapshot.children){
+                            if (data.key == acct.id){
+
+                                val u = data.getValue(Player::class.java) as Player
+
+                                startNavBottomActivity(u)
+
+                                return
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+                })
+            }
         }
+    }
+
+    fun startNavBottomActivity(u : Player) {
+        startActivity(NavBottom.getLaunchIntent(this, u))
+        finish()
     }
 
     companion object {

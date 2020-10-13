@@ -3,6 +3,7 @@ package edu.bluejack20_1.learn_ezo
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
@@ -18,11 +19,14 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_nav.*
 import kotlinx.android.synthetic.main.fragment_user.*
+import java.io.Serializable
 
 
 class NavBottom : AppCompatActivity() {
     lateinit var mGoogleSignInClient : GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
+
+    var u : Player? = null
 
     fun signOut() {
         startActivity(LoginActivity.getLaunchIntent(this))
@@ -43,6 +47,9 @@ class NavBottom : AppCompatActivity() {
         configureSignIn()
 //        loadFragment(Home())
 
+        u = intent.getParcelableExtra("user") as Player?
+
+        Toast.makeText(this, u?.id.toString(), Toast.LENGTH_LONG).show()
 
         val viewPager : ViewPager2 = findViewById(R.id.viewPager)
         viewPager.adapter = MenuFragmentAdapter(this)
@@ -84,8 +91,9 @@ class NavBottom : AppCompatActivity() {
     }
 
     companion object {
-        fun getLaunchIntent(from: Context) = Intent(from, NavBottom::class.java).apply {
+        fun getLaunchIntent(from: Context, loggedUser: Player) = Intent(from, NavBottom::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            putExtra("user", loggedUser as Parcelable)
         }
     }
 }
