@@ -5,6 +5,7 @@
     android:id="@+id/user_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="56dp"
     tools:context="edu.bluejack20_1.learn_ezo.User">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,16 +92,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/sign_out_button"
-                android:layout_width="98dp"
-                android:layout_height="420dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginHorizontal="16dp"
-                android:text="@string/sign_out"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="250dp"
@@ -112,6 +103,29 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/display_name" />
+
+            <TextView
+                android:id="@+id/level_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="36dp"
+                android:text="Level 1"
+                app:layout_constraintStart_toEndOf="@+id/profile_pic"
+                app:layout_constraintTop_toBottomOf="@+id/display_name" />
+
+            <ProgressBar
+                android:id="@+id/level_progress"
+                style="@style/ProgressBarPrimary"
+                android:layout_width="180dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="26dp"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="80"
+                app:layout_constraintStart_toEndOf="@+id/level_count"
+                app:layout_constraintTop_toBottomOf="@+id/follower" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -237,7 +251,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_friend"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="16dp"
@@ -257,9 +271,33 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_friend" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_achievement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <Button
+                android:id="@+id/btn_achievements"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/btn_rounded"
+                android:text="@string/view_more"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_achievement"
+                tools:layout_editor_absoluteX="16dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
     </ScrollView>
 

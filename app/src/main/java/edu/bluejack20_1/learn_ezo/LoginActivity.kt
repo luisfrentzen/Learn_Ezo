@@ -31,7 +31,7 @@ import com.google.firebase.ktx.Firebase
 import edu.bluejack20_1.learn_ezo.R
 
 
-class LoginActivity : AppCompatActivity() {
+class   LoginActivity : AppCompatActivity() {
 
     val RC_SIGN_IN : Int = 1
     lateinit var mGoogleSignInClient : GoogleSignInClient
