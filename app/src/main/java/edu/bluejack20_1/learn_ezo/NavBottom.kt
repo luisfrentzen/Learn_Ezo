@@ -52,7 +52,7 @@ class NavBottom : AppCompatActivity() {
 
         var cal : Calendar = Calendar.getInstance()
 
-        var day : String = (cal.get(Calendar.DATE) + 1 ).toString()
+        var day : String = cal.get(Calendar.DATE).toString()
         var month : String = cal.get(Calendar.MONTH).toString()
         var year : String = cal.get(Calendar.YEAR).toString()
 
