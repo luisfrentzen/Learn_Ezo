@@ -45,11 +45,11 @@ class Practice : Fragment() {
         val rvLesson = root.findViewById<View>(R.id.rv_lesson) as RecyclerView
         lesson_list = ArrayList<Lesson>()
         lesson_list.add(Lesson(1, "Basic Letter 1", R.drawable.ic_hiragana, true))
-        lesson_list.add(Lesson(2, "Basic Letter 2", R.drawable.ic_katakana, false))
-        lesson_list.add(Lesson(3, "Counting", R.drawable.ic_counting, false))
-        lesson_list.add(Lesson(4, "Places", R.drawable.ic_place, false))
-        lesson_list.add(Lesson(5, "Time", R.drawable.ic_time, false))
-        lesson_list.add(Lesson(6, "Basic Vocab", R.drawable.ic_convo, false))
+        lesson_list.add(Lesson(2, "Basic Letter 2", R.drawable.ic_katakana, true))
+        lesson_list.add(Lesson(3, "Counting", R.drawable.ic_counting, true))
+        lesson_list.add(Lesson(4, "Places", R.drawable.ic_place, true))
+        lesson_list.add(Lesson(5, "Time", R.drawable.ic_time, true))
+        lesson_list.add(Lesson(6, "Basic Vocab", R.drawable.ic_convo, true))
 
         val rvAdapter = LessonNodeAdapter(lesson_list)
         rvLesson.adapter = rvAdapter
