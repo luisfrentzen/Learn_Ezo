@@ -1,14 +1,18 @@
 package edu.bluejack20_1.learn_ezo
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import org.w3c.dom.Text
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,6 +54,24 @@ class Setting : Fragment() {
             (activity as NavBottom?)?.signOut()
         }
 
+        val goalTextView : TextView = root.findViewById(R.id.tv_goal)
+        goalTextView.setOnClickListener {
+            val dialog = SetGoalDialog(activity, this, "goal")
+            dialog.show()
+        }
+
+        val reminderTextView : TextView = root.findViewById(R.id.tv_reminder)
+        reminderTextView.setOnClickListener {
+            val dialog = SetGoalDialog(activity, this, "reminder")
+            dialog.show()
+        }
+
+        val langTextView : TextView = root.findViewById(R.id.tv_lang)
+        langTextView.setOnClickListener {
+            val dialog = SetGoalDialog(activity, this, "lang")
+            dialog.show()
+        }
+
         val btnBack : ImageButton = root.findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
             val fragment : Profile = this@Setting.getParentFragment() as Profile
@@ -57,6 +79,21 @@ class Setting : Fragment() {
         }
 
         return root
+    }
+
+    fun setGoal(g : String){
+        val goalTextView = view?.findViewById<TextView>(R.id.tv_goal)
+        goalTextView?.setText(g)
+    }
+
+    fun setReminder(g : String){
+        val reminderTextView = view?.findViewById<TextView>(R.id.tv_reminder)
+        reminderTextView?.setText(g)
+    }
+
+    fun setLanguage(g : String){
+        val langTextView = view?.findViewById<TextView>(R.id.tv_lang)
+        langTextView?.setText(g)
     }
 
     companion object {
