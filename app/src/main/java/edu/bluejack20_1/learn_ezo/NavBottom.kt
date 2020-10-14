@@ -14,8 +14,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_nav.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class NavBottom : AppCompatActivity() {
@@ -23,6 +27,7 @@ class NavBottom : AppCompatActivity() {
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
 
     var u : Player? = null
+    var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
 
     fun signOut() {
         startActivity(LoginActivity.getLaunchIntent(this))
@@ -43,6 +48,21 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun addUserRecord(id: String){
+
+        var cal : Calendar = Calendar.getInstance()
+
+        var day : String = (cal.get(Calendar.DATE) + 1 ).toString()
+        var month : String = cal.get(Calendar.MONTH).toString()
+        var year : String = cal.get(Calendar.YEAR).toString()
+
+
+        var date : String = day.plus("-").plus(month).plus("-").plus(year)
+
+        databaseR.child(id).child(date).setValue(1)
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav)
@@ -50,6 +70,8 @@ class NavBottom : AppCompatActivity() {
 //        loadFragment(Home())
 
         u = intent.getParcelableExtra("user") as Player?
+
+        addUserRecord(u!!.id)
 
         val viewPager : ViewPager2 = findViewById(R.id.viewPager)
         viewPager.adapter = MenuFragmentAdapter(this)

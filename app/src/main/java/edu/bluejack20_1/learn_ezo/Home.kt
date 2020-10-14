@@ -46,9 +46,7 @@ class Home : Fragment() {
 
         val events = ArrayList<EventDay>()
 
-        val calendar : Calendar = Calendar.getInstance()
-
-        var databaseRecord : DatabaseReference = databaseR.child((activity as NavBottom).u?.id as String)
+        val databaseRecord : DatabaseReference = databaseR.child((activity as NavBottom).u?.id as String)
 
         var day : Int
         var month : Int
@@ -56,9 +54,12 @@ class Home : Fragment() {
 
         val calendarView : CalendarView = root.findViewById(R.id.calendarView) as CalendarView
 
+        Log.d("not desu", databaseRecord.toString())
+
         databaseRecord.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(data in snapshot.children){
+                    val calendar : Calendar = Calendar.getInstance()
 
                     Log.d("date", data.key.toString())
 

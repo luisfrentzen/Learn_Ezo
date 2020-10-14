@@ -48,7 +48,6 @@ class   LoginActivity : AppCompatActivity() {
     private var fireDatabase : FirebaseDatabase = FirebaseDatabase.getInstance()
 
     var databaseU : DatabaseReference = fireDatabase.getReference("users")
-    var databaseR : DatabaseReference = fireDatabase.getReference("records")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +83,6 @@ class   LoginActivity : AppCompatActivity() {
         })
 
         databaseU.child(id).setValue(p)
-        addUserRecord(id)
 
         Toast.makeText(this, "Done!", Toast.LENGTH_LONG).show()
     }
@@ -116,21 +114,6 @@ class   LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun addUserRecord(id: String){
-
-        var cal : Calendar = Calendar.getInstance()
-
-        var day : String = cal.get(Calendar.DATE).toString()
-        var month : String = cal.get(Calendar.MONTH).toString()
-        var year : String = cal.get(Calendar.YEAR).toString()
-
-
-        var date : String = day.plus("-").plus(month).plus("-").plus(year)
-
-        databaseR.child(id).child(date).setValue(0)
-
-    }
-
     private fun configureSignIn(){
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
@@ -159,7 +142,6 @@ class   LoginActivity : AppCompatActivity() {
 
                                 val u = data.getValue(Player::class.java) as Player
 
-                                addUserRecord(u.id)
                                 startNavBottomActivity(u)
 
                                 return
