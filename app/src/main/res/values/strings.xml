@@ -28,4 +28,14 @@
     <string name="quick_review">Quick Review</string>
     <string name="learning_review">Learning Review</string>
     <string name="memorize">Memorize!</string>
+    <string name="_5_minutes">5 Minutes</string>
+    <string name="_10_minutes">10 Minutes</string>
+    <string name="_15_minutes">15 Minutes</string>
+    <string name="set_your_daily_goal">Set your daily goal</string>
+    <string name="daily_goal_helps_you_learn_more_consistently_everyday_don_t_worry_you_can_change_it_anytime_later_on">Daily goal helps you learn more consistently everyday. Don\'t worry, you can change it anytime later on</string>
+    <string name="set_your_daily_reminder">Set your daily reminder</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="we_can_also_remind_you_to_practice_everyday">We can also remind you to practice everyday!</string>
+    <string name="finish">Finish</string>
 </resources>
