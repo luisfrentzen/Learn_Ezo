@@ -47,4 +47,8 @@
     <string name="english">English</string>
     <string name="select_language">Select Language</string>
     <string name="confirm">Confirm</string>
+    <string name="play">Play</string>
+    <string name="practice_your_japanese_by_memorizing_set_of_characters_flip_all_the_right_pair_to_win_the_game">Practice your japanese by memorizing set of characters. Flip all the right pair to win the game.</string>
+    <string name="guess_the_image">Guess the Image</string>
+    <string name="learn_by_guessing_various_objects_in_japanese_be_quick_before_the_time_runs_out">Learn by guessing various objects in japanese. Be quick before the time runs out!</string>
 </resources>
