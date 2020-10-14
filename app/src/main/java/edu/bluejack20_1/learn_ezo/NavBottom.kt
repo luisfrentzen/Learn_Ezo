@@ -43,23 +43,22 @@ class NavBottom : AppCompatActivity() {
     }
 
     fun moveToAchievementPage(ach_list : ArrayList<Achievement>){
-        var intent = Intent(this, AchievementActivity::class.java)
+        val intent = Intent(this, AchievementActivity::class.java)
         intent.putExtra("ach", ach_list)
         startActivity(intent)
     }
 
     private fun addUserRecord(id: String){
 
-        var cal : Calendar = Calendar.getInstance()
+        val cal : Calendar = Calendar.getInstance()
 
-        var day : String = cal.get(Calendar.DATE).toString()
-        var month : String = cal.get(Calendar.MONTH).toString()
-        var year : String = cal.get(Calendar.YEAR).toString()
+        val day : String = cal.get(Calendar.DATE).toString()
+        val month : String = cal.get(Calendar.MONTH).toString()
+        val year : String = cal.get(Calendar.YEAR).toString()
 
+        val date : String = day.plus("-").plus(month).plus("-").plus(year)
 
-        var date : String = day.plus("-").plus(month).plus("-").plus(year)
-
-        databaseR.child(id).child(date).setValue(1)
+        databaseR.child(id).child(date).setValue(0)
 
     }
 
