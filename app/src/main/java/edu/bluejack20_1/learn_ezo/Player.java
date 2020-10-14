@@ -13,6 +13,8 @@ public class Player implements Parcelable {
     private int dayStreak;
     private int follower;
     private int following;
+    private int practiceGoal;
+    private String dailyReminder;
 
     public Player(String id, String name) {
         this.id = id;
@@ -26,6 +28,14 @@ public class Player implements Parcelable {
 
     public Player(){
 
+    }
+    
+    public void setPracticeGoal(int practiceGoal) {
+        this.practiceGoal = practiceGoal;
+    }
+
+    public void setDailyReminder(String dailyReminder) {
+        this.dailyReminder = dailyReminder;
     }
 
     protected Player(Parcel in) {

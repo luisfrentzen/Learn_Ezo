@@ -54,18 +54,12 @@ class Home : Fragment() {
 
         val calendarView : CalendarView = root.findViewById(R.id.calendarView) as CalendarView
 
-        Log.d("not desu", databaseRecord.toString())
-
         databaseRecord.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(data in snapshot.children){
                     val calendar : Calendar = Calendar.getInstance()
 
-                    Log.d("date", data.key.toString())
-
                     val list = (data.key.toString()).split("-")
-
-                    Log.d("date", list.toString())
 
                     day = list[0].toInt()
                     month = list[1].toInt()
@@ -73,27 +67,13 @@ class Home : Fragment() {
 
                     calendar.set(year, month, day)
 
-                    Log.d("date", calendar.toString())
-
                     if(data.value.toString() == "0"){
-                        Log.d("date", "0 masuk")
                         events.add(EventDay(calendar, R.drawable.ic_dot_red))
                     }else{
-                        Log.d("date", "1 masuk")
                         events.add(EventDay(calendar, R.drawable.ic_dot_green))
                     }
-
-                    Log.d("date", events.toString())
                 }
-
-                var i = 1
-
-                for(data in events){
-                    Log.d("desu", i.toString().plus(data.calendar.toString()))
-                    i++
-                }
-
-                Log.d("date", "done!")
+                
                 calendarView.setEvents(events)
 
             }

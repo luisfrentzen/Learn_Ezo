@@ -11,9 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AchievementActivity"></activity>
+        <activity android:name=".SetupActivity"></activity>
+        <activity android:name=".AchievementActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".NavBottom"></activity>
+        <activity android:name=".NavBottom" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/SplashTheme">
