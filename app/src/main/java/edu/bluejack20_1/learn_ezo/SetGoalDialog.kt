@@ -70,7 +70,7 @@ class SetGoalDialog (var c: Activity, var f: Setting, var type : String) : Dialo
                         "AM"
                     }
 
-                    val reminderTime = String.format("%02d", hour) + " : " + String.format("%02d", minute) + " " + form
+                    val reminderTime = String.format("%02d", hour) + ":" + String.format("%02d", minute) + " " + form
                     setReminder(reminderTime)
                     dismiss()
                 }
