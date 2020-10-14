@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import edu.bluejack20_1.learn_ezo.R
+import java.util.*
 
 
 class   LoginActivity : AppCompatActivity() {
@@ -43,7 +45,10 @@ class   LoginActivity : AppCompatActivity() {
 
     var userLogged : Player? = null
 
-    var databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
+    private var fireDatabase : FirebaseDatabase = FirebaseDatabase.getInstance()
+
+    var databaseU : DatabaseReference = fireDatabase.getReference("users")
+    var databaseR : DatabaseReference = fireDatabase.getReference("records")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +67,6 @@ class   LoginActivity : AppCompatActivity() {
     private fun storeUserData(id: String, name: String, ctx: Context){
         val p : Player = Player(id, name)
 
-
-
         databaseU.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(data in snapshot.children){
@@ -81,6 +84,7 @@ class   LoginActivity : AppCompatActivity() {
         })
 
         databaseU.child(id).setValue(p)
+        addUserRecord(id)
 
         Toast.makeText(this, "Done!", Toast.LENGTH_LONG).show()
     }
@@ -112,6 +116,21 @@ class   LoginActivity : AppCompatActivity() {
             }
     }
 
+    private fun addUserRecord(id: String){
+
+        var cal : Calendar = Calendar.getInstance()
+
+        var day : String = cal.get(Calendar.DATE).toString()
+        var month : String = cal.get(Calendar.MONTH).toString()
+        var year : String = cal.get(Calendar.YEAR).toString()
+
+
+        var date : String = day.plus("-").plus(month).plus("-").plus(year)
+
+        databaseR.child(id).child(date).setValue(0)
+
+    }
+
     private fun configureSignIn(){
         mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
@@ -128,7 +147,32 @@ class   LoginActivity : AppCompatActivity() {
         super.onStart()
 
         val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val acct = GoogleSignIn.getLastSignedInAccount(this)
 
+            if (acct != null) {
+
+                databaseU.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for(data in snapshot.children){
+                            if (data.key == acct.id){
+
+                                val u = data.getValue(Player::class.java) as Player
+
+                                addUserRecord(u.id)
+                                startNavBottomActivity(u)
+
+                                return
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+                })
+            }
+        }
     }
 
     fun startNavBottomActivity(u : Player) {
