@@ -105,8 +105,6 @@ class   LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-
                     startActivity(NavBottom.getLaunchIntent(this, userLogged as Player))
                 } else {
                     Toast.makeText(this, "Firebase authentication failed", Toast.LENGTH_LONG).show()
@@ -129,36 +127,8 @@ class   LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-
-
         val user = FirebaseAuth.getInstance().currentUser
 
-
-        if (user != null) {
-            val acct = GoogleSignIn.getLastSignedInAccount(this)
-
-            if (acct != null) {
-
-                databaseU.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        for(data in snapshot.children){
-                            if (data.key == acct.id){
-
-                                val u = data.getValue(Player::class.java) as Player
-
-                                startNavBottomActivity(u)
-
-                                return
-                            }
-                        }
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-                })
-            }
-        }
     }
 
     fun startNavBottomActivity(u : Player) {

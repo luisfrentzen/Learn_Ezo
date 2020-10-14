@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_extra"
             android:gravity="center"
-            android:text="@string/tv_setting"
+            android:text="@string/achievements"
             android:textColor="@color/colorPrimary"
             android:textSize="19sp"
             android:textStyle="bold" />
