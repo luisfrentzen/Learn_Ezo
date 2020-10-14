@@ -85,9 +85,15 @@ class Home : Fragment() {
                     Log.d("date", events.toString())
                 }
 
+                var i = 1
+
+                for(data in events){
+                    Log.d("desu", i.toString().plus(data.calendar.toString()))
+                    i++
+                }
+
                 Log.d("date", "done!")
                 calendarView.setEvents(events)
-
 
             }
 
