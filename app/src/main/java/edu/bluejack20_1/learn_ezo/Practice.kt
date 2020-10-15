@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import edu.bluejack20_1.learn_ezo.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,6 +46,9 @@ class Practice : Fragment() {
 
         val rvLesson = root.findViewById<View>(R.id.rv_lesson) as RecyclerView
         lesson_list = ArrayList<Lesson>()
+
+        var databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("achievements")
+
         lesson_list.add(Lesson(1, "Basic Letter 1", R.drawable.ic_hiragana, true))
         lesson_list.add(Lesson(2, "Basic Letter 2", R.drawable.ic_katakana, true))
         lesson_list.add(Lesson(3, "Counting", R.drawable.ic_counting, true))

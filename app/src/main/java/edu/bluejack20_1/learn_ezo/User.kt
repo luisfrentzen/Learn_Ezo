@@ -60,11 +60,8 @@ class User : Fragment() {
 
         val rvAchievement = root.findViewById<View>(R.id.rv_achievement) as RecyclerView
         var ach_list = ArrayList<Achievement>()
-        var ach_icon_list = ArrayList<Int>()
 
         var databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("achievements")
-
-        Log.d("desu", databaseA.toString())
 
         databaseA.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -81,7 +78,7 @@ class User : Fragment() {
                     val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
                     acct?.id.toString()).child("achievements").child(u.id.toString())
 
-                    databaseP.addListenerForSingleValueEvent(object: ValueEventListener {
+                    databaseP.addValueEventListener(object: ValueEventListener {
                         override fun onCancelled(error: DatabaseError) {
                         }
 
@@ -91,13 +88,11 @@ class User : Fragment() {
                             if(!temp.equals("null")){
                                 u.currentProgress = temp.toInt()
                             }
-
                         }
 
                     })
 
                     ach_list.add(u)
-
                 }
 
                 var ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
@@ -115,9 +110,6 @@ class User : Fragment() {
         })
 
         val p : Player = (activity as NavBottom).u as Player
-
-        Log.d("desu", "Exp : " + p.exp.toString())
-        Log.d("desu", "Streak : " + p.dayStreak.toString())
 
         val day_streak_count : TextView = root.findViewById(R.id.day_streak_count)
         val exp_count : TextView = root.findViewById(R.id.exp_count)
