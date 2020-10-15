@@ -48,13 +48,13 @@ class User : Fragment() {
 
         val rvAchievement = root.findViewById<View>(R.id.rv_achievement) as RecyclerView
         var ach_list = ArrayList<Achievement>()
-        ach_list.add(Achievement(1, "Hardworker", "Reach 10 days streak", 0, 10, R.drawable.ic_ach_hardworker, false))
-        ach_list.add(Achievement(2, "Intermediate Student", "Reach level 5", 0, 5, R.drawable.ic_ach_intermediate, false))
-        ach_list.add(Achievement(3, "Conqueror", "Complete all lessons", 0, 6, R.drawable.ic_ach_conqueror, false))
-        ach_list.add(Achievement(4, "Social Person", "Follow 3 friends", 0, 3, R.drawable.ic_ach_social, false))
-        ach_list.add(Achievement(5, "Big Brain", "Complete 3 reviews", 0, 3, R.drawable.ic_ach_bigbrain, false))
-        ach_list.add(Achievement(6, "Popular One", "Have 3 followers", 0, 3, R.drawable.ic_ach_popular, false))
-        ach_list.add(Achievement(7, "Genius", "Complete a lesson with no mistake", 0, 1, R.drawable.ic_ach_genius, false))
+        ach_list.add(Achievement(1, "Hardworker", "Reach 10 days streak", 0, 10, R.drawable.ic_ach_hardworker))
+        ach_list.add(Achievement(2, "Intermediate Student", "Reach level 5", 0, 5, R.drawable.ic_ach_intermediate))
+        ach_list.add(Achievement(3, "Conqueror", "Complete all lessons", 0, 6, R.drawable.ic_ach_conqueror))
+        ach_list.add(Achievement(4, "Social Person", "Follow 3 friends", 0, 3, R.drawable.ic_ach_social))
+        ach_list.add(Achievement(5, "Big Brain", "Complete 3 reviews", 0, 3, R.drawable.ic_ach_bigbrain))
+        ach_list.add(Achievement(6, "Popular One", "Have 3 followers", 0, 3, R.drawable.ic_ach_popular))
+        ach_list.add(Achievement(7, "Genius", "Complete a lesson with no mistake", 0, 1, R.drawable.ic_ach_genius))
 
         val p : Player = (activity as NavBottom).u as Player
 
