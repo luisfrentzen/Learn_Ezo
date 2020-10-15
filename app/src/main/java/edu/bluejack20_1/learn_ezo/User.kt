@@ -47,6 +47,7 @@ class User : Fragment() {
         val root = inflater.inflate(R.layout.fragment_user, container, false)
 
         val rvAchievement = root.findViewById<View>(R.id.rv_achievement) as RecyclerView
+
         var ach_list = ArrayList<Achievement>()
         ach_list.add(Achievement(1, "Hardworker", "Reach 10 days streak", 0, 10, R.drawable.ic_ach_hardworker))
         ach_list.add(Achievement(2, "Intermediate Student", "Reach level 5", 0, 5, R.drawable.ic_ach_intermediate))
