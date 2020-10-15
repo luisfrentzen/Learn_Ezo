@@ -39,15 +39,14 @@ class AchievementCardAdapter(val achievementList : ArrayList<Achievement>) :
         val progressView = holder.achProg
         val progressBarView = holder.achProgBar
 
-        val prog = achievement.achievement_current_progress.toString() + "/" + achievement.achievement_target_proggress
+        val prog = achievement.currentProgress.toString() + "/" + achievement.goal
         progressView.setText(prog)
 
+        iconImageView.setImageResource(achievement.icon?.toInt() as Int)
+        progressBarView.max = achievement.goal as Int
+        progressBarView.progress = achievement.currentProgress as Int
 
-        iconImageView.setImageResource(achievement.achievement_icon)
-        progressBarView.max = achievement.achievement_target_proggress
-        progressBarView.progress = achievement.achievement_current_progress
-
-        titleTextView.setText(achievement.achievement_title)
-        descTextView.setText(achievement.achievement_desc)
+        titleTextView.setText(achievement.title)
+        descTextView.setText(achievement.desc)
     }
 }

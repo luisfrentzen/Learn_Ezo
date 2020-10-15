@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_user.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,16 +47,73 @@ class User : Fragment() {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_user, container, false)
 
+        val acct = GoogleSignIn.getLastSignedInAccount(activity)
+
+
+//        ach_list.add(Achievement(1, "Hardworker", "Reach 10 days streak", 10, R.drawable.ic_ach_hardworker))
+//        ach_list.add(Achievement(2, "Intermediate Student", "Reach level 5", 5, R.drawable.ic_ach_intermediate))
+//        ach_list.add(Achievement(3, "Conqueror", "Complete all lessons", 6, R.drawable.ic_ach_conqueror))
+//        ach_list.add(Achievement(4, "Social Person", "Follow 3 friends", 3, R.drawable.ic_ach_social))
+//        ach_list.add(Achievement(5, "Big Brain", "Complete 3 reviews", 3, R.drawable.ic_ach_bigbrain))
+//        ach_list.add(Achievement(6, "Popular One", "Have 3 followers", 3, R.drawable.ic_ach_popular))
+//        ach_list.add(Achievement(7, "Genius", "Complete a lesson with no mistake", 1, R.drawable.ic_ach_genius))
+
         val rvAchievement = root.findViewById<View>(R.id.rv_achievement) as RecyclerView
 
         var ach_list = ArrayList<Achievement>()
-        ach_list.add(Achievement(1, "Hardworker", "Reach 10 days streak", 0, 10, R.drawable.ic_ach_hardworker))
-        ach_list.add(Achievement(2, "Intermediate Student", "Reach level 5", 0, 5, R.drawable.ic_ach_intermediate))
-        ach_list.add(Achievement(3, "Conqueror", "Complete all lessons", 0, 6, R.drawable.ic_ach_conqueror))
-        ach_list.add(Achievement(4, "Social Person", "Follow 3 friends", 0, 3, R.drawable.ic_ach_social))
-        ach_list.add(Achievement(5, "Big Brain", "Complete 3 reviews", 0, 3, R.drawable.ic_ach_bigbrain))
-        ach_list.add(Achievement(6, "Popular One", "Have 3 followers", 0, 3, R.drawable.ic_ach_popular))
-        ach_list.add(Achievement(7, "Genius", "Complete a lesson with no mistake", 0, 1, R.drawable.ic_ach_genius))
+        var ach_icon_list = ArrayList<Int>()
+
+        var databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("achievements")
+
+        Log.d("desu", databaseA.toString())
+
+        databaseA.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(data in snapshot.children){
+
+                    val u = data.getValue(Achievement::class.java) as Achievement
+
+                    u.currentProgress = 0
+
+                    var temp = resources.getIdentifier(u.icon, "drawable", context?.packageName)
+
+                    u.icon = temp.toString()
+
+                    val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+                    acct?.id.toString()).child("achievements").child(u.id.toString())
+
+                    databaseP.addListenerForSingleValueEvent(object: ValueEventListener {
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            var temp = (snapshot.child("currentProgress").value).toString()
+
+                            if(!temp.equals("null")){
+                                u.currentProgress = temp.toInt()
+                            }
+
+                        }
+
+                    })
+
+                    ach_list.add(u)
+
+                }
+
+                var ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
+
+                val rvAdapter = AchievementCardAdapter(ach_overview)
+                rvAchievement.adapter = rvAdapter
+                rvAchievement.hasFixedSize()
+                rvAchievement.layoutManager = LinearLayoutManager(root.context)
+                rvAchievement.isNestedScrollingEnabled = false
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
 
         val p : Player = (activity as NavBottom).u as Player
 
@@ -92,7 +150,7 @@ class User : Fragment() {
 
         val profilePic : ImageView = root.findViewById(R.id.profile_pic)
 
-        val acct = GoogleSignIn.getLastSignedInAccount(activity)
+
         if (acct != null) {
             personName = acct.givenName
             personEmail = acct.email
@@ -106,14 +164,6 @@ class User : Fragment() {
 
 
         }
-
-        var ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
-
-        val rvAdapter = AchievementCardAdapter(ach_overview)
-        rvAchievement.adapter = rvAdapter
-        rvAchievement.hasFixedSize()
-        rvAchievement.layoutManager = LinearLayoutManager(root.context)
-        rvAchievement.isNestedScrollingEnabled = false
 
 //        val btnSetting : ImageButton = root.findViewById(R.id.setting_button)
 //        btnSetting.setOnClickListener {
