@@ -75,6 +75,10 @@ class User : Fragment() {
         val tv_follower : TextView = root.findViewById(R.id.follower)
         tv_follower.setText( p.follower.toString().plus(" Follower / ").plus(p.following.toString()).plus(" Following"))
 
+        val btnFriend : Button = root.findViewById(R.id.btn_friend)
+        btnFriend.setOnClickListener {
+            (activity as NavBottom).moveToFriendPage()
+        }
 
         val btnSetting : ImageButton = root.findViewById(R.id.setting_button)
         btnSetting.setOnClickListener {

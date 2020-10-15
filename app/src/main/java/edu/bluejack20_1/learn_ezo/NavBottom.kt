@@ -53,6 +53,12 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun moveToFriendPage(){
+        val intent = Intent(this, SearchActivity::class.java)
+        startActivity(intent)
+    }
+
+
     private fun addUserRecord(id: String){
 
         val cal : Calendar = Calendar.getInstance()
