@@ -8,14 +8,14 @@ import android.os.Parcelable
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_nav.*
 import java.util.*
@@ -28,11 +28,16 @@ class NavBottom : AppCompatActivity() {
 
     var u : Player? = null
     var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
+    val ach_list = ArrayList<Achievement>()
 
     fun signOut() {
         startActivity(LoginActivity.getLaunchIntent(this))
         Firebase.auth.signOut();
         mGoogleSignInClient.signOut()
+    }
+
+    fun getAchList() : ArrayList<Achievement>{
+        return ach_list
     }
 
     private fun configureSignIn(){
@@ -84,6 +89,52 @@ class NavBottom : AppCompatActivity() {
                     super.onPageSelected(position)
                     btm_nav.getMenu().getItem(position).setChecked(true);
                 }
+            }
+        })
+
+        val acct = GoogleSignIn.getLastSignedInAccount(this)
+
+        var databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("achievements")
+
+        databaseA.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(data in snapshot.children){
+
+                    val u = data.getValue(Achievement::class.java) as Achievement
+
+                    u.currentProgress = 0
+
+                    var temp = resources.getIdentifier(u.icon, "drawable", packageName)
+
+                    u.icon = temp.toString()
+
+                    val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+                        acct?.id.toString()).child("achievements").child(u.id.toString())
+
+                    databaseP.addListenerForSingleValueEvent(object: ValueEventListener {
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            val temp = (snapshot.child("currentProgress").value).toString()
+
+                            if(!temp.equals("null")){
+                                u.currentProgress = temp.toInt()
+                            }
+
+                            ach_list.add(u)
+                        }
+
+                    })
+
+
+                }
+
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
             }
         })
 
