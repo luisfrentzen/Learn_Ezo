@@ -49,76 +49,22 @@ class User : Fragment() {
 
         val acct = GoogleSignIn.getLastSignedInAccount(activity)
 
-
-//        ach_list.add(Achievement(1, "Hardworker", "Reach 10 days streak", 10, R.drawable.ic_ach_hardworker))
-//        ach_list.add(Achievement(2, "Intermediate Student", "Reach level 5", 5, R.drawable.ic_ach_intermediate))
-//        ach_list.add(Achievement(3, "Conqueror", "Complete all lessons", 6, R.drawable.ic_ach_conqueror))
-//        ach_list.add(Achievement(4, "Social Person", "Follow 3 friends", 3, R.drawable.ic_ach_social))
-//        ach_list.add(Achievement(5, "Big Brain", "Complete 3 reviews", 3, R.drawable.ic_ach_bigbrain))
-//        ach_list.add(Achievement(6, "Popular One", "Have 3 followers", 3, R.drawable.ic_ach_popular))
-//        ach_list.add(Achievement(7, "Genius", "Complete a lesson with no mistake", 1, R.drawable.ic_ach_genius))
-
         val rvAchievement = root.findViewById<View>(R.id.rv_achievement) as RecyclerView
 
-        var ach_list = ArrayList<Achievement>()
-        var ach_icon_list = ArrayList<Int>()
+        var ach_list = (activity as NavBottom).getAchList()
 
-        var databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("achievements")
+        val ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
 
-        Log.d("desu", databaseA.toString())
-
-        databaseA.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for(data in snapshot.children){
-
-                    val u = data.getValue(Achievement::class.java) as Achievement
-
-                    u.currentProgress = 0
-
-                    var temp = resources.getIdentifier(u.icon, "drawable", context?.packageName)
-
-                    u.icon = temp.toString()
-
-                    val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
-                    acct?.id.toString()).child("achievements").child(u.id.toString())
-
-                    databaseP.addListenerForSingleValueEvent(object: ValueEventListener {
-                        override fun onCancelled(error: DatabaseError) {
-                        }
-
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            var temp = (snapshot.child("currentProgress").value).toString()
-
-                            if(!temp.equals("null")){
-                                u.currentProgress = temp.toInt()
-                            }
-
-                        }
-
-                    })
-
-                    ach_list.add(u)
-
-                }
-
-                var ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
-
-                val rvAdapter = AchievementCardAdapter(ach_overview)
-                rvAchievement.adapter = rvAdapter
-                rvAchievement.hasFixedSize()
-                rvAchievement.layoutManager = LinearLayoutManager(root.context)
-                rvAchievement.isNestedScrollingEnabled = false
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
+        val rvAdapter = AchievementCardAdapter(ach_overview)
+        rvAchievement.adapter = rvAdapter
+        rvAchievement.hasFixedSize()
+        rvAchievement.layoutManager = LinearLayoutManager(root.context)
+        rvAchievement.isNestedScrollingEnabled = false
 
         val p : Player = (activity as NavBottom).u as Player
-
-        Log.d("desu", "Exp : " + p.exp.toString())
-        Log.d("desu", "Streak : " + p.dayStreak.toString())
+//
+//        Log.d("desu", "Exp : " + p.exp.toString())
+//        Log.d("desu", "Streak : " + p.dayStreak.toString())
 
         val day_streak_count : TextView = root.findViewById(R.id.day_streak_count)
         val exp_count : TextView = root.findViewById(R.id.exp_count)
