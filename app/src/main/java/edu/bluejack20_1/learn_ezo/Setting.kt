@@ -42,6 +42,9 @@ class Setting : Fragment() {
         }
     }
 
+    var databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
+    var activity_nav: NavBottom ?= null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,7 +52,7 @@ class Setting : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_setting, container, false)
 
-        val activity: NavBottom = activity as NavBottom
+        activity_nav = (activity as NavBottom)
 
         val btnSignOut : Button = root.findViewById(R.id.sign_out_button)
         btnSignOut.setOnClickListener {
@@ -57,40 +60,45 @@ class Setting : Fragment() {
             (activity as NavBottom?)?.signOut()
         }
 
-        val p : Player = activity.u as Player
+        val p : Player = activity_nav?.u as Player
 
         var tv_reminder : TextView = root.findViewById(R.id.tv_reminder)
         var tv_goal : TextView = root.findViewById(R.id.tv_goal)
 
 
         tv_reminder.setText(p.dailyReminder)
-        tv_goal.setText(p.practiceGoal.toString())
+
+        if(p.practiceGoal == 15){
+            tv_goal.setText(R.string._15_minutes)
+        }else if(p.practiceGoal == 30){
+            tv_goal.setText(R.string._30_minutes)
+        }else{
+            tv_goal.setText(R.string._45_minutes)
+        }
+
+
 
         val goalTextView : TextView = root.findViewById(R.id.tv_goal)
         goalTextView.setOnClickListener {
-            val dialog = SetGoalDialog(activity, this, "goal")
+            val dialog = SetGoalDialog(activity_nav!!, this, "goal")
             dialog.show()
         }
 
         val reminderTextView : TextView = root.findViewById(R.id.tv_reminder)
         reminderTextView.setOnClickListener {
-            val dialog = SetGoalDialog(activity, this, "reminder")
+            val dialog = SetGoalDialog(activity_nav!!, this, "reminder")
             dialog.show()
         }
 
         val langTextView : TextView = root.findViewById(R.id.tv_lang)
         langTextView.setOnClickListener {
-            val dialog = SetGoalDialog(activity, this, "lang")
+            val dialog = SetGoalDialog(activity_nav!!, this, "lang")
             dialog.show()
         }
 
         val btnBack : ImageButton = root.findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
             val fragment : Profile = this@Setting.getParentFragment() as Profile
-
-            var databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
-
-            databaseU.child(p.id).setValue(activity.u as Player)
 
             fragment.loadFragment(User())
         }
@@ -100,17 +108,27 @@ class Setting : Fragment() {
 
     fun setGoal(g : String){
         val goalTextView = view?.findViewById<TextView>(R.id.tv_goal)
-        goalTextView?.setText(g)
+
 
         var temp = g.split(" ")
 
-        (activity as NavBottom).u?.practiceGoal = temp[0].toInt()
+        if(temp[0] == "15"){
+            goalTextView?.setText(R.string._15_minutes)
+        }else if(temp[0] == "30"){
+            goalTextView?.setText(R.string._30_minutes)
+        }else{
+            goalTextView?.setText(R.string._45_minutes)
+        }
+        activity_nav?.u?.practiceGoal = temp[0].toInt()
+        databaseU.child(activity_nav?.u?.id.toString()).setValue(activity_nav?.u as Player)
     }
 
     fun setReminder(g : String){
         val reminderTextView = view?.findViewById<TextView>(R.id.tv_reminder)
         reminderTextView?.setText(g)
-        (activity as NavBottom).u?.dailyReminder = g
+        activity_nav?.u?.dailyReminder = g
+
+        databaseU.child(activity_nav?.u?.id.toString()).setValue(activity_nav?.u as Player)
     }
 
     fun setLanguage(g : String){

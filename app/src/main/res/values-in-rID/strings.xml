@@ -32,4 +32,33 @@
     <string name="select_language">Pilih Bahasa</string>
     <string name="confirm">Konfirmasi</string>
     <string name="play">Bermain</string>
+    <string name="tv_ach_1_title">Pekerja Keras</string>
+    <string name="tv_ach_2_title">Murid Menengah</string>
+    <string name="tv_ach_3_title">Penakluk</string>
+    <string name="tv_ach_4_title">Makhluk Sosial</string>
+    <string name="tv_ach_5_title">Pintar</string>
+    <string name="tv_ach_6_title">Si Populer</string>
+    <string name="tv_ach_7_title">Jenius</string>
+    <string name="tv_ach_1_desc">Capai 10 hari berturut-turut</string>
+    <string name="tv_ach_2_desc">Capai level 5</string>
+    <string name="tv_ach_3_desc">Selesaikan semua pelajaran</string>
+    <string name="tv_ach_4_desc">Ikuti 3 teman</string>
+    <string name="tv_ach_5_desc">Selesaikan 3 review</string>
+    <string name="tv_ach_6_desc">Dapatkan 3 pengikut</string>
+    <string name="tv_ach_7_desc">Selesaikan pelajaran tanpa kesalahan</string>
+    <string name="practice_your_japanese_by_memorizing_set_of_characters_flip_all_the_right_pair_to_win_the_game">Latih kemampuan Bahasa Jepang mu dengan mengingat huruf. Balikkan semua pasangan kartu untuk memenangkan permainan.</string>
+    <string name="learn_by_guessing_various_objects_in_japanese_be_quick_before_the_time_runs_out" translatable="false">Belajar dengan menebak beberapa nama objek dalam Bahasa Jepang. Cepatlah sebelum waktu habis!</string>
+    <string name="select_goal">Tentukan target</string>
+    <string name="we_can_also_remind_you_to_practice_everyday">Kami juga bisa mengingatkanmu untuk berlatih tiap hari!</string>
+    <string name="set_your_daily_reminder">Atur pengingat harianmu</string>
+    <string name="daily_goal_helps_you_learn_more_consistently_everyday_don_t_worry_you_can_change_it_anytime_later_on">Target harian membantumu untuk belajar dengan lebih konsisten tiap hari. Jangan khawatir, kamu bisa menggantinya kapan saja.</string>
+    <string name="set_your_daily_goal">Atur target harianmu</string>
+    <string name="quick_review" translatable="false">Review Singkat</string>
+    <string name="learning_review" translatable="false">Review Pelajaran</string>
+    <string name="day_streak">Hari berturut</string>
+    <string name="tv_set_time">Atur waktu</string>
+    <string name="tv_practice_reminder">Pengingat latihan</string>
+    <string name="please_sign_in">Tolong masuk</string>
+    <string name="tv_home">Beranda</string>
+    <string name="search">Cari</string>
 </resources>

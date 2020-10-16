@@ -115,6 +115,14 @@ class NavBottom : AppCompatActivity() {
 
                     u.icon = temp.toString()
 
+                    var temp_title = resources.getString(resources.getIdentifier(u.title, "string", packageName))
+
+                    u.title = temp_title
+
+                    var temp_desc = resources.getString(resources.getIdentifier(u.desc, "string", packageName))
+
+                    u.desc = temp_desc
+
                     val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
                         acct?.id.toString()).child("achievements").child(u.id.toString())
 
