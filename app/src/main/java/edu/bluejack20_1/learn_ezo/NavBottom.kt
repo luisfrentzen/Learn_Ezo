@@ -164,6 +164,7 @@ class NavBottom : AppCompatActivity() {
 
                     val temp = resources.getIdentifier(u.icon, "drawable", packageName)
 
+                    u.id = data.key?.toInt()
                     u.icon = temp.toString()
 
                     val temp_title = resources.getString(resources.getIdentifier(u.title, "string", packageName))

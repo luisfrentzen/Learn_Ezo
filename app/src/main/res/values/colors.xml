@@ -9,6 +9,9 @@
 
     <color name="lightGray">#E1E1E1</color>
 
+    <color name="darkGreen">#006003</color>
+    <color name="darkRed">#6A0000</color>
+
     <color name="gray">#989898</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>

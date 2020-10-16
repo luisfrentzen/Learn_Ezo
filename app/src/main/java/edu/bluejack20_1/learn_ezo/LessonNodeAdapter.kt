@@ -44,6 +44,7 @@ class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>, ctx : Context) : Re
 
         nodeBtn.setOnClickListener {
             val intent = Intent(con, LessonActivity::class.java)
+            intent.putExtra("les", lesson)
             con.startActivity(intent)
         }
 

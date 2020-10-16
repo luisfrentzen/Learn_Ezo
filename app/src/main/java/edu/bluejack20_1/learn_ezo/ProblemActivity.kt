@@ -2,23 +2,34 @@ package edu.bluejack20_1.learn_ezo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 
 class ProblemActivity : AppCompatActivity() {
+    lateinit var vpProblem : ViewPager2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_problem)
 
-        val vpProblem : ViewPager2 = findViewById(R.id.vp_problems)
+        vpProblem = findViewById(R.id.vp_problems)
 
-        val arProblem = ArrayList<Problem>()
+        val arProblem = intent.getSerializableExtra("probs") as ArrayList<Problem>
 
-        val arChoices = ArrayList<String>()
-        arChoices.add("You")
-        arChoices.add("Anda")
-        arChoices.add("Engkau")
-        arProblem.add(Problem("Apakah itu pantek", "Kau", arChoices))
+        vpProblem.adapter = ProblemPageAdapter(arProblem, this)
+        vpProblem.isUserInputEnabled = false
 
-        vpProblem.adapter = ProblemPageAdapter(arProblem)
+        val btn_back = findViewById<ImageButton>(R.id.btn_back)
+        btn_back.setOnClickListener {
+            finish()
+        }
+
+        val ttl = findViewById<TextView>(R.id.prob_title)
+        ttl.setText(intent.getStringExtra("title"))
+    }
+
+    fun nextPage(){
+        vpProblem.setCurrentItem(vpProblem.currentItem + 1)
     }
 }
