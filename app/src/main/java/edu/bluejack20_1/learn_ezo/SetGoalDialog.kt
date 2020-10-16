@@ -40,20 +40,6 @@ class SetGoalDialog (var c: Activity, var f: Setting, var type : String) : Dialo
                     dismiss()
                 }
             }
-            "lang" -> {
-                setContentView(R.layout.set_language_dialog)
-                val btnindon = findViewById<Button>(R.id.indon_btn)
-                btnindon.setOnClickListener {
-                    setLang(btnindon.text.toString())
-                    dismiss()
-                }
-
-                val btnenglish = findViewById<Button>(R.id.eng_btn)
-                btnenglish.setOnClickListener {
-                    setLang(btnenglish.text.toString())
-                    dismiss()
-                }
-            }
             "reminder" -> {
                 setContentView(R.layout.set_reminder_dialog)
                 val reminderTimePicker = findViewById<TimePicker>(R.id.tp_reminder)
@@ -63,7 +49,9 @@ class SetGoalDialog (var c: Activity, var f: Setting, var type : String) : Dialo
                     var hour = reminderTimePicker.hour
                     val minute = reminderTimePicker.minute
                     val form = if ( hour > 11 ) {
-                        hour = hour - 11
+                        if ( hour > 12 ){
+                            hour = hour - 12
+                        }
                         "PM"
                     }
                     else {
@@ -86,10 +74,6 @@ class SetGoalDialog (var c: Activity, var f: Setting, var type : String) : Dialo
 
     fun setReminder(reminder : String){
         f.setReminder(reminder)
-    }
-
-    fun setLang(lang : String){
-        f.setLanguage(lang)
     }
 
     override fun onClick(v: View) {

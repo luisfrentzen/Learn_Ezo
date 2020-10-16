@@ -78,12 +78,6 @@ class Setting : Fragment() {
             dialog.show()
         }
 
-        val langTextView : TextView = root.findViewById(R.id.tv_lang)
-        langTextView.setOnClickListener {
-            val dialog = SetGoalDialog(activity, this, "lang")
-            dialog.show()
-        }
-
         val btnBack : ImageButton = root.findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
             val fragment : Profile = this@Setting.getParentFragment() as Profile
@@ -111,11 +105,6 @@ class Setting : Fragment() {
         val reminderTextView = view?.findViewById<TextView>(R.id.tv_reminder)
         reminderTextView?.setText(g)
         (activity as NavBottom).u?.dailyReminder = g
-    }
-
-    fun setLanguage(g : String){
-        val langTextView = view?.findViewById<TextView>(R.id.tv_lang)
-        langTextView?.setText(g)
     }
 
     companion object {
