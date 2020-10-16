@@ -1,5 +1,7 @@
 package edu.bluejack20_1.learn_ezo
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.PorterDuff
@@ -9,10 +11,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 
-class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>) : RecyclerView.Adapter<LessonNodeAdapter.ViewHolder>(){
+class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>, ctx : Context) : RecyclerView.Adapter<LessonNodeAdapter.ViewHolder>(){
+
+    val con : Context = ctx
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val tvTitle = itemView.findViewById<TextView>(R.id.tv_lesson_title)
@@ -37,6 +42,11 @@ class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>) : RecyclerView.Adap
         val nodeBtn = holder.btnNode
         val nodeIcon = holder.ivIcon
 
+        nodeBtn.setOnClickListener {
+            val intent = Intent(con, LessonActivity::class.java)
+            con.startActivity(intent)
+        }
+
         nodeIcon.setImageResource(lesson.icon?.toInt() as Int)
         if(lesson.isCompleted == false){
             val matrix = ColorMatrix()
@@ -46,6 +56,12 @@ class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>) : RecyclerView.Adap
 
             nodeIcon.setColorFilter(filter)
             nodeIcon.alpha = 0.5f
+            nodeBtn.isEnabled = false
+        }
+        else {
+            nodeIcon.clearColorFilter()
+            nodeIcon.alpha = 1f
+            nodeBtn.isEnabled = true
         }
 
         textView.setText(lesson.title)

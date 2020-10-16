@@ -20,8 +20,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_nav.*
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.log
 
 
 class NavBottom : AppCompatActivity() {
@@ -31,6 +34,8 @@ class NavBottom : AppCompatActivity() {
     var u : Player? = null
     var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
     val ach_list = ArrayList<Achievement>()
+
+    lateinit var lessonAdapter : LessonNodeAdapter
 
     var databaseL : DatabaseReference = FirebaseDatabase.getInstance().getReference("lessons")
     val lessons_list = ArrayList<Lesson>()
@@ -155,40 +160,17 @@ class NavBottom : AppCompatActivity() {
 
                 for(data in snapshot.children){
 
-                    var temps_title = data.key as String
-
                     val u = data.getValue(Lesson::class.java) as Lesson
 
-                    var temp = resources.getIdentifier(u.icon, "drawable", packageName)
+                    val temp = resources.getIdentifier(u.icon, "drawable", packageName)
 
                     u.icon = temp.toString()
 
-                    var temp_title = resources.getString(resources.getIdentifier(u.title, "string", packageName))
+                    val temp_title = resources.getString(resources.getIdentifier(u.title, "string", packageName))
 
                     u.title = temp_title
 
-                    val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
-                        acct?.id.toString()).child("lessons")
-
-                    databaseP.addListenerForSingleValueEvent(object: ValueEventListener {
-                        override fun onCancelled(error: DatabaseError) {
-
-                        }
-
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            val temp = snapshot.value.toString()
-
-                            var temp_completed = temp.split(",")
-
-                            for(i in temp_completed){
-                                if(i == temps_title){
-                                    u.isCompleted = true
-                                }
-                            }
-
-                            lessons_list.add(u)
-                        }
-                    })
+                    lessons_list.add(u)
                 }
             }
 
@@ -197,6 +179,37 @@ class NavBottom : AppCompatActivity() {
             }
         })
 
+        val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+            acct?.id.toString()).child("lessons")
+
+        databaseP.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val temp = snapshot.value.toString()
+
+                Log.d("lesson", temp)
+
+                val temp_completed = temp.split(",")
+
+                var idx : Int = 0;
+                val lastCompleted = temp_completed.get((temp_completed.lastIndex)).toInt().plus(1)
+
+                Log.d("lesson", lastCompleted.toString())
+
+                for(i in lessons_list){
+                    i.isCompleted = idx < lastCompleted
+                    idx = idx + 1
+                }
+
+                lessonAdapter.notifyDataSetChanged()
+
+            }
+        })
+
+        lessonAdapter = LessonNodeAdapter(lessons_list, this)
 
         btm_nav.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {

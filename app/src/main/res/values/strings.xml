@@ -68,12 +68,13 @@
     <string name="tv_ach_6_desc">Have 3 followers</string>
     <string name="tv_ach_7_desc">Complete a lesson with no mistake</string>
     <string name="search">Search</string>
-    
+
     <string name="tv_date">Date</string>
     <string name="tv_hiragana" translatable="false">Hiragana</string>
     <string name="tv_katakana" translatable="false">Katakana</string>
     <string name="tv_number">Number</string>
     <string name="tv_time">Time</string>
+    <string name="start">Start</string>
 
 
 </resources>

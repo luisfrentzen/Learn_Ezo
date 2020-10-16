@@ -1,10 +1,12 @@
 package edu.bluejack20_1.learn_ezo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
@@ -37,30 +39,19 @@ class Practice : Fragment() {
 
     }
 
+    var rvAdapter : LessonNodeAdapter?= null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var root = inflater.inflate(R.layout.fragment_practice, container, false)
+        val root = inflater.inflate(R.layout.fragment_practice, container, false)
 
         val rvLesson = root.findViewById<View>(R.id.rv_lesson) as RecyclerView
         lesson_list = (activity as NavBottom).lessons_list
 
-        var i = 0
-        for(data in lesson_list){
-            if(data.isCompleted == false){
-                val old_data = lesson_list.get(i)
-
-                old_data.isCompleted = true
-
-                lesson_list.set(i, old_data)
-                break
-            }
-            i++
-        }
-
-        val rvAdapter = LessonNodeAdapter(lesson_list)
+        rvAdapter = (activity as NavBottom).lessonAdapter
         rvLesson.adapter = rvAdapter
         rvLesson.hasFixedSize()
         rvLesson.layoutManager = LinearLayoutManager(root.context)
