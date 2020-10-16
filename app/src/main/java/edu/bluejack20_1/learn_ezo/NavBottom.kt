@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -127,16 +128,10 @@ class NavBottom : AppCompatActivity() {
                             if(!temp.equals("null")){
                                 u.currentProgress = temp.toInt()
                             }
-
                             ach_list.add(u)
                         }
-
                     })
-
-
                 }
-
-
             }
 
             override fun onCancelled(error: DatabaseError) {
