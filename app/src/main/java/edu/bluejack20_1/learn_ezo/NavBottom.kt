@@ -32,6 +32,9 @@ class NavBottom : AppCompatActivity() {
     var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
     val ach_list = ArrayList<Achievement>()
 
+    var databaseL : DatabaseReference = FirebaseDatabase.getInstance().getReference("lessons")
+    val lessons_list = ArrayList<Lesson>()
+
     fun signOut() {
         startActivity(LoginActivity.getLaunchIntent(this))
         Firebase.auth.signOut();
@@ -147,6 +150,54 @@ class NavBottom : AppCompatActivity() {
 
             }
         })
+
+        databaseL.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                for(data in snapshot.children){
+
+                    var temps_title = data.key as String
+
+                    val u = data.getValue(Lesson::class.java) as Lesson
+
+                    var temp = resources.getIdentifier(u.icon, "drawable", packageName)
+
+                    u.icon = temp.toString()
+
+                    var temp_title = resources.getString(resources.getIdentifier(u.title, "string", packageName))
+
+                    u.title = temp_title
+
+                    val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+                        acct?.id.toString()).child("lessons")
+
+                    databaseP.addListenerForSingleValueEvent(object: ValueEventListener {
+                        override fun onCancelled(error: DatabaseError) {
+
+                        }
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            val temp = snapshot.value.toString()
+
+                            var temp_completed = temp.split(",")
+
+                            for(i in temp_completed){
+                                if(i == temps_title){
+                                    u.isCompleted = true
+                                }
+                            }
+
+                            lessons_list.add(u)
+                        }
+                    })
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
 
         btm_nav.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {

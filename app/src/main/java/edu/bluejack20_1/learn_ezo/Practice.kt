@@ -45,16 +45,20 @@ class Practice : Fragment() {
         var root = inflater.inflate(R.layout.fragment_practice, container, false)
 
         val rvLesson = root.findViewById<View>(R.id.rv_lesson) as RecyclerView
-        lesson_list = ArrayList<Lesson>()
+        lesson_list = (activity as NavBottom).lessons_list
 
-        var databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("achievements")
+        var i = 0
+        for(data in lesson_list){
+            if(data.isCompleted == false){
+                val old_data = lesson_list.get(i)
 
-        lesson_list.add(Lesson(1, "Basic Letter 1", R.drawable.ic_hiragana, true))
-        lesson_list.add(Lesson(2, "Basic Letter 2", R.drawable.ic_katakana, true))
-        lesson_list.add(Lesson(3, "Counting", R.drawable.ic_counting, true))
-        lesson_list.add(Lesson(4, "Places", R.drawable.ic_place, true))
-        lesson_list.add(Lesson(5, "Time", R.drawable.ic_time, true))
-        lesson_list.add(Lesson(6, "Basic Vocab", R.drawable.ic_convo, true))
+                old_data.isCompleted = true
+
+                lesson_list.set(i, old_data)
+                break
+            }
+            i++
+        }
 
         val rvAdapter = LessonNodeAdapter(lesson_list)
         rvLesson.adapter = rvAdapter

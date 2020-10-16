@@ -37,8 +37,8 @@ class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>) : RecyclerView.Adap
         val nodeBtn = holder.btnNode
         val nodeIcon = holder.ivIcon
 
-        nodeIcon.setImageResource(lesson.lesson_icon)
-        if(lesson.lesson_is_completed == false){
+        nodeIcon.setImageResource(lesson.icon?.toInt() as Int)
+        if(lesson.isCompleted == false){
             val matrix = ColorMatrix()
             matrix.setSaturation(0f)
 
@@ -48,6 +48,6 @@ class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>) : RecyclerView.Adap
             nodeIcon.alpha = 0.5f
         }
 
-        textView.setText(lesson.lesson_title)
+        textView.setText(lesson.title)
     }
 }

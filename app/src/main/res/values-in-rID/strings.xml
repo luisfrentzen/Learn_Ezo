@@ -61,4 +61,7 @@
     <string name="please_sign_in">Tolong masuk</string>
     <string name="tv_home">Beranda</string>
     <string name="search">Cari</string>
+    <string name="tv_date">Tanggal</string>
+    <string name="tv_number">Angka</string>
+    <string name="tv_time">Waktu</string>
 </resources>
