@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:fontFamily="@font/nunito"
-                android:hint="Search"
+                android:hint="@string/search"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
