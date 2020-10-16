@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -40,8 +41,28 @@ class ReminderPreferencesFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_reminder_preferences, container, false)
         val finishBtn = root.findViewById<Button>(R.id.finish_button)
+
+        var setup_activity = (activity as SetupActivity)
+
+        val reminderTimePicker = root.findViewById<TimePicker>(R.id.time_picker)
+
         finishBtn.setOnClickListener {
-            (activity as SetupActivity)!!.finishSetup()
+
+            var hour = reminderTimePicker.hour
+            val minute = reminderTimePicker.minute
+            val form = if ( hour > 11 ) {
+                hour = hour - 11
+                "PM"
+            }
+            else {
+                "AM"
+            }
+
+            val reminderTime = String.format("%02d", hour) + ":" + String.format("%02d", minute) + " " + form
+
+            setup_activity.u?.dailyReminder = reminderTime
+
+            setup_activity!!.finishSetup()
         }
 
         val backBtn = root.findViewById<Button>(R.id.back_button)

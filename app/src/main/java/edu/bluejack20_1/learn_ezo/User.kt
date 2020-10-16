@@ -51,7 +51,6 @@ class User : Fragment() {
 
         val rvAchievement = root.findViewById<View>(R.id.rv_achievement) as RecyclerView
 
-
         var ach_list = (activity as NavBottom).getAchList()
 
         val ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
@@ -64,6 +63,9 @@ class User : Fragment() {
 
         val p : Player = (activity as NavBottom).u as Player
 
+        val level_progress : ProgressBar = root.findViewById(R.id.level_progress)
+
+        level_progress.progress = p.exp
 
         val day_streak_count : TextView = root.findViewById(R.id.day_streak_count)
         val exp_count : TextView = root.findViewById(R.id.exp_count)

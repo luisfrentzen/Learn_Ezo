@@ -1,11 +1,13 @@
 package edu.bluejack20_1.learn_ezo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,9 +39,26 @@ class PracticePreferencesFragment : Fragment() {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_practice_preferences, container, false)
 
+        var fifteenMin = root.findViewById<RadioButton>(R.id.five_min)
+        var thirtyMin = root.findViewById<RadioButton>(R.id.ten_min)
+        var fortyFiveMin = root.findViewById<RadioButton>(R.id.fifteen_min)
+
+        var setup_activity = (activity as SetupActivity)
+
         val nextBtn = root.findViewById<Button>(R.id.next_button_2)
         nextBtn.setOnClickListener{
-            (activity as SetupActivity)!!.loadFragment(ReminderPreferencesFragment())
+
+            if(fifteenMin.isChecked){
+                setup_activity.u?.practiceGoal = 15
+            }else if(thirtyMin.isChecked){
+                setup_activity.u?.practiceGoal = 30
+            }else if(fortyFiveMin.isChecked){
+                setup_activity.u?.practiceGoal = 45
+            }
+
+            Log.d("desu", setup_activity.u?.practiceGoal.toString())
+
+            setup_activity!!.loadFragment(ReminderPreferencesFragment())
         }
 
         return root

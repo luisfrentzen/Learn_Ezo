@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -36,6 +37,8 @@ class MainActivity : AppCompatActivity() {
                             if (data.key == acct.id){
 
                                 val u = data.getValue(Player::class.java) as Player
+
+                                Log.d("desu", u.practiceGoal.toString())
 
                                 startNavBottomActivity(u)
 

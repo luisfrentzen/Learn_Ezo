@@ -2,6 +2,7 @@ package edu.bluejack20_1.learn_ezo
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import org.w3c.dom.Text
 
 
@@ -54,6 +57,15 @@ class Setting : Fragment() {
             (activity as NavBottom?)?.signOut()
         }
 
+        val p : Player = activity.u as Player
+
+        var tv_reminder : TextView = root.findViewById(R.id.tv_reminder)
+        var tv_goal : TextView = root.findViewById(R.id.tv_goal)
+
+
+        tv_reminder.setText(p.dailyReminder)
+        tv_goal.setText(p.practiceGoal.toString())
+
         val goalTextView : TextView = root.findViewById(R.id.tv_goal)
         goalTextView.setOnClickListener {
             val dialog = SetGoalDialog(activity, this, "goal")
@@ -75,6 +87,11 @@ class Setting : Fragment() {
         val btnBack : ImageButton = root.findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
             val fragment : Profile = this@Setting.getParentFragment() as Profile
+
+            var databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
+
+            databaseU.child(p.id).setValue(activity.u as Player)
+
             fragment.loadFragment(User())
         }
 
@@ -84,11 +101,16 @@ class Setting : Fragment() {
     fun setGoal(g : String){
         val goalTextView = view?.findViewById<TextView>(R.id.tv_goal)
         goalTextView?.setText(g)
+
+        var temp = g.split(" ")
+
+        (activity as NavBottom).u?.practiceGoal = temp[0].toInt()
     }
 
     fun setReminder(g : String){
         val reminderTextView = view?.findViewById<TextView>(R.id.tv_reminder)
         reminderTextView?.setText(g)
+        (activity as NavBottom).u?.dailyReminder = g
     }
 
     fun setLanguage(g : String){

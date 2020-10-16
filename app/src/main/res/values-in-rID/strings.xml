@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Learn! Ezo</string>
+    <string name="tv_setting">Pengaturan</string>
+    <string name="tv_profile">Profil</string>
+    <string name="tv_play">Bermain</string>
+    <string name="tv_learn">Belajar</string>
+    <string name="google">Masuk dengan Google</string>
+    <string name="we_would_like_to_remember_you">Kami ingin mengingat anda</string>
+    <string name="tv_dark_mode">Mode Gelap</string>
+    <string name="tv_user_preference">Preferensi Pengguna</string>
+    <string name="tv_language">Bahasa</string>
+    <string name="sign_out">Keluar</string>
+    <string name="statistics">Statistik</string>
+    <string name="league">Liga</string>
+    <string name="lessons_mastered">Pelajaran yang dikuasai</string>
+    <string name="social">Sosial</string>
+    <string name="find_friends">Temukan Teman</string>
+    <string name="achievements">Pencapaian</string>
+    <string name="view_more">Lihat lebih banyak</string>
+    <string name="_15_minutes">15 menit</string>
+    <string name="_30_minutes">30 menit</string>
+    <string name="_45_minutes">45 menit</string>
+    <string name="next">Lanjut</string>
+    <string name="back">Kembali</string>
+    <string name="finish">Selesai</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="language">Bahasa</string>
+    <string name="reminder">Pengingat</string>
+    <string name="reminder_time">Waktu Pengingat</string>
+    <string name="english">Inggris</string>
+    <string name="select_language">Pilih Bahasa</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="play">Bermain</string>
+</resources>

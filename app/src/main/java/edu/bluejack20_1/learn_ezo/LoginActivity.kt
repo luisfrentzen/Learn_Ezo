@@ -45,6 +45,8 @@ class   LoginActivity : AppCompatActivity() {
 
     var userLogged : Player? = null
 
+    var account :GoogleSignInAccount? = null
+
     private var fireDatabase : FirebaseDatabase = FirebaseDatabase.getInstance()
 
     var databaseU : DatabaseReference = fireDatabase.getReference("users")
@@ -68,23 +70,30 @@ class   LoginActivity : AppCompatActivity() {
 
         databaseU.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                var isNewUser = true
                 for(data in snapshot.children){
                     if (data.key == p.id){
 
                         userLogged = data.getValue(Player::class.java) as Player
+                        isNewUser = false
 
+                        break
                     }
                 }
+
+                if(isNewUser) {
+                    databaseU.child(id).setValue(p)
+                    userLogged = p
+                }
+
+                firebaseAuthWithGoogle(isNewUser, account?.idToken!!)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
-
-        databaseU.child(id).setValue(p)
-
-        Toast.makeText(this, "Done!", Toast.LENGTH_LONG).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -93,21 +102,24 @@ class   LoginActivity : AppCompatActivity() {
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val account = task.getResult(ApiException::class.java)!!
-                storeUserData(account.id.toString(), account.displayName.toString(), this)
-                firebaseAuthWithGoogle(account.idToken!!)
+                account = task.getResult(ApiException::class.java)!!
+                storeUserData(account!!.id.toString(), account!!.displayName.toString(), this)
             } catch (e: ApiException) {
                 Toast.makeText(this, "Google authentication failed", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String){
+    private fun firebaseAuthWithGoogle(isNewUser: Boolean, idToken: String){
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    startActivity(NavBottom.getLaunchIntent(this, userLogged as Player))
+                    if(isNewUser){
+                        startActivity(SetupActivity.getLaunchIntent(this, userLogged as Player))
+                    }else{
+                        startActivity(NavBottom.getLaunchIntent(this, userLogged as Player))
+                    }
                 } else {
                     Toast.makeText(this, "Firebase authentication failed", Toast.LENGTH_LONG).show()
                 }
@@ -128,33 +140,6 @@ class   LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            val acct = GoogleSignIn.getLastSignedInAccount(this)
-
-            if (acct != null) {
-
-                databaseU.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        for(data in snapshot.children){
-                            if (data.key == acct.id){
-
-                                val u = data.getValue(Player::class.java) as Player
-
-                                startNavBottomActivity(u)
-
-                                return
-                            }
-                        }
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-                })
-            }
-        }
     }
 
     fun startNavBottomActivity(u : Player) {

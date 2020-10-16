@@ -56,6 +56,9 @@ class Home : Fragment() {
 
         databaseRecord.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
+                var i = 1
+
                 for(data in snapshot.children){
                     val calendar : Calendar = Calendar.getInstance()
 
@@ -72,6 +75,8 @@ class Home : Fragment() {
                     }else{
                         events.add(EventDay(calendar, R.drawable.ic_dot_green))
                     }
+
+                    i++
                 }
                 
                 calendarView.setEvents(events)
