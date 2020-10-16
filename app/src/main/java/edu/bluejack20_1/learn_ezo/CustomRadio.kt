@@ -9,7 +9,6 @@ import androidx.appcompat.widget.AppCompatRadioButton
 class CustomRadio : AppCompatRadioButton {
     var onChangeListener : OnCheckedChangeListener? = null
 
-
     constructor(context: Context?) : super(context)
 
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)

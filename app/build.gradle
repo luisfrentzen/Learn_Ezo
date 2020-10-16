@@ -28,6 +28,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude 'META-INF/library_release.kotlin_module'
+    }
 }
 
 dependencies {
@@ -57,4 +61,5 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     compileOnly 'com.google.android.wearable:wearable:2.5.0'
+    implementation 'com.github.Jamshid-M:NestedRadioGroup:1.1'
 }

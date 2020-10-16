@@ -60,7 +60,6 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     private fun addUserRecord(id: String){
 
         val cal : Calendar = Calendar.getInstance()

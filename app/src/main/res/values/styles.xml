@@ -48,4 +48,11 @@
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">@color/lightGray</item>
     </style>
+
+    <style name="CustomChoices">
+        <item name="android:background">@drawable/selectable_choices_background</item>
+        <item name="android:textColor">@drawable/selectable_choices_text_color</item>
+        <item name="android:elevation">2dp</item>
+        <item name="fontFamily">@font/nunito</item>
+    </style>
 </resources>
