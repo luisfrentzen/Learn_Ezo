@@ -62,9 +62,10 @@ class User : Fragment() {
         rvAchievement.isNestedScrollingEnabled = false
 
         val p : Player = (activity as NavBottom).u as Player
-//
-//        Log.d("desu", "Exp : " + p.exp.toString())
-//        Log.d("desu", "Streak : " + p.dayStreak.toString())
+
+        val level_progress : ProgressBar = root.findViewById(R.id.level_progress)
+
+        level_progress.progress = p.exp
 
         val day_streak_count : TextView = root.findViewById(R.id.day_streak_count)
         val exp_count : TextView = root.findViewById(R.id.exp_count)

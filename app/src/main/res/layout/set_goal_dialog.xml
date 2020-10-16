@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toTopOf="@id/tenmin_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/_5_minutes"/>
+        android:text="@string/_15_minutes"/>
 
     <Button
         android:id="@+id/tenmin_btn"
@@ -37,7 +37,7 @@
         android:layout_height="48dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/_10_minutes"
+        android:text="@string/_30_minutes"
         app:layout_constraintBottom_toTopOf="@+id/fifteenmin_btn"
         app:layout_constraintTop_toBottomOf="@id/fivemin_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
         android:layout_height="48dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/_15_minutes"
+        android:text="@string/_45_minutes"
         app:layout_constraintTop_toBottomOf="@id/tenmin_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -24,6 +24,8 @@ public class Player implements Parcelable {
         this.dayStreak = 1;
         this.follower = 0;
         this.following = 0;
+        this.practiceGoal = 10;
+        this.dailyReminder = "05:00 PM";
     }
 
     public Player(){
@@ -46,6 +48,8 @@ public class Player implements Parcelable {
         dayStreak = in.readInt();
         follower = in.readInt();
         following = in.readInt();
+        this.practiceGoal = in.readInt();
+        this.dailyReminder = in.readString();
     }
 
     public String getId() {
@@ -76,6 +80,14 @@ public class Player implements Parcelable {
         return name;
     }
 
+    public int getPracticeGoal() {
+        return practiceGoal;
+    }
+
+    public String getDailyReminder() {
+        return dailyReminder;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -90,6 +102,8 @@ public class Player implements Parcelable {
         dest.writeInt(dayStreak);
         dest.writeInt(follower);
         dest.writeInt(following);
+        dest.writeInt(practiceGoal);
+        dest.writeString(dailyReminder);
     }
 
     public static final Creator<Player> CREATOR = new Creator<Player>() {
