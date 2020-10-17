@@ -1,6 +1,7 @@
 package edu.bluejack20_1.learn_ezo
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -56,11 +57,22 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
 
         holder.rgChoices.clearCheck()
         val options = holder.arChoicesBtn
+        val dr : Drawable? = act.getDrawable(R.drawable.btn_rounded)
 
         for(i in options){
             i.setBackgroundResource(R.drawable.selectable_choices_background)
             i.isChecked = false
+            i.setOnClickListener {
+                holder.nextBtn.isEnabled = true
+                dr!!.mutate()
+                dr.alpha = 255
+            }
         }
+
+        holder.nextBtn.text = act.getString(R.string.check)
+        holder.nextBtn.isEnabled = false
+        dr!!.mutate()
+        dr.alpha = 179
 
         holder.nextBtn.setOnClickListener {
             val selectedBtn = holder.view.findViewById<CustomRadio>(holder.rgChoices.checkedRadioButtonId)
@@ -80,7 +92,7 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
             }
 
             if(position == itemCount - 1){
-                holder.nextBtn.text = "Finish"
+                holder.nextBtn.text = act.getString(R.string.finish)
                 holder.nextBtn.setOnClickListener {
                     //add exp
                     user.exp += 10
@@ -99,7 +111,7 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
                 }
             }
             else {
-                holder.nextBtn.text = "Next"
+                holder.nextBtn.text = act.getString(R.string.next)
                 holder.nextBtn.setOnClickListener {
                     (act as ProblemActivity).nextPage()
                 }

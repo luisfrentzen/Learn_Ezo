@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import com.google.firebase.database.*
 import org.w3c.dom.Text
@@ -72,6 +73,11 @@ class LessonActivity : AppCompatActivity() {
             intent.putExtra("lesson_id", lesson.id.toString())
             intent.putExtra("us", user)
             startActivity(intent)
+            finish()
+        }
+
+        val btn_back = findViewById<ImageButton>(R.id.btn_back)
+        btn_back.setOnClickListener {
             finish()
         }
     }

@@ -33,6 +33,8 @@ class NavBottom : AppCompatActivity() {
 
     var u : Player? = null
 
+    var lastCompleted : Int ?= null
+
     var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
     val ach_list = ArrayList<Achievement>()
 
@@ -232,12 +234,12 @@ class NavBottom : AppCompatActivity() {
                     val temp_completed = temp.split(",")
 
                     var idx : Int = 0;
-                    val lastCompleted = temp_completed.get((temp_completed.lastIndex)).toInt().plus(1)
+                    lastCompleted = temp_completed.get((temp_completed.lastIndex)).toInt().plus(1)
 
                     Log.d("lesson", lastCompleted.toString())
 
                     for(i in lessons_list){
-                        i.isCompleted = idx < lastCompleted
+                        i.isCompleted = idx < lastCompleted!!
                         idx = idx + 1
                     }
                 }

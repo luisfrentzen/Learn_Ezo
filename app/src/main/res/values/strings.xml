@@ -187,6 +187,12 @@
 
     <string name="gto_desc">Guess the object in 60 seconds!</string>
     <string name="how_to_play">How To Play?</string>
+    <string name="lg_apprentice">Apprentice</string>
+    <string name="lg_disciple">Disciple</string>
+    <string name="lg_teacher">Teacher</string>
+    <string name="lg_master">Master</string>
+    <string name="lg_scholar">Scholar</string>
+    <string name="check">Check</string>
 
 
 </resources>

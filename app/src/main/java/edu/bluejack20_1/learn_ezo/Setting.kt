@@ -77,7 +77,6 @@ class Setting : Fragment() {
         }
 
 
-
         val goalTextView : TextView = root.findViewById(R.id.tv_goal)
         goalTextView.setOnClickListener {
             val dialog = SetGoalDialog(activity_nav!!, this, "goal")
