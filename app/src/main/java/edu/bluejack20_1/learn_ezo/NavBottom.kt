@@ -218,7 +218,6 @@ class NavBottom : AppCompatActivity() {
 
                     lessons_mastered_count = temp_completed.size
 
-
                     var idx : Int = 0;
                     lastCompleted = temp_completed.get((temp_completed.lastIndex)).toInt().plus(1)
 
