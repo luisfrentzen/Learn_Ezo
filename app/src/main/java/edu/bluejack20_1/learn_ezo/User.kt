@@ -109,10 +109,10 @@ class User : Fragment() {
         val tv_lesson_mastered : TextView = root.findViewById(R.id.tv_lesson_mastered)
         tv_lesson_mastered.text = (activity as NavBottom).lessons_mastered_count.toString()
 
-        val btnFriend : Button = root.findViewById(R.id.btn_friend)
-        btnFriend.setOnClickListener {
-            (activity as NavBottom).moveToFriendPage()
-        }
+//        val btnFriend : Button = root.findViewById(R.id.btn_friend)
+//        btnFriend.setOnClickListener {
+//            (activity as NavBottom).moveToFriendPage()
+//        }
 
         val btnSetting : ImageButton = root.findViewById(R.id.setting_button)
         btnSetting.setOnClickListener {
