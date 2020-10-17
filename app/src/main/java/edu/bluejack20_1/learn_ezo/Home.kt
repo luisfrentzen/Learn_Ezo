@@ -90,12 +90,20 @@ class Home : Fragment() {
         })
 
         val button_learning_review : Button = root.findViewById<Button>(R.id.review_button)
+        val quick_review : Button = root.findViewById<Button>(R.id.quick_review_btn)
+
+        if((activity as NavBottom).lessons_mastered_count <= 2){
+            button_learning_review.isEnabled = false
+            quick_review.isEnabled = false
+            button_learning_review.alpha = 0.7F
+            quick_review.alpha = 0.7F
+        }
 
         button_learning_review.setOnClickListener {
             (activity as NavBottom).moveToReviewPage(1)
         }
 
-        val quick_review : Button = root.findViewById<Button>(R.id.quick_review_btn)
+
 
         quick_review.setOnClickListener {
             (activity as NavBottom).moveToReviewPage(2)

@@ -40,7 +40,7 @@ class NavBottom : AppCompatActivity() {
 
     lateinit var lessonAdapter : LessonNodeAdapter
 
-    var lessons_mastered_count by Delegates.notNull<Int>()
+    var lessons_mastered_count : Int = 0
 
     lateinit var userFragment : User
 
