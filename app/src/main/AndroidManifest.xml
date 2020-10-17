@@ -15,7 +15,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HowToPlay"></activity>
+        <activity android:name=".MemorizeIntroActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MemorizeActivity">
+
+        </activity>
+        <activity android:name=".HowToPlay" />
         <activity android:name=".LessonActivity" />
         <activity android:name=".ProblemActivity" />
         <activity android:name=".SearchActivity" />
@@ -34,13 +44,7 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/SplashTheme"></activity>
     </application>
 
 </manifest>
