@@ -86,7 +86,7 @@
 
     </string>
 
-    <string name="tv_example_hiragana">
+    <string name="tv_example_hiragana" translatable="false">
         き - KI
         \nも - MO
         \nに - NI
@@ -100,7 +100,7 @@
 
     </string>
 
-    <string name="tv_example_katakana">
+    <string name="tv_example_katakana" translatable="false">
         ダ - DA
         \nカ - KA
         \nガ - GA
@@ -112,7 +112,7 @@
         Japanese Numbers are fairly simple. It advances on a base ten system, so you’ll be able to use the numbers by learning 1 to 10 and then learning expressions for the digits such as 10, 100 and 1,000.
     </string>
 
-    <string name="tv_example_number">
+    <string name="tv_example_number" translatable="false">
         1 ichi 「いち」
         \n2 ni 「に」
         \n3 san 「さん」
@@ -143,7 +143,7 @@
         \nごご(gogo) for PM
     </string>
 
-    <string name="tv_example_time">
+    <string name="tv_example_time" translatable="false">
         01:00 ichiji 「いちじ」
         \n03:30 PM gogosanjihan 「ごごさんじはん」
         \n04:00 AM gozenyoji 「ごぜんよじ」
@@ -164,7 +164,7 @@
         \nFor days of month, just use (number + 日/にち nichi) but it is different for 1-10, 14, 20, 24
     </string>
 
-    <string name="tv_example_date">
+    <string name="tv_example_date" translatable="false">
         1st tsuitachi 「ついたち」
         \n2nd futsuka 「ふつか」
         \n3rd mikka 「みっか」
@@ -182,7 +182,7 @@
     </string>
 
 
-    <string name="memorize_game">Memorize</string>
+    <string name="memorize_game" translatable="false">Memorize</string>
 
     <string name="how_to_play">How To Play?</string>
 
