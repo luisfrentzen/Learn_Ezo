@@ -204,17 +204,24 @@ class NavBottom : AppCompatActivity() {
 
                 Log.d("lesson", temp)
 
-                val temp_completed = temp.split(",")
+                if(temp == "null"){
+                    var temp_lessons = lessons_list.get(0)
 
-                var idx : Int = 0;
-                val lastCompleted = temp_completed.get((temp_completed.lastIndex)).toInt().plus(1)
+                    temp_lessons.isCompleted = true
+                }else{
+                    val temp_completed = temp.split(",")
 
-                Log.d("lesson", lastCompleted.toString())
+                    var idx : Int = 0;
+                    val lastCompleted = temp_completed.get((temp_completed.lastIndex)).toInt().plus(1)
 
-                for(i in lessons_list){
-                    i.isCompleted = idx < lastCompleted
-                    idx = idx + 1
+                    Log.d("lesson", lastCompleted.toString())
+
+                    for(i in lessons_list){
+                        i.isCompleted = idx < lastCompleted
+                        idx = idx + 1
+                    }
                 }
+
 
                 lessonAdapter.notifyDataSetChanged()
 

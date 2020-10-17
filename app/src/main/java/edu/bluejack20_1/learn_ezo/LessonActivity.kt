@@ -69,6 +69,7 @@ class LessonActivity : AppCompatActivity() {
             val intent = Intent(this, ProblemActivity::class.java)
             intent.putExtra("probs", arProb)
             intent.putExtra("title", ttl.text)
+            intent.putExtra("lesson_id", lesson.id.toString())
             intent.putExtra("us", user)
             startActivity(intent)
             finish()
