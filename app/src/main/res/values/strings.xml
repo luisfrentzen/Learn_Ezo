@@ -76,5 +76,110 @@
     <string name="tv_time">Time</string>
     <string name="start">Start</string>
 
+    <string name="for_example">Example: </string>
+
+    <string name="tv_lesson_hiragana">
+        Hiragana is the basic Japanese alphabet. It represents every sound in the Japanese language.
+
+        \n\nIn English, each letter usually represents one sound, like k or b. But hiragana characters each represents as syllable. Japanese syllables are usually just a consonant followed by a vowel.
+        \n\nThere are 46 hiragana symbols in Japanese, each with a particular sound but with no independent meaning.
+
+    </string>
+
+    <string name="tv_example_hiragana">
+        き - KI
+        \nも - MO
+        \nに - NI
+        \nれ - RE
+        \nか - KA
+    </string>
+    <string name="tv_lesson_katakana">
+        Katakana is mainly used for words imported from foreign languages. Katakana represents the same set of phonetic sounds as Hiragana, but all the characters are different from Hiragana.
+
+        \n\nKatakana is tougher to master compared to Hiragana because it is only used for certain words and you do not get nearly as much practice as you do with Hiragana.
+
+    </string>
+
+    <string name="tv_example_katakana">
+        ダ - DA
+        \nカ - KA
+        \nガ - GA
+        \nツ - TSU
+        \nフ - FU
+    </string>
+    
+    <string name="tv_lesson_number">
+        Japanese Numbers are fairly simple. It advances on a base ten system, so you’ll be able to use the numbers by learning 1 to 10 and then learning expressions for the digits such as 10, 100 and 1,000.
+    </string>
+
+    <string name="tv_example_number">
+        1 ichi 「いち」
+        \n2 ni 「に」
+        \n3 san 「さん」
+        \n4 yon/shi 「よん/し」
+        \n5 go 「ご」
+        \n6 roku 「ろく」
+        \n7 nana/shichi 「なな/しち」
+        \n8 hachi 「はち」
+        \n9 kyuu/ku 「きゅう/く」
+        \n10 juu 「じゅう」
+        \n100 hyaku「ひゃく」
+        \n1,000 sen「せん」
+        \n10,000 man「まん」
+
+        \n\n12 = 10 + 2 = juuni 「じゅうに」
+        \n43 = 4 + 10 + 3 = yonjuusan 「よんじゅうさん」
+        \n111 = 100 + 10 + 1 = hyakujuuichi 「ひゃくじゅういち」
+
+    </string>
+
+    <string name="tv_lesson_time">
+        Once you know about Japanese number, it becomes easier to give time in Japanese.
+
+        \n\nAppend じ (ji) to the number for hour.
+        \nAppend ふん/ぷん (fun/pun it depends on the number) to the number for minute.
+        \nAppend びょう (byou) to the number for second. However most of the time you will not need to give the seconds of the time.
+        \nごぜん(gozen) for AM
+        \nごご(gogo) for PM
+    </string>
+
+    <string name="tv_example_time">
+        01:00 ichiji 「いちじ」
+        \n03:30 PM gogosanjihan 「ごごさんじはん」
+        \n04:00 AM gozenyoji 「ごぜんよじ」
+    </string>
+    
+    <string name="tv_lesson_date">
+        To say date in Japanese, you can for example say:
+
+        \n\n今日は２０２０年２月１１日です
+
+        \n\n今日は(kyou wa) -> today
+        \n２０２０年 (nisennijuunen) -> year 2020
+        \n２月 (nigatsu) -> February
+        \n１１日 (juuichinichi) -> 11th
+        \nです (desu) -> is the polite form of the copula verb meaning "to be" or "is"
+        \n\nFor year, just write the year concerned and then add 年/ねん (nen)
+        \nFor month, just write the month concerned and then add 月/がつ (gatsu)
+        \nFor days of month, just use (number + 日/にち nichi) but it is different for 1-10, 14, 20, 24
+    </string>
+
+    <string name="tv_example_date">
+        1st tsuitachi 「ついたち」
+        \n2nd futsuka 「ふつか」
+        \n3rd mikka 「みっか」
+        \n4th yokka 「よっか」
+        \n5th itsuka 「いつか」
+        \n6th muika 「むいか」
+        \n7th nanoka 「なのか」
+        \n8th youka 「ようか」
+        \n9th kokonoka 「ここのか」
+        \n10th tooka 「とおか」
+        \n14th juuyokka 「じゅうよっか」
+        \n20th hatsuka 「はつか」
+        \n24th nijuuyokka 「にじゅうよっか」
+        \n12th juuninichi 「じゅうににち」
+    </string>
+
 
 </resources>

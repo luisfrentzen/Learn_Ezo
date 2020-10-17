@@ -114,6 +114,7 @@ class Setting : Fragment() {
             goalTextView?.setText(R.string._45_minutes)
         }
         activity_nav?.u?.practiceGoal = temp[0].toInt()
+
         databaseU.child(activity_nav?.u?.id.toString()).setValue(activity_nav?.u as Player)
     }
 

@@ -171,6 +171,14 @@ class NavBottom : AppCompatActivity() {
 
                     u.title = temp_title
 
+                    val temp_lesson = resources.getString(resources.getIdentifier(u.short_lesson, "string", packageName))
+
+                    u.short_lesson = temp_lesson
+
+                    val temp_example = resources.getString(resources.getIdentifier(u.example, "string", packageName))
+
+                    u.example = temp_example
+
                     lessons_list.add(u)
                 }
             }

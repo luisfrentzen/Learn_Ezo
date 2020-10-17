@@ -78,9 +78,16 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, var act : 
 
             Log.d("last", position.toString())
 
+            var activity_nav = act as NavBottom
+
             if(position == itemCount - 1){
                 holder.nextBtn.text = "Finish"
                 holder.nextBtn.setOnClickListener {
+                    //add exp, and update achievement
+                    activity_nav.u.dailyReminder =12
+
+                    activity_nav?.u?.practiceGoal = temp[0].toInt()
+
                     (act as ProblemActivity).finish()
                 }
             }

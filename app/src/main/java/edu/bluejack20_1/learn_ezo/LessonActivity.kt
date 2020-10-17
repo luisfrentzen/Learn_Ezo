@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.database.*
+import org.w3c.dom.Text
 
 class LessonActivity : AppCompatActivity() {
     lateinit var lesson : Lesson
@@ -52,6 +53,15 @@ class LessonActivity : AppCompatActivity() {
 
         val ttl = findViewById<TextView>(R.id.title_lesson)
         ttl.setText(lesson.title)
+
+        val title_container = findViewById<TextView>(R.id.tv_title)
+        title_container.setText(lesson.title)
+
+        val tv_short_lesson = findViewById<TextView>(R.id.tv_short_lesson)
+        tv_short_lesson.setText(lesson.short_lesson)
+
+        val tv_example = findViewById<TextView>(R.id.tv_example)
+        tv_example.setText(lesson.example)
 
         startBtn.setOnClickListener {
             val intent = Intent(this, ProblemActivity::class.java)

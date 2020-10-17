@@ -10,12 +10,14 @@ class Lesson : Serializable{
     var icon : String ?= null
     var short_lesson : String? = null
     var isCompleted : Boolean ?= false
+    var example : String ?= null
 
     constructor(id : Int, title : String, icon : String, is_completed : Boolean, short_lesson : String){
         this.id = id
         this.title = title
         this.icon = icon
         this.short_lesson = short_lesson
+        this.example = example
         isCompleted = is_completed
     }
 

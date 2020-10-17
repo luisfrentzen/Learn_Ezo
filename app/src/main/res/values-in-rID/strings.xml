@@ -64,4 +64,5 @@
     <string name="tv_date">Tanggal</string>
     <string name="tv_number">Angka</string>
     <string name="tv_time">Waktu</string>
+    <string name="start">Mulai</string>
 </resources>
