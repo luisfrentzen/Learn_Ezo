@@ -65,16 +65,28 @@ class User : Fragment() {
 
         val level_progress : ProgressBar = root.findViewById(R.id.level_progress)
 
-        level_progress.progress = p.exp
+        var level_count = 1
+
+        var temp_exp = p.exp
+
+        while(temp_exp >= 25){
+            level_count++
+            temp_exp -= 25
+        }
+
+        level_progress.progress = temp_exp
 
         val day_streak_count : TextView = root.findViewById(R.id.day_streak_count)
         val exp_count : TextView = root.findViewById(R.id.exp_count)
 
         day_streak_count.setText(p.dayStreak.toString())
-        exp_count.setText(p.exp.toString())
+        exp_count.text = p.exp.toString()
 
         val tv_follower : TextView = root.findViewById(R.id.follower)
         tv_follower.setText( p.follower.toString().plus(" Follower / ").plus(p.following.toString()).plus(" Following"))
+
+        val level_tv : TextView = root.findViewById(R.id.level_count)
+        level_tv.text = "Level ".plus(level_count)
 
         val btnFriend : Button = root.findViewById(R.id.btn_friend)
         btnFriend.setOnClickListener {
@@ -122,6 +134,12 @@ class User : Fragment() {
 //        }
 
         return root
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean){
+        super.setUserVisibleHint(isVisibleToUser)
+
+        fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
     }
 
     companion object {

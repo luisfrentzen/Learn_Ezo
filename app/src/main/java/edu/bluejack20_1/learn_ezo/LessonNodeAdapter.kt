@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 
-class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>, ctx : Context) : RecyclerView.Adapter<LessonNodeAdapter.ViewHolder>(){
+class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>, var user : Player, ctx : Context) : RecyclerView.Adapter<LessonNodeAdapter.ViewHolder>(){
 
     val con : Context = ctx
 
@@ -45,6 +45,7 @@ class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>, ctx : Context) : Re
         nodeBtn.setOnClickListener {
             val intent = Intent(con, LessonActivity::class.java)
             intent.putExtra("les", lesson)
+            intent.putExtra("us", user)
             con.startActivity(intent)
         }
 

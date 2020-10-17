@@ -9,6 +9,8 @@ import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -31,14 +33,12 @@ class MainActivity : AppCompatActivity() {
 
             if (acct != null) {
 
-                databaseU.addListenerForSingleValueEvent(object : ValueEventListener {
+                databaseU.addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         for(data in snapshot.children){
                             if (data.key == acct.id){
 
                                 val u = data.getValue(Player::class.java) as Player
-
-                                Log.d("desu", u.practiceGoal.toString())
 
                                 startNavBottomActivity(u)
 

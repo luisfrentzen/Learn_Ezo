@@ -65,4 +65,5 @@
     <string name="tv_number">Angka</string>
     <string name="tv_time">Waktu</string>
     <string name="start">Mulai</string>
+    <string name="for_example">Contoh:</string>
 </resources>

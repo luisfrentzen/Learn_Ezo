@@ -15,8 +15,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
-class ProblemPageAdapter(private var problemList: ArrayList<Problem>, var act : Context) : RecyclerView.Adapter<ProblemPageAdapter.Pager2ViewHolder>(){
+class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private var user : Player, var act : Context) : RecyclerView.Adapter<ProblemPageAdapter.Pager2ViewHolder>(){
 
     inner class Pager2ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val view = itemView
@@ -37,6 +39,8 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, var act : 
         }
 
     }
+
+    var databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
 
     override fun onCreateViewHolder(parent: ViewGroup,  viewType: Int): ProblemPageAdapter.Pager2ViewHolder {
         val context = parent.context
@@ -76,17 +80,14 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, var act : 
                 }
             }
 
-            Log.d("last", position.toString())
-
-            var activity_nav = act as NavBottom
-
             if(position == itemCount - 1){
                 holder.nextBtn.text = "Finish"
                 holder.nextBtn.setOnClickListener {
                     //add exp, and update achievement
-                    activity_nav.u.dailyReminder =12
+                    user.exp += 10
 
-                    activity_nav?.u?.practiceGoal = temp[0].toInt()
+                    databaseU.child(user.id.toString()).setValue(user)
+
 
                     (act as ProblemActivity).finish()
                 }

@@ -13,6 +13,7 @@ import org.w3c.dom.Text
 
 class LessonActivity : AppCompatActivity() {
     lateinit var lesson : Lesson
+    lateinit var user : Player
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +22,7 @@ class LessonActivity : AppCompatActivity() {
         val startBtn = findViewById<Button>(R.id.start_button)
 
         lesson = intent.getSerializableExtra("les") as Lesson
+        user = intent.getParcelableExtra<Player>("us") as Player
 
         val tvShortLesson = findViewById<TextView>(R.id.tv_short_lesson)
         tvShortLesson.setText(lesson.short_lesson)
@@ -67,6 +69,7 @@ class LessonActivity : AppCompatActivity() {
             val intent = Intent(this, ProblemActivity::class.java)
             intent.putExtra("probs", arProb)
             intent.putExtra("title", ttl.text)
+            intent.putExtra("us", user)
             startActivity(intent)
             finish()
         }

@@ -32,10 +32,13 @@ class NavBottom : AppCompatActivity() {
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
 
     var u : Player? = null
+
     var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
     val ach_list = ArrayList<Achievement>()
 
     lateinit var lessonAdapter : LessonNodeAdapter
+
+    lateinit var userFragment : User
 
     var databaseL : DatabaseReference = FirebaseDatabase.getInstance().getReference("lessons")
     val lessons_list = ArrayList<Lesson>()
@@ -218,7 +221,7 @@ class NavBottom : AppCompatActivity() {
             }
         })
 
-        lessonAdapter = LessonNodeAdapter(lessons_list, this)
+        lessonAdapter = LessonNodeAdapter(lessons_list, u!!,this)
 
         btm_nav.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -243,6 +246,8 @@ class NavBottom : AppCompatActivity() {
 
         })
     }
+
+
 
     companion object {
         fun getLaunchIntent(from: Context, loggedUser: Player) = Intent(from, NavBottom::class.java).apply {

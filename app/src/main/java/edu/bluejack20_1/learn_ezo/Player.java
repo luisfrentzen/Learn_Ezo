@@ -31,7 +31,11 @@ public class Player implements Parcelable {
     public Player(){
 
     }
-    
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
     public void setPracticeGoal(int practiceGoal) {
         this.practiceGoal = practiceGoal;
     }
