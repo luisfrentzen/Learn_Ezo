@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import edu.bluejack20_1.learn_ezo.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,7 +36,14 @@ class Game : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game, container, false)
+        val root = inflater.inflate(R.layout.fragment_game, container, false)
+
+        val memoBtn = root.findViewById<Button>(R.id.play_memorize)
+        memoBtn.setOnClickListener {
+            (activity as NavBottom).moveToMemorizePage()
+        }
+
+        return root
     }
 
     companion object {

@@ -72,6 +72,11 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun moveToMemorizePage(){
+        val intent = Intent(this, MemorizeIntroActivity::class.java)
+        startActivity(intent)
+    }
+
     fun moveToAchievementPage(ach_list : ArrayList<Achievement>){
         val intent = Intent(this, AchievementActivity::class.java)
         intent.putExtra("ach", ach_list)
@@ -82,8 +87,6 @@ class NavBottom : AppCompatActivity() {
         val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
