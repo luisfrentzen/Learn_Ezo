@@ -66,4 +66,60 @@
     <string name="tv_time">Waktu</string>
     <string name="start">Mulai</string>
     <string name="for_example">Contoh:</string>
+    <string name="learning_review_desc">
+        Ini saatnya untuk mereview semuanya!
+        \n\nDi bagian ini, kita akan menanyakan 20 pertanyaan acak dari semua pelajaran yang telah kamu selesaikan
+        \n\nSemoga beruntung!
+    </string>
+
+    <string name="quick_review_desc">
+        Ini saatnya untuk mereview semuanya!
+
+        Di bagian ini, kamu akan melakukan review ke semua pelajaran yang telah kamu selesaikan. Kami akan memberimu 60 detik untuk menjawab semua pertanyaan
+
+        \n\nSemoga beruntung!
+
+    </string>
+
+    <string name="tv_lesson_hiragana">
+        Hiragana adalah huruf bahasa jepang yang dasar. Hiragana mewakili setiap huruf di Bahasa Jepang.
+
+        \n\nDi Inggris, biasanya 1 huruf itu hanya memiliki satu suara, seperti k atau b. Tapi karakter hiragana masing-masing mewakili suku kata. Suku kata Jepang biasanya adalah sebuah konsonan yang diikuti huruf vokal.
+        \n\nAda 46 simbol hiragana di Jepang, semuanya memiliki suaranya tersendiri tapi tanpa memiliki arti khusus.
+    </string>
+
+    <string name="tv_lesson_katakana">
+        Katakana digunakan untuk kata-kata yang dikonversi dari bahasa asing. Katakana mewakili rangkaian bunyi fonetik yang sama dengan Hiragana, tetapi semua karakternya berbeda dengan Hiragana.
+
+        \n\nKatakana lebih susah untuk dikuasai daripada Hiragana karena Katakana hanya digunakan untuk beberapa kata dan kalian tidak akan mendapatkan latihan sebanyak yang kalian lakukan dengan Hiragana.
+    </string>
+
+    <string name="tv_lesson_number">
+        Angka jepang sangatlah sederhana. Angka di bahasa Jepang berdasarkan sistem 10 angka, jadi kamu cukup mempelajari angka 1 hingga angka 10 lalu baru belajar ekspresi untuk angka lain seperti 10, 100 dan 1,000
+    </string>
+
+    <string name="tv_lesson_time">
+        Setelah kamu tahu tentang angka dalam Bahasa Jepang, mempelajari waktu dalam Bahasa Jepang akan menjadi lebih mudah.
+        \n\nTambahkan じ (ji) pada angka untuk jam.
+        \nTambahkan ふん/ぷん (fun/pun tergantung pada angkanya) pada angka untuk menit.
+        \nTambahkan びょう (byou) pada angka untuk detik. Tetapi sering kali pada penulisan waktu, kamu tidak perlu menuliskan detik dari waktu tersebut.
+        \nごぜん(gozen) untuk AM.
+        \nごご(gogo) untuk PM
+    </string>
+
+    <string name="tv_lesson_date">
+        Untuk menyatakan tanggal dalam Bahasa Jepang, kamu bisa:
+
+        \n\n今日は２０２０年２月１１日です
+
+        \n\n今日は(kyou wa) -> hari ini
+        \n２０２０年 (nisennijuunen) -> tahun 2020
+        \n２月 (nigatsu) -> februari
+        \n１１日 (juuichinichi) -> tanggal 11
+        \nです (desu) -> adalah bentuk sopan dari kata kerja kopula yang berarti "menjadi" atau "adalah"
+        \n\nUntuk tahun, tulis saja tahun yang bersangkutan lalu tambahkan 年/ねん (nen)
+        \nUntuk bulan, tulis saja bulan yang bersangkutan lalu tambahkan 月/がつ (gatsu)
+        \nUntuk tanggal dalam bulan, gunakan saja (angka + 日/にち nichi) tapi tidak untuk 1-10, 14, 20, 24
+    </string>
+
 </resources>
