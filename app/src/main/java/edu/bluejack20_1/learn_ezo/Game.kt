@@ -39,6 +39,12 @@ class Game : Fragment() {
         val root = inflater.inflate(R.layout.fragment_game, container, false)
 
         val memoBtn = root.findViewById<Button>(R.id.play_memorize)
+
+        if((activity as NavBottom).lessons_mastered_count <= 2){
+            memoBtn.isEnabled = false
+            memoBtn.alpha = 0.7F
+        }
+
         memoBtn.setOnClickListener {
             (activity as NavBottom).moveToMemorizePage()
         }
