@@ -185,6 +185,8 @@
     <string name="memorize_game">Memorize</string>
 
     <string name="how_to_play">How To Play?</string>
+
+
     <string name="gto_desc">Guess the object in 60 seconds!</string>
     <string name="memorize_desc">Memorize game desc</string>
 
@@ -194,6 +196,13 @@
         \n\nIn this section, we will randomly ask 20 questions from all of the lessons that you\'ve cleared.
         \n\nGood Luck!
     </string>
+
+    <string name="lg_apprentice">Apprentice</string>
+    <string name="lg_disciple">Disciple</string>
+    <string name="lg_teacher">Teacher</string>
+    <string name="lg_master">Master</string>
+    <string name="lg_scholar">Scholar</string>
+    <string name="check">Check</string>
 
     <string name="quick_review_desc">
         It\'s time to review it all!

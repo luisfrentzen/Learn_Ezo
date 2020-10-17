@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_user.*
+import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,13 +66,30 @@ class User : Fragment() {
 
         val level_progress : ProgressBar = root.findViewById(R.id.level_progress)
 
-        var level_count = 1
 
         var temp_exp = p.exp
+        val level_count = (temp_exp / 25) + 1
+        temp_exp -= (level_count - 1) * 25
 
-        while(temp_exp >= 25){
-            level_count++
-            temp_exp -= 25
+        val leagueTv = root.findViewById<TextView>(R.id.tv_league)
+        val lessonMasteredTv = root.findViewById<TextView>(R.id.tv_lesson_mastered)
+
+        lessonMasteredTv.text = ((activity as NavBottom).lastCompleted?.minus(1)).toString()
+
+        if(level_count < 5){
+            leagueTv.text = resources.getString(R.string.lg_apprentice)
+        }
+        else if(level_count < 10){
+            leagueTv.text = resources.getString(R.string.lg_disciple)
+        }
+        else if(level_count < 25) {
+            leagueTv.text = resources.getString(R.string.lg_teacher)
+        }
+        else if(level_count < 50) {
+            leagueTv.text = resources.getString(R.string.lg_master)
+        }
+        else {
+            leagueTv.text = resources.getString(R.string.lg_scholar)
         }
 
         level_progress.progress = temp_exp

@@ -201,11 +201,12 @@
                     android:text="@string/league" />
 
                 <TextView
+                    android:id="@+id/tv_league"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginHorizontal="10dp"
-                    android:text="Apprentice" />
+                    android:text="@string/lg_apprentice" />
 
             </androidx.cardview.widget.CardView>
 
@@ -229,12 +230,12 @@
                     android:text="@string/lessons_mastered" />
 
                 <TextView
-                    android:id="@+id/lesson_mastered"
+                    android:id="@+id/tv_lesson_mastered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginHorizontal="10dp"
-                    android:text="0" />
+                     />
 
             </androidx.cardview.widget.CardView>
 

@@ -34,6 +34,8 @@ class NavBottom : AppCompatActivity() {
 
     var u : Player? = null
 
+    var lastCompleted : Int ?= null
+
     val ach_list = ArrayList<Achievement>()
 
     lateinit var lessonAdapter : LessonNodeAdapter
@@ -215,12 +217,12 @@ class NavBottom : AppCompatActivity() {
 
 
                     var idx : Int = 0;
-                    val lastCompleted = temp_completed.get((temp_completed.lastIndex)).toInt().plus(1)
+                    lastCompleted = temp_completed.get((temp_completed.lastIndex)).toInt().plus(1)
 
                     Log.d("lesson", lastCompleted.toString())
 
                     for(i in lessons_list){
-                        i.isCompleted = idx < lastCompleted
+                        i.isCompleted = idx < lastCompleted!!
                         idx = idx + 1
                     }
                 }
