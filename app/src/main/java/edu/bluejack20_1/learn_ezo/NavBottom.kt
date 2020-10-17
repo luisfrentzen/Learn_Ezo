@@ -71,7 +71,7 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun addUserRecord(id: String){
+    fun addUserRecord(id: String, value: Int){
 
         val cal : Calendar = Calendar.getInstance()
 
@@ -81,7 +81,27 @@ class NavBottom : AppCompatActivity() {
 
         val date : String = day.plus("-").plus(month).plus("-").plus(year)
 
-        databaseR.child(id).child(date).setValue(0)
+
+        databaseR.child(id).child(date).addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var temp = snapshot.value.toString()
+                if(temp == "null"){
+                        databaseR.child(id).child(date).setValue(value)
+                }else{
+                    if(value != 0){
+                        databaseR.child(id).child(date).setValue(value)
+                    }
+                }
+            }
+
+
+        })
+
+
 
     }
 
@@ -93,7 +113,7 @@ class NavBottom : AppCompatActivity() {
 
         u = intent.getParcelableExtra("user") as Player?
 
-        addUserRecord(u!!.id)
+        addUserRecord(u!!.id, 0)
 
         val viewPager : ViewPager2 = findViewById(R.id.viewPager)
         viewPager.adapter = MenuFragmentAdapter(this)

@@ -92,6 +92,12 @@ class Home : Fragment() {
         return root
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean){
+        super.setUserVisibleHint(isVisibleToUser)
+
+        fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

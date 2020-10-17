@@ -88,7 +88,7 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
                     databaseU.child(user.id.toString()).setValue(user)
 
                     //update achievement
-
+                    (act as ProblemActivity).updateCalendarLegend()
 
 
                     //update lesson cleared

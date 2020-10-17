@@ -107,7 +107,7 @@
         \nツ - TSU
         \nフ - FU
     </string>
-    
+
     <string name="tv_lesson_number">
         Japanese Numbers are fairly simple. It advances on a base ten system, so you’ll be able to use the numbers by learning 1 to 10 and then learning expressions for the digits such as 10, 100 and 1,000.
     </string>
@@ -148,7 +148,7 @@
         \n03:30 PM gogosanjihan 「ごごさんじはん」
         \n04:00 AM gozenyoji 「ごぜんよじ」
     </string>
-    
+
     <string name="tv_lesson_date">
         To say date in Japanese, you can for example say:
 
@@ -180,6 +180,13 @@
         \n24th nijuuyokka 「にじゅうよっか」
         \n12th juuninichi 「じゅうににち」
     </string>
+
+
+    <string name="memorize_game">Memorize</string>
+    <string name="guess_the_object">Guess The Object</string>
+
+    <string name="gto_desc">Guess the object in 60 seconds!</string>
+    <string name="how_to_play">How To Play?</string>
 
 
 </resources>

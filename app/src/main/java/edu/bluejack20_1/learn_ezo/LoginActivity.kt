@@ -116,6 +116,7 @@ class   LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     if(isNewUser){
+                        startActivity(SetupActivity.getLaunchIntent(this, userLogged as Player))
                     }else{
                         startActivity(NavBottom.getLaunchIntent(this, userLogged as Player))
                     }
