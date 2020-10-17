@@ -39,7 +39,19 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/game_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout6" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="540dp"
         android:layout_margin="16dp"
@@ -47,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/relativeLayout6">
+        app:layout_constraintTop_toBottomOf="@id/game_timer">
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
             android:id="@+id/fv_1"
@@ -65,9 +77,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout1"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout1"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -86,9 +100,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_1"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout2"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout2"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -107,9 +123,11 @@
             app:layout_constraintStart_toEndOf="@id/fv_2"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout3"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout3"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -128,9 +146,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_3"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout4"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout4"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -149,9 +169,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fv_1">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout5"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout5"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -164,15 +186,17 @@
             app:flipFrom="right"
             app:flipOnTouch="true"
             app:flipType="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/fv_2"
             app:layout_constraintBottom_toTopOf="@id/fv_10"
-            app:layout_constraintStart_toEndOf="@id/fv_5"
             app:layout_constraintEnd_toStartOf="@id/fv_7"
-            app:layout_constraintHorizontal_bias="0.5">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/fv_5"
+            app:layout_constraintTop_toBottomOf="@id/fv_2">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout6"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout6"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -191,9 +215,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_6"
             app:layout_constraintTop_toBottomOf="@id/fv_3">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout7"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout7"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -212,9 +238,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_7"
             app:layout_constraintTop_toBottomOf="@id/fv_4">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout8"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout8"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -233,9 +261,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fv_5">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout9"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout9"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -254,9 +284,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_9"
             app:layout_constraintTop_toBottomOf="@+id/fv_6">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout10"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout10"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -275,9 +307,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_10"
             app:layout_constraintTop_toBottomOf="@+id/fv_7">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout11"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout11"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -296,9 +330,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_11"
             app:layout_constraintTop_toBottomOf="@+id/fv_8">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout12"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout12"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -317,9 +353,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fv_9">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout13"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout13"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -338,9 +376,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_13"
             app:layout_constraintTop_toBottomOf="@id/fv_10">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout14"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout14"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -359,9 +399,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_14"
             app:layout_constraintTop_toBottomOf="@id/fv_11">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout15"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout15"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -380,9 +422,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_15"
             app:layout_constraintTop_toBottomOf="@id/fv_12">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout16"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout16"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -401,9 +445,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fv_13">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout17"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout17"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -422,9 +468,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_13"
             app:layout_constraintTop_toBottomOf="@id/fv_14">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout18"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout18"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -443,9 +491,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_14"
             app:layout_constraintTop_toBottomOf="@id/fv_15">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout19"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout19"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
         <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -464,9 +514,11 @@
             app:layout_constraintStart_toEndOf="@+id/fv_15"
             app:layout_constraintTop_toBottomOf="@id/fv_16">
 
-            <include layout="@layout/back_card_layout"
-                android:id="@+id/back_layout20"/>
-            <include layout="@layout/front_card_layout"/>
+            <include
+                android:id="@+id/back_layout20"
+                layout="@layout/back_card_layout" />
+
+            <include layout="@layout/front_card_layout" />
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

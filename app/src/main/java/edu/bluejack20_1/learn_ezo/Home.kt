@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.EventDay
 import com.google.firebase.database.*
@@ -88,6 +89,18 @@ class Home : Fragment() {
             }
         })
 
+        val button_learning_review : Button = root.findViewById<Button>(R.id.review_button)
+
+        button_learning_review.setOnClickListener {
+            (activity as NavBottom).moveToReviewPage(1)
+        }
+
+        val quick_review : Button = root.findViewById<Button>(R.id.quick_review_btn)
+
+        quick_review.setOnClickListener {
+            (activity as NavBottom).moveToReviewPage(2)
+        }
+
 
         return root
     }
@@ -116,5 +129,42 @@ class Home : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+
+
+        fun addUserRecord(id: String, value: Int){
+
+            val cal : Calendar = Calendar.getInstance()
+
+            val day : String = cal.get(Calendar.DATE).toString()
+            val month : String = cal.get(Calendar.MONTH).toString()
+            val year : String = cal.get(Calendar.YEAR).toString()
+
+            val date : String = day.plus("-").plus(month).plus("-").plus(year)
+
+            var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
+
+            databaseR.child(id).child(date).addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var temp = snapshot.value.toString()
+                    if(temp == "null"){
+                        databaseR.child(id).child(date).setValue(value)
+                    }else{
+                        if(value != 0){
+                            databaseR.child(id).child(date).setValue(value)
+                        }
+                    }
+                }
+
+
+            })
+
+
+
+        }
+
     }
 }

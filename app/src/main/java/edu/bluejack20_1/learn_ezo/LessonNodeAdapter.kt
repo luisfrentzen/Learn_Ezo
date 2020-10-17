@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.PorterDuff
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,8 @@ class LessonNodeAdapter(val lesson_list : ArrayList<Lesson>, var user : Player, 
         val textView = holder.tvTitle
         val nodeBtn = holder.btnNode
         val nodeIcon = holder.ivIcon
+
+        Log.d("desu", user.name.toString())
 
         nodeBtn.setOnClickListener {
             val intent = Intent(con, LessonActivity::class.java)

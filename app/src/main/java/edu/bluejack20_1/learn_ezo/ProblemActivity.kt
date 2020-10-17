@@ -2,6 +2,7 @@ package edu.bluejack20_1.learn_ezo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
@@ -9,25 +10,42 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.database.*
 import java.util.*
 import kotlin.collections.ArrayList
+import org.w3c.dom.Text
 
-class ProblemActivity : AppCompatActivity() {
+class ProblemActivity : AppCompatActivity(){
     lateinit var vpProblem : ViewPager2
-    lateinit var user : Player
     lateinit var lesson_id : String
 
-    var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
+    lateinit var user : Player
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_problem)
 
+
         vpProblem = findViewById(R.id.vp_problems)
 
         val arProblem = intent.getSerializableExtra("probs") as ArrayList<Problem>
-
         user = intent.getParcelableExtra<Player>("us") as Player
 
         lesson_id = intent.getStringExtra("lesson_id") as String
+
+        val tv_timer = findViewById<TextView>(R.id.timer)
+
+        if(lesson_id == "dummy2"){
+            object: CountDownTimer(60000, 1000){
+                override fun onFinish() {
+                    finish()
+                }
+
+                override fun onTick(millisUntilFinished: Long) {
+                    tv_timer.text = ((millisUntilFinished / 1000).toInt()).toString()
+                }
+
+            }.start()
+        }
 
         vpProblem.adapter = ProblemPageAdapter(arProblem, user, this)
         vpProblem.isUserInputEnabled = false
@@ -45,19 +63,13 @@ class ProblemActivity : AppCompatActivity() {
         vpProblem.setCurrentItem(vpProblem.currentItem + 1)
     }
 
-    fun updateCalendarLegend(){
-        val cal : Calendar = Calendar.getInstance()
-
-        val day : String = cal.get(Calendar.DATE).toString()
-        val month : String = cal.get(Calendar.MONTH).toString()
-        val year : String = cal.get(Calendar.YEAR).toString()
-
-        val date : String = day.plus("-").plus(month).plus("-").plus(year)
-
-        databaseR.child(user.id).child(date).setValue(1)
-    }
 
     fun updateAccomplishment(){
+
+        if(lesson_id == "dummy1" || lesson_id == "dummy2"){
+            return
+        }
+
         val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
             user.id.toString()).child("lessons")
 
@@ -97,5 +109,4 @@ class ProblemActivity : AppCompatActivity() {
 
         })
     }
-
 }

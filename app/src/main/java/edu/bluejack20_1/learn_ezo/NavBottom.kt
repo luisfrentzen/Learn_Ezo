@@ -25,6 +25,7 @@ import androidx.viewpager.widget.ViewPager
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.log
+import kotlin.properties.Delegates
 
 
 class NavBottom : AppCompatActivity() {
@@ -35,10 +36,11 @@ class NavBottom : AppCompatActivity() {
 
     var lastCompleted : Int ?= null
 
-    var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
     val ach_list = ArrayList<Achievement>()
 
     lateinit var lessonAdapter : LessonNodeAdapter
+
+    var lessons_mastered_count by Delegates.notNull<Int>()
 
     lateinit var userFragment : User
 
@@ -62,6 +64,19 @@ class NavBottom : AppCompatActivity() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
     }
 
+    fun moveToReviewPage(review : Int){
+        val intent = Intent(this, ReviewActivity::class.java)
+        intent.putExtra("review", review.toString())
+        intent.putExtra("lessons", lessons_list)
+        intent.putExtra("lesson_mastered_count", lessons_mastered_count.toString())
+        startActivity(intent)
+    }
+
+    fun moveToMemorizePage(){
+        val intent = Intent(this, MemorizeIntroActivity::class.java)
+        startActivity(intent)
+    }
+
     fun moveToAchievementPage(ach_list : ArrayList<Achievement>){
         val intent = Intent(this, AchievementActivity::class.java)
         intent.putExtra("ach", ach_list)
@@ -73,40 +88,6 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun addUserRecord(id: String, value: Int){
-
-        val cal : Calendar = Calendar.getInstance()
-
-        val day : String = cal.get(Calendar.DATE).toString()
-        val month : String = cal.get(Calendar.MONTH).toString()
-        val year : String = cal.get(Calendar.YEAR).toString()
-
-        val date : String = day.plus("-").plus(month).plus("-").plus(year)
-
-
-        databaseR.child(id).child(date).addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                var temp = snapshot.value.toString()
-                if(temp == "null"){
-                        databaseR.child(id).child(date).setValue(value)
-                }else{
-                    if(value != 0){
-                        databaseR.child(id).child(date).setValue(value)
-                    }
-                }
-            }
-
-
-        })
-
-
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav)
@@ -115,7 +96,9 @@ class NavBottom : AppCompatActivity() {
 
         u = intent.getParcelableExtra("user") as Player?
 
-        addUserRecord(u!!.id, 0)
+        Log.d("desuu", u?.name.toString())
+
+        Home.addUserRecord(u!!.id, 0)
 
         val viewPager : ViewPager2 = findViewById(R.id.viewPager)
         viewPager.adapter = MenuFragmentAdapter(this)
@@ -232,6 +215,9 @@ class NavBottom : AppCompatActivity() {
                     temp_lessons.isCompleted = true
                 }else{
                     val temp_completed = temp.split(",")
+
+                    lessons_mastered_count = temp_completed.size
+
 
                     var idx : Int = 0;
                     lastCompleted = temp_completed.get((temp_completed.lastIndex)).toInt().plus(1)

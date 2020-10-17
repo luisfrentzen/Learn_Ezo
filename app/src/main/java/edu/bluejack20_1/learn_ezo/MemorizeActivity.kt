@@ -1,12 +1,14 @@
 package edu.bluejack20_1.learn_ezo
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.wajahatkarim3.easyflipview.EasyFlipView
 import com.wajahatkarim3.easyflipview.EasyFlipView.OnFlipAnimationListener
+import kotlinx.android.synthetic.main.activity_memorize.*
 import kotlin.random.Random
 
 class MemorizeActivity : AppCompatActivity() {
@@ -16,6 +18,17 @@ class MemorizeActivity : AppCompatActivity() {
 
         val backLayouts = ArrayList<View>()
         val flipViews = ArrayList<EasyFlipView>()
+
+        object: CountDownTimer(90000, 1000){
+            override fun onFinish() {
+                finish()
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                game_timer.text = ((millisUntilFinished / 1000).toInt()).toString()
+            }
+
+        }.start()
 
         var flipped = 0
 
@@ -27,6 +40,7 @@ class MemorizeActivity : AppCompatActivity() {
         poolrom!!.shuffle(Random(seed))
 
         val pool = ArrayList<String>()
+        var score = 0
 
         pool.addAll(pooljpn.take(10))
         pool.addAll(poolrom.take(10))
@@ -92,6 +106,10 @@ class MemorizeActivity : AppCompatActivity() {
                         fv2.flipTheView()
                         if(isCorrect){
                             fv2.visibility = View.INVISIBLE
+                            score++
+                            if(score == 10){
+                                winGame()
+                            }
                         }
                         fv2.isFlipOnTouch = true
 
@@ -113,5 +131,9 @@ class MemorizeActivity : AppCompatActivity() {
             tv.text = pool.get(idx)
             idx++
         }
+    }
+
+    fun winGame(){
+        finish()
     }
 }
