@@ -183,10 +183,26 @@
 
 
     <string name="memorize_game">Memorize</string>
-    <string name="guess_the_object">Guess The Object</string>
 
-    <string name="gto_desc">Guess the object in 60 seconds!</string>
     <string name="how_to_play">How To Play?</string>
+    <string name="gto_desc">Guess the object in 60 seconds!</string>
+    <string name="memorize_desc">Memorize game desc</string>
 
+
+    <string name="learning_review_desc">
+        It\'s time to review it all!
+        \n\nIn this section, we will randomly ask 20 questions from all of the lessons that you\'ve cleared.
+        \n\nGood Luck!
+    </string>
+
+    <string name="quick_review_desc">
+        It\'s time to review it all!
+
+        \n\nIn this section, you will be reviewing all of the lessons that you\'ve cleared.
+        \nWe will give you 60 seconds to answer all of the questions!
+
+        \n\nGood Luck!
+
+    </string>
 
 </resources>

@@ -88,6 +88,9 @@ class User : Fragment() {
         val level_tv : TextView = root.findViewById(R.id.level_count)
         level_tv.text = "Level ".plus(level_count)
 
+        val tv_lesson_mastered : TextView = root.findViewById(R.id.lesson_mastered)
+        tv_lesson_mastered.text = (activity as NavBottom).lessons_mastered_count.toString()
+
         val btnFriend : Button = root.findViewById(R.id.btn_friend)
         btnFriend.setOnClickListener {
             (activity as NavBottom).moveToFriendPage()

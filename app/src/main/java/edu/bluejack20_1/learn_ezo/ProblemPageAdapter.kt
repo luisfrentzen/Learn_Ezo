@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.firebase.database.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private var user : Player, var act : Context) : RecyclerView.Adapter<ProblemPageAdapter.Pager2ViewHolder>(){
 
@@ -47,6 +49,8 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
         val contactView = inflater.inflate(R.layout.problem_layout, parent, false)
         val pager : Pager2ViewHolder = Pager2ViewHolder((contactView))
         pager.populateArChoices()
+
+
         return pager
     }
 
@@ -61,6 +65,8 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
             i.setBackgroundResource(R.drawable.selectable_choices_background)
             i.isChecked = false
         }
+
+        holder.nextBtn.text = "Check"
 
         holder.nextBtn.setOnClickListener {
             val selectedBtn = holder.view.findViewById<CustomRadio>(holder.rgChoices.checkedRadioButtonId)
@@ -88,7 +94,7 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
                     databaseU.child(user.id.toString()).setValue(user)
 
                     //update achievement
-                    (act as ProblemActivity).updateCalendarLegend()
+                    Home.addUserRecord(user.id, 1)
 
 
                     //update lesson cleared
