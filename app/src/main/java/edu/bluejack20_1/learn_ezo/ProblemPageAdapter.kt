@@ -99,17 +99,90 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
                 holder.nextBtn.text = act.getString(R.string.finish)
                 holder.nextBtn.setOnClickListener {
                     //add exp
-                    user.exp += 10
+                    Log.d("rev", (act as ProblemActivity).lesson_id)
+                    if((act as ProblemActivity).lesson_id == "dummy1" || (act as ProblemActivity).lesson_id == "dummy2"){
+                        Log.d("rev", "test")
 
-                    databaseU.child(user.id.toString()).setValue(user)
+                        val databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+                            user.id.toString()).child("achievements").child("5")
+
+                        Log.d("rev", databaseA.toString())
+
+                        databaseA.addListenerForSingleValueEvent(object: ValueEventListener {
+                            override fun onCancelled(error: DatabaseError) {
+                            }
+
+                            override fun onDataChange(snapshot: DataSnapshot) {
+
+                                val temp_snapshot = snapshot.value.toString()
+                                Log.d("rev", snapshot.child("isComplete").value.toString())
+
+                                if(temp_snapshot == "null"){
+                                    Log.d("rev", "test2")
+                                    databaseA.child("currentProgress").setValue(1)
+                                    databaseA.child("isComplete").setValue(0)
+                                }
+                                else if (snapshot.child("isComplete").value.toString() == "0"){
+                                    val tmp = snapshot.child("currentProgress").value.toString().toInt() + 1
+                                    databaseA.child("currentProgress").setValue(tmp)
+
+                                    if(tmp == 3){
+                                        databaseA.child("isComplete").setValue(1)
+                                    }
+                                }
+
+                            }
+
+                        })
+                    }
+
+                    databaseU.child(user.id.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            user.exp = snapshot.child("exp").value.toString().toInt() + 10
+                            databaseU.child(user.id.toString()).child("exp").setValue(user.exp)
+
+                            val databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+                                user.id.toString()).child("achievements").child("2")
+
+                            databaseA.addListenerForSingleValueEvent(object: ValueEventListener {
+                                override fun onCancelled(error: DatabaseError) {
+                                }
+
+                                override fun onDataChange(snapshot: DataSnapshot) {
+
+                                    val temp_snapshot = snapshot.value.toString()
+
+                                    if(temp_snapshot == "null"){
+                                        databaseA.child("isComplete").setValue(0)
+                                    }
+                                    else if(snapshot.child("isComplete").value == 1){
+                                        return
+                                    }
+
+                                    if(user.exp/25+1 >= 5){
+                                        databaseA.child("currentProgress").setValue(5)
+                                        databaseA.child("isComplete").setValue(1)
+                                        return
+                                    }
+
+                                    databaseA.child("currentProgress").setValue(user.exp/25+1)
+                                }
+
+                            })
+                        }
+
+                    })
+
+
 
                     //update achievement
                     Home.addUserRecord(user.id, 1)
 
-
                     //update lesson cleared
                     (act as ProblemActivity).updateAccomplishment()
-
 
                     (act as ProblemActivity).finish()
                 }

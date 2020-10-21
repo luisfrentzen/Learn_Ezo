@@ -126,13 +126,13 @@ class Home : Fragment() {
 
 
         button_learning_review.setOnClickListener {
-            (activity as NavBottom).moveToReviewPage(1)
+            (activity as NavBottom).moveToReviewPage(1, (activity as NavBottom).u as Player)
         }
 
 
 
         quick_review.setOnClickListener {
-            (activity as NavBottom).moveToReviewPage(2)
+            (activity as NavBottom).moveToReviewPage(2, (activity as NavBottom).u as Player)
         }
 
 

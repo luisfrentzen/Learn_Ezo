@@ -64,10 +64,11 @@ class NavBottom : AppCompatActivity() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions)
     }
 
-    fun moveToReviewPage(review : Int){
+    fun moveToReviewPage(review : Int, player: Player){
         val intent = Intent(this, ReviewActivity::class.java)
         intent.putExtra("review", review.toString())
         intent.putExtra("lessons", lessons_list)
+        intent.putExtra("user", player)
         intent.putExtra("lesson_mastered_count", lessons_mastered_count.toString())
         startActivity(intent)
     }
