@@ -77,9 +77,10 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun moveToAchievementPage(ach_list : ArrayList<Achievement>){
+    fun moveToAchievementPage(ach_list : ArrayList<Achievement>, player : Player){
         val intent = Intent(this, AchievementActivity::class.java)
         intent.putExtra("ach", ach_list)
+        intent.putExtra("user", player)
         startActivity(intent)
     }
 
@@ -119,7 +120,7 @@ class NavBottom : AppCompatActivity() {
 
         var databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("achievements")
 
-        databaseA.addValueEventListener(object : ValueEventListener {
+        databaseA.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(data in snapshot.children){
 
@@ -205,7 +206,7 @@ class NavBottom : AppCompatActivity() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                val temp = snapshot.value.toString()
+                    val temp = snapshot.value.toString()
 
                 Log.d("lesson", temp)
 

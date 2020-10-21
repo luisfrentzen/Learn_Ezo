@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
             if (acct != null) {
 
-                databaseU.addValueEventListener(object : ValueEventListener {
+                databaseU.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         for(data in snapshot.children){
                             if (data.key == acct.id){

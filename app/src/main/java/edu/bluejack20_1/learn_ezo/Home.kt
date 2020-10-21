@@ -45,8 +45,6 @@ class Home : Fragment() {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val events = ArrayList<EventDay>()
-
         val databaseRecord : DatabaseReference = databaseR.child((activity as NavBottom).u?.id as String)
 
         var day : Int
@@ -57,6 +55,10 @@ class Home : Fragment() {
 
         databaseRecord.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
+                val events = ArrayList<EventDay>()
+
+                Log.d("db record listener", "yaww");
 
                 var i = 1
 
@@ -92,12 +94,36 @@ class Home : Fragment() {
         val button_learning_review : Button = root.findViewById<Button>(R.id.review_button)
         val quick_review : Button = root.findViewById<Button>(R.id.quick_review_btn)
 
-        if((activity as NavBottom).lessons_mastered_count <= 2){
-            button_learning_review.isEnabled = false
-            quick_review.isEnabled = false
-            button_learning_review.alpha = 0.7F
-            quick_review.alpha = 0.7F
-        }
+        val databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+            (activity as NavBottom).u?.id.toString()
+        ).child("lessons")
+
+        databaseA.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val temp = snapshot.value.toString()
+
+                val temp_completed = temp.split(",")
+
+                if(temp_completed.size <= 2){
+                    button_learning_review.isEnabled = false
+                    quick_review.isEnabled = false
+                    button_learning_review.alpha = 0.7F
+                    quick_review.alpha = 0.7F
+                }else{
+                    button_learning_review.isEnabled = true
+                    quick_review.isEnabled = true
+                    button_learning_review.alpha = 1F
+                    quick_review.alpha = 1F
+                }
+            }
+
+        })
+
+
 
         button_learning_review.setOnClickListener {
             (activity as NavBottom).moveToReviewPage(1)
@@ -111,12 +137,6 @@ class Home : Fragment() {
 
 
         return root
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean){
-        super.setUserVisibleHint(isVisibleToUser)
-
-        fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
     }
 
     companion object {
