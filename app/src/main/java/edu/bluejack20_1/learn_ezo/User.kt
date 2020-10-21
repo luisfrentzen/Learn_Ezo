@@ -54,7 +54,7 @@ class User : Fragment() {
 
         var ach_list = (activity as NavBottom).getAchList()
 
-        val ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
+        var ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
 
         val rvAdapter = AchievementCardAdapter(ach_overview)
         rvAchievement.adapter = rvAdapter
@@ -62,52 +62,110 @@ class User : Fragment() {
         rvAchievement.layoutManager = LinearLayoutManager(root.context)
         rvAchievement.isNestedScrollingEnabled = false
 
-        val p : Player = (activity as NavBottom).u as Player
+        val databaseO : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+            (activity as NavBottom).u?.id.toString()
+        ).child("achievements")
+
+        databaseO.addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(data in snapshot.children){
+                    val u = data.getValue(Achievement::class.java) as Achievement
+
+
+                    var temp = ach_list.get(data.key?.toInt()?.minus(1) as Int)
+
+                    temp.currentProgress = data.child("currentProgress").value.toString().toInt()
+
+                    ach_list.set(data.key?.toInt()!!.minus(1) as Int, temp)
+
+                    ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
+
+                    rvAdapter.notifyDataSetChanged()
+
+                }
+            }
+
+        })
 
         val level_progress : ProgressBar = root.findViewById(R.id.level_progress)
-
-
-        var temp_exp = p.exp
-        val level_count = (temp_exp / 25) + 1
-        temp_exp -= (level_count - 1) * 25
-
         val leagueTv = root.findViewById<TextView>(R.id.tv_league)
-        val lessonMasteredTv = root.findViewById<TextView>(R.id.tv_lesson_mastered)
-
-        lessonMasteredTv.text = ((activity as NavBottom).lastCompleted?.minus(1)).toString()
-
-        if(level_count < 5){
-            leagueTv.text = resources.getString(R.string.lg_apprentice)
-        }
-        else if(level_count < 10){
-            leagueTv.text = resources.getString(R.string.lg_disciple)
-        }
-        else if(level_count < 25) {
-            leagueTv.text = resources.getString(R.string.lg_teacher)
-        }
-        else if(level_count < 50) {
-            leagueTv.text = resources.getString(R.string.lg_master)
-        }
-        else {
-            leagueTv.text = resources.getString(R.string.lg_scholar)
-        }
-
-        level_progress.progress = temp_exp
-
         val day_streak_count : TextView = root.findViewById(R.id.day_streak_count)
         val exp_count : TextView = root.findViewById(R.id.exp_count)
-
-        day_streak_count.setText(p.dayStreak.toString())
-        exp_count.text = p.exp.toString()
-
         val tv_follower : TextView = root.findViewById(R.id.follower)
-        tv_follower.setText( p.follower.toString().plus(" Follower / ").plus(p.following.toString()).plus(" Following"))
-
         val level_tv : TextView = root.findViewById(R.id.level_count)
-        level_tv.text = "Level ".plus(level_count)
-
         val tv_lesson_mastered : TextView = root.findViewById(R.id.tv_lesson_mastered)
+
+
+        val databaseUser : DatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(
+            (activity as NavBottom).u?.id.toString()
+        )
+
+        databaseUser.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val p : Player = snapshot.getValue(Player::class.java) as Player
+
+                var temp_exp = p.exp
+                val level_count = (temp_exp / 25) + 1
+                temp_exp -= (level_count - 1) * 25
+
+                if(level_count < 5){
+                    leagueTv.text = resources.getString(R.string.lg_apprentice)
+                }
+                else if(level_count < 10){
+                    leagueTv.text = resources.getString(R.string.lg_disciple)
+                }
+                else if(level_count < 25) {
+                    leagueTv.text = resources.getString(R.string.lg_teacher)
+                }
+                else if(level_count < 50) {
+                    leagueTv.text = resources.getString(R.string.lg_master)
+                }
+                else {
+                    leagueTv.text = resources.getString(R.string.lg_scholar)
+                }
+
+                level_progress.progress = temp_exp
+
+                day_streak_count.setText(p.dayStreak.toString())
+                exp_count.text = p.exp.toString()
+
+                tv_follower.setText( p.follower.toString().plus(" Follower / ").plus(p.following.toString()).plus(" Following"))
+
+                level_tv.text = "Level ".plus(level_count)
+            }
+
+        })
+
         tv_lesson_mastered.text = (activity as NavBottom).lessons_mastered_count.toString()
+
+        val databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+            (activity as NavBottom).u?.id.toString()
+        )
+
+        databaseA.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val temp = snapshot.child("lessons").value.toString()
+
+                val temp_completed = temp.split(",")
+
+                tv_lesson_mastered.text = temp_completed.size.toString()
+            }
+
+        })
+
 
 //        val btnFriend : Button = root.findViewById(R.id.btn_friend)
 //        btnFriend.setOnClickListener {
@@ -124,7 +182,7 @@ class User : Fragment() {
 
         val btnAchievement : Button = root.findViewById(R.id.btn_achievements)
         btnAchievement.setOnClickListener {
-            (activity as NavBottom?)?.moveToAchievementPage(ach_list)
+            (activity as NavBottom?)?.moveToAchievementPage(ach_list, (activity as NavBottom).u as Player)
         }
 
         val personPhoto: Uri?
@@ -155,12 +213,6 @@ class User : Fragment() {
 //        }
 
         return root
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean){
-        super.setUserVisibleHint(isVisibleToUser)
-
-        fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
     }
 
     companion object {
