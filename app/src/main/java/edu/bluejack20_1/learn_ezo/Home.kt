@@ -58,8 +58,6 @@ class Home : Fragment() {
 
                 val events = ArrayList<EventDay>()
 
-                Log.d("db record listener", "yaww");
-
                 var i = 1
 
                 for(data in snapshot.children){
