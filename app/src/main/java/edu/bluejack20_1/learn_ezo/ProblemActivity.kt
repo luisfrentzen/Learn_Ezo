@@ -37,6 +37,37 @@ class ProblemActivity : AppCompatActivity(){
         if(lesson_id == "dummy2"){
             object: CountDownTimer(60000, 1000){
                 override fun onFinish() {
+                    val databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+                        user.id.toString()).child("achievements").child("5")
+
+                    Log.d("rev", databaseA.toString())
+
+                    databaseA.addListenerForSingleValueEvent(object: ValueEventListener {
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+
+                            val temp_snapshot = snapshot.value.toString()
+                            Log.d("rev", snapshot.child("isComplete").value.toString())
+
+                            if(temp_snapshot == "null"){
+                                Log.d("rev", "test2")
+                                databaseA.child("currentProgress").setValue(1)
+                                databaseA.child("isComplete").setValue(0)
+                            }
+                            else if (snapshot.child("isComplete").value.toString() == "0"){
+                                val tmp = snapshot.child("currentProgress").value.toString().toInt() + 1
+                                databaseA.child("currentProgress").setValue(tmp)
+
+                                if(tmp == 3){
+                                    databaseA.child("isComplete").setValue(1)
+                                }
+                            }
+
+                        }
+
+                    })
                     finish()
                 }
 
@@ -84,7 +115,7 @@ class ProblemActivity : AppCompatActivity(){
                 if(temp_snapshot == "null"){
                     databaseP.setValue(lesson_id.toString())
                 }else{
-                    var temp = (snapshot.value as String).split(",")
+                    val temp = (snapshot.value as String).split(",")
 
                     var flag = 0
 
@@ -108,5 +139,34 @@ class ProblemActivity : AppCompatActivity(){
             }
 
         })
+
+        val databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+            user.id.toString()).child("achievements").child("3")
+
+        databaseA.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val temp_snapshot = snapshot.value.toString()
+
+                if(temp_snapshot == "null"){
+                    databaseA.child("currentProgress").setValue(lesson_id.toInt())
+                    databaseA.child("isComplete").setValue(0)
+                }else if(snapshot.child("isComplete").value != 1){
+                    if(snapshot.child("currentProgress").value.toString().toInt() < lesson_id.toInt()){
+                        databaseA.child("currentProgress").setValue(lesson_id.toInt())
+                    }
+
+                    if(lesson_id.toInt() == 5){
+                        databaseA.child("isComplete").setValue(1)
+                    }
+                }
+
+            }
+
+        })
+
     }
 }

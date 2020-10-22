@@ -16,10 +16,10 @@ class ReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_review)
 
-        var review = intent.getStringExtra("review")?.toInt()
-
-        var lessons = intent.getSerializableExtra("lessons") as ArrayList<Lesson>
-        var lesson_mastered = intent.getStringExtra("lesson_mastered_count")?.toInt()
+        val review = intent.getStringExtra("review")?.toInt()
+        val user = intent.getParcelableExtra<Player>("user")
+        val lessons = intent.getSerializableExtra("lessons") as ArrayList<Lesson>
+        val lesson_mastered = intent.getStringExtra("lesson_mastered_count")?.toInt()
 
         val rom = ArrayList<String>()
         val alf = ArrayList<String>()
@@ -66,7 +66,7 @@ class ReviewActivity : AppCompatActivity() {
                 intent.putExtra("probs", arProb)
                 intent.putExtra("title", resources.getString(R.string.learning_review))
                 intent.putExtra("lesson_id", "dummy1")
-                intent.putExtra("us", Player(1.toString(), "dummy"))
+                intent.putExtra("us", user)
                 startActivity(intent)
                 finish()
             }
@@ -88,7 +88,7 @@ class ReviewActivity : AppCompatActivity() {
                 intent.putExtra("probs", arProb)
                 intent.putExtra("title", resources.getString(R.string.learning_review))
                 intent.putExtra("lesson_id", "dummy2")
-                intent.putExtra("us", Player(1.toString(), "dummy"))
+                intent.putExtra("us", user)
                 startActivity(intent)
                 finish()
             }

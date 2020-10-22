@@ -121,5 +121,6 @@
         \nUntuk bulan, tulis saja bulan yang bersangkutan lalu tambahkan 月/がつ (gatsu)
         \nUntuk tanggal dalam bulan, gunakan saja (angka + 日/にち nichi) tapi tidak untuk 1-10, 14, 20, 24
     </string>
+    <string name="how_to_play" translatable="false">Cara bermain</string>
 
 </resources>
