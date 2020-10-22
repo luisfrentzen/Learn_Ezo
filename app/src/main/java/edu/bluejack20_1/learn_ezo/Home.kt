@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.EventDay
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -38,6 +40,61 @@ class Home : Fragment() {
 
     var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
 
+    lateinit var calendars : CalendarView
+
+    val events = ArrayList<EventDay>()
+
+    override fun onResume() {
+        super.onResume()
+        val databaseRecord = databaseR.child((activity as NavBottom).u?.id as String)
+
+        var day : Int
+        var month : Int
+        var year : Int
+
+        if(events.isNotEmpty()){
+            calendars.setEvents(events)
+        }
+
+        databaseRecord.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                events.clear()
+
+                Log.d("db record listener", "yaww");
+
+                var i = 1
+
+                for(data in snapshot.children){
+                    val calendar : Calendar = Calendar.getInstance()
+
+                    val list = (data.key.toString()).split("-")
+
+                    day = list[0].toInt()
+                    month = list[1].toInt()
+                    year = list[2].toInt()
+
+                    calendar.set(year, month, day)
+
+                    if(data.value.toString() == "0"){
+                        events.add(EventDay(calendar, R.drawable.ic_dot_red))
+                    }else{
+                        events.add(EventDay(calendar, R.drawable.ic_dot_green))
+                    }
+
+                    i++
+                }
+
+                calendars.setEvents(events)
+                Log.d("test", calendars.toString())
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,11 +109,13 @@ class Home : Fragment() {
         var year : Int
 
         val calendarView : CalendarView = root.findViewById(R.id.calendarView) as CalendarView
+        calendars = calendarView
 
         databaseRecord.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
-                val events = ArrayList<EventDay>()
+                if(events.isNotEmpty()){
+                    events.clear()
+                }
 
                 Log.d("db record listener", "yaww");
 
@@ -83,6 +142,7 @@ class Home : Fragment() {
                 }
                 
                 calendarView.setEvents(events)
+                Log.d("test", calendarView.toString())
 
             }
 
@@ -177,19 +237,86 @@ class Home : Fragment() {
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    var temp = snapshot.value.toString()
+                    val temp = snapshot.value.toString()
+                    var before = 0
                     if(temp == "null"){
                         databaseR.child(id).child(date).setValue(value)
                     }else{
                         if(value != 0){
+                            before = snapshot.value.toString().toInt()
                             databaseR.child(id).child(date).setValue(value)
                         }
                     }
+
+                    if(value == 1 && before != 1){
+                        val yesterdayCal = Calendar.getInstance()
+                        yesterdayCal.add(Calendar.DAY_OF_YEAR, -1)
+
+                        val yesterday = yesterdayCal.get(Calendar.DATE).toString()
+
+                        val yesterdayDate : String = yesterday.plus("-").plus(month).plus("-").plus(year)
+
+                        var curStreak = 1
+
+                        Log.d("yesterday", databaseR.child(id).child(yesterdayDate).toString())
+
+                        databaseR.child(id).child(yesterdayDate).addListenerForSingleValueEvent(object : ValueEventListener{
+                            override fun onCancelled(error: DatabaseError) {
+
+                            }
+
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                val temp2 = snapshot.value.toString()
+                                if(temp2 != "null"){
+                                    Log.d("yesterday", snapshot.value.toString())
+                                    if(snapshot.value.toString() == "1"){
+
+                                        val databaseU = FirebaseDatabase.getInstance().getReference("users").child(id).child("dayStreak")
+
+                                        databaseU.addListenerForSingleValueEvent(object : ValueEventListener{
+                                            override fun onCancelled(error: DatabaseError) {
+
+                                            }
+
+                                            override fun onDataChange(snapshot: DataSnapshot) {
+                                                Log.d("streak", snapshot.value.toString())
+                                                databaseU.setValue(snapshot.value.toString().toIntOrNull()
+                                                    ?.plus(1))
+                                                curStreak = snapshot.value.toString().toIntOrNull()!!
+
+                                                val databaseA = FirebaseDatabase.getInstance().getReference("accomplishment").child(id).child("achievements").child("1")
+
+                                                databaseA.addListenerForSingleValueEvent(object: ValueEventListener {
+                                                    override fun onCancelled(error: DatabaseError) {
+
+                                                    }
+
+                                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                                        val temp = snapshot.value.toString()
+                                                        if(temp == "null"){
+                                                            databaseA.child("isComplete").setValue(0)
+                                                        }
+
+                                                        databaseA.child("currentProgress").setValue(curStreak+1)
+                                                    }
+
+
+                                                })
+                                            }
+
+                                        })
+                                    }
+                                }
+                            }
+
+                        })
+                    }
+
+
                 }
 
 
             })
-
 
 
         }

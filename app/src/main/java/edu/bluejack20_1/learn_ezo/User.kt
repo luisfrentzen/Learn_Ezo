@@ -78,7 +78,7 @@ class User : Fragment() {
 
                     var temp = ach_list.get(data.key?.toInt()?.minus(1) as Int)
 
-                    temp.currentProgress = data.child("currentProgress").value.toString().toInt()
+                    temp.currentProgress = data.child("currentProgress").value.toString().toIntOrNull()
 
                     ach_list.set(data.key?.toInt()!!.minus(1) as Int, temp)
 
@@ -117,20 +117,18 @@ class User : Fragment() {
                 val level_count = (temp_exp / 25) + 1
                 temp_exp -= (level_count - 1) * 25
 
-                if(level_count < 5){
-                    leagueTv.text = resources.getString(R.string.lg_apprentice)
-                }
-                else if(level_count < 10){
-                    leagueTv.text = resources.getString(R.string.lg_disciple)
-                }
-                else if(level_count < 25) {
-                    leagueTv.text = resources.getString(R.string.lg_teacher)
-                }
-                else if(level_count < 50) {
-                    leagueTv.text = resources.getString(R.string.lg_master)
-                }
-                else {
-                    leagueTv.text = resources.getString(R.string.lg_scholar)
+                if(activity != null) {
+                    if (level_count < 5) {
+                        leagueTv.text = resources.getString(R.string.lg_apprentice)
+                    } else if (level_count < 10) {
+                        leagueTv.text = resources.getString(R.string.lg_disciple)
+                    } else if (level_count < 25) {
+                        leagueTv.text = resources.getString(R.string.lg_teacher)
+                    } else if (level_count < 50) {
+                        leagueTv.text = resources.getString(R.string.lg_master)
+                    } else {
+                        leagueTv.text = resources.getString(R.string.lg_scholar)
+                    }
                 }
 
                 level_progress.progress = temp_exp
