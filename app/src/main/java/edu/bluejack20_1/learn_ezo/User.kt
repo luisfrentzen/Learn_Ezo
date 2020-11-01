@@ -113,6 +113,9 @@ class User : Fragment() {
 
                 val p : Player = snapshot.getValue(Player::class.java) as Player
 
+                var follower_count = 0;
+                var following_count = 0;
+
                 var temp_exp = p.exp
                 val level_count = (temp_exp / 25) + 1
                 temp_exp -= (level_count - 1) * 25
@@ -136,7 +139,32 @@ class User : Fragment() {
                 day_streak_count.setText(p.dayStreak.toString())
                 exp_count.text = p.exp.toString()
 
-                tv_follower.setText( p.follower.toString().plus(" Follower / ").plus(p.following.toString()).plus(" Following"))
+                val followerref = databaseUser.child("follower-list")
+                followerref.addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        follower_count = snapshot.children.count()
+
+                        val followingref = databaseUser.child("following-list")
+                        followingref.addValueEventListener(object : ValueEventListener {
+                            override fun onCancelled(error: DatabaseError) {
+                            }
+
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                following_count = snapshot.children.count()
+
+                                tv_follower.setText( follower_count.toString().plus(" Follower / ").plus(following_count.toString()).plus(" Following"))
+
+                            }
+
+                        })
+                    }
+
+                })
+
+
 
                 level_tv.text = "Level ".plus(level_count)
             }
@@ -164,19 +192,18 @@ class User : Fragment() {
 
         })
 
+        val activity : NavBottom = activity as NavBottom
 
-//        val btnFriend : Button = root.findViewById(R.id.btn_friend)
-//        btnFriend.setOnClickListener {
-//            (activity as NavBottom).moveToFriendPage()
-//        }
+        val btnFriend : Button = root.findViewById(R.id.btn_friend)
+        btnFriend.setOnClickListener {
+            (activity as NavBottom?)?.moveToFriendPage((activity as NavBottom).u as Player)
+        }
 
         val btnSetting : ImageButton = root.findViewById(R.id.setting_button)
         btnSetting.setOnClickListener {
             val fragment : Profile = this@User.getParentFragment() as Profile
             fragment.loadFragment(Setting())
         }
-
-        val activity : NavBottom = activity as NavBottom
 
         val btnAchievement : Button = root.findViewById(R.id.btn_achievements)
         btnAchievement.setOnClickListener {

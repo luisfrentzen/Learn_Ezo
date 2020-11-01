@@ -85,8 +85,9 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun moveToFriendPage(){
+    fun moveToFriendPage(player: Player){
         val intent = Intent(this, SearchActivity::class.java)
+        intent.putExtra("user", player);
         startActivity(intent)
     }
 
