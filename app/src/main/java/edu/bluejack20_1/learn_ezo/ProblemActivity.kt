@@ -18,7 +18,7 @@ class ProblemActivity : AppCompatActivity(){
 
     lateinit var user : Player
 
-
+    var missCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +77,8 @@ class ProblemActivity : AppCompatActivity(){
 
             }.start()
         }
+
+        missCount = 0
 
         vpProblem.adapter = ProblemPageAdapter(arProblem, user, this)
         vpProblem.isUserInputEnabled = false

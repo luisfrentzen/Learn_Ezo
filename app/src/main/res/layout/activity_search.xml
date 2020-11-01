@@ -55,6 +55,9 @@
             android:theme="@style/inputText">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_edit_text"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:fontFamily="@font/nunito"
@@ -78,6 +81,16 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView8">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/result_rv"
+            android:paddingVertical="16dp"
+            android:clipToPadding="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.cardview.widget.CardView>
 

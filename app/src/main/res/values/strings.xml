@@ -214,5 +214,7 @@
 
     </string>
     <string name="set_goal">Set Goal</string>
+    <string name="follow">Follow</string>
+    <string name="followed">Followed</string>
 
 </resources>

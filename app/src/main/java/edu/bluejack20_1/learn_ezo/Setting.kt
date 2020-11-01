@@ -56,7 +56,6 @@ class Setting : Fragment() {
 
         val btnSignOut : Button = root.findViewById(R.id.sign_out_button)
         btnSignOut.setOnClickListener {
-            Toast.makeText(view?.context, "Button Clicked", Toast.LENGTH_LONG).show()
             (activity as NavBottom?)?.signOut()
         }
 

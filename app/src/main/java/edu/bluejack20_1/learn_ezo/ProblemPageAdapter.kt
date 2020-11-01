@@ -86,6 +86,7 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
             }
             else if( selectedBtn.text != problem.ans) {
                 selectedBtn.setBackgroundResource(R.drawable.wrong_choice)
+                (act as ProblemActivity).missCount += 1
 
                 for(btn in holder.arChoicesBtn) {
                     if ( btn.text == problem.ans) {
@@ -99,6 +100,27 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
                 holder.nextBtn.text = act.getString(R.string.finish)
                 holder.nextBtn.setOnClickListener {
                     //add exp
+                    if ((act as ProblemActivity).missCount == 0) {
+                        val databaseA: DatabaseReference =
+                            FirebaseDatabase.getInstance().getReference("accomplishment").child(
+                                user.id.toString()
+                            ).child("achievements").child("7")
+
+                        Log.d("rev", databaseA.toString())
+
+                        databaseA.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onCancelled(error: DatabaseError) {
+                            }
+
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                databaseA.child("currentProgress").setValue(1)
+                                databaseA.child("isComplete").setValue(1)
+
+                            }
+
+                        })
+                     }
+
                     Log.d("rev", (act as ProblemActivity).lesson_id)
                     if((act as ProblemActivity).lesson_id == "dummy1" || (act as ProblemActivity).lesson_id == "dummy2"){
                         Log.d("rev", "test")
