@@ -15,11 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".GuessActivity">
+
+        </activity>
         <activity android:name=".GuessIntroActivity">
 
         </activity>
-        <activity android:name=".MemorizeIntroActivity"/>
-        <activity android:name=".MemorizeActivity"/>
+        <activity android:name=".MemorizeIntroActivity" />
+        <activity android:name=".MemorizeActivity" />
         <activity android:name=".ReviewActivity" />
         <activity android:name=".HowToPlay" />
         <activity android:name=".LessonActivity" />

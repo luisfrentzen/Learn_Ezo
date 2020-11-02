@@ -78,6 +78,11 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun moveToGuessPage(){
+        val intent = Intent(this, GuessIntroActivity::class.java)
+        startActivity(intent)
+    }
+
     fun moveToAchievementPage(ach_list : ArrayList<Achievement>, player : Player){
         val intent = Intent(this, AchievementActivity::class.java)
         intent.putExtra("ach", ach_list)

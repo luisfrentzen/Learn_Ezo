@@ -24,7 +24,6 @@ class ProblemActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_problem)
 
-
         vpProblem = findViewById(R.id.vp_problems)
 
         val arProblem = intent.getSerializableExtra("probs") as ArrayList<Problem>

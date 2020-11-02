@@ -73,10 +73,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp"
-                android:text="Flip the card to reveal a word in japanese
-or in alphabeth. If you reveal the correct pair then that pair of card
-will be discarded.\n\nClear all card within 90 seconds in order to win.
- Don't run out of time!"
+                android:text="@string/memorize_how_to"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.google.firebase.database.*
 import edu.bluejack20_1.learn_ezo.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,15 +40,57 @@ class Game : Fragment() {
         val root = inflater.inflate(R.layout.fragment_game, container, false)
 
         val memoBtn = root.findViewById<Button>(R.id.play_memorize)
+        val guessBtn = root.findViewById<Button>(R.id.play_image)
+
 
         if((activity as NavBottom).lessons_mastered_count <= 2){
             memoBtn.isEnabled = false
             memoBtn.alpha = 0.7F
+
+            guessBtn.isEnabled = false
+            guessBtn.alpha = 0.7F
         }
+
+        val databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+            (activity as NavBottom).u?.id.toString()
+        )
+
+        databaseA.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val temp = snapshot.child("lessons").value.toString()
+
+                val temp_completed = temp.split(",")
+
+                if(temp_completed.size <= 2){
+                    memoBtn.isEnabled = false
+                    memoBtn.alpha = 0.7F
+
+                    guessBtn.isEnabled = false
+                    guessBtn.alpha = 0.7F
+                }else{
+                    memoBtn.isEnabled = true
+                    memoBtn.alpha = 1F
+
+                    guessBtn.isEnabled = true
+                    guessBtn.alpha = 1F
+                }
+            }
+
+        })
 
         memoBtn.setOnClickListener {
             (activity as NavBottom).moveToMemorizePage()
         }
+
+        guessBtn.setOnClickListener {
+            (activity as NavBottom).moveToGuessPage()
+        }
+
+
 
         return root
     }

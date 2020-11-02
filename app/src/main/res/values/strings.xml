@@ -187,7 +187,7 @@
     <string name="how_to_play">How To Play</string>
 
 
-    <string name="gto_desc">Guess the object in 60 seconds!</string>
+    <string name="gto_desc">Guess the object as many as you can in 60 seconds</string>
     <string name="memorize_desc">Memorize game desc</string>
 
 
@@ -216,5 +216,6 @@
     <string name="set_goal">Set Goal</string>
     <string name="follow">Follow</string>
     <string name="followed">Followed</string>
+    <string name="memorize_how_to">Flip the card to reveal a word in japanese or in alphabeth. If you reveal the correct pair then that pair of card will be discarded.\n\nClear all card within 90 seconds in order to win. Don\'t run out of time!</string>
 
 </resources>

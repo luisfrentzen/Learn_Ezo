@@ -72,5 +72,39 @@ class Problem constructor(problem : String, ans : String, choices : ArrayList<St
 
             return arProb
         }
+
+        fun createGuessProblems(jpn : ArrayList<String>, link : ArrayList<String>) : ArrayList<Problem>{
+
+            val arProb = ArrayList<Problem>()
+
+            for( i in 0 until 59 ){
+
+                val maxSize : Int = jpn.size
+                val idx : Int = (0..maxSize-1).random()
+
+                lateinit var prob : String
+                lateinit var ans : String
+                lateinit var choices : ArrayList<String>
+
+                lateinit var temp : ArrayList<Problem>
+
+                prob = link.get(idx)
+                ans = jpn.get(idx)
+
+                temp = jpn.toMutableList() as ArrayList<Problem>
+                temp.removeAt(idx)
+                temp.shuffle()
+
+                choices = temp.take(3) as ArrayList<String>
+
+                choices.add(ans)
+                choices.shuffle()
+
+                arProb.add(Problem(prob, ans, choices))
+
+            }
+
+            return arProb
+        }
     }
 }
