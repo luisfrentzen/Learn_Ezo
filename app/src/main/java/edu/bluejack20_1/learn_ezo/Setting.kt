@@ -182,25 +182,13 @@ class Setting : Fragment() {
     }
 
     fun setGoal(g : String){
-        val goalTextView = view?.findViewById<TextView>(R.id.tv_goal)
-
 
         var temp = g.split(" ")
-
-        if(temp[0] == "15"){
-            goalTextView?.setText(R.string._15_minutes)
-        }else if(temp[0] == "30"){
-            goalTextView?.setText(R.string._30_minutes)
-        }else{
-            goalTextView?.setText(R.string._45_minutes)
-        }
 
         databaseU.child(activity_nav?.u?.id.toString()).child("practiceGoal").setValue(temp[0].toInt())
     }
 
     fun setReminder(g : String){
-        val reminderTextView = view?.findViewById<TextView>(R.id.tv_reminder)
-        reminderTextView?.setText(g)
 
         databaseU.child(activity_nav?.u?.id.toString()).child("dailyReminder").setValue(g)
 
