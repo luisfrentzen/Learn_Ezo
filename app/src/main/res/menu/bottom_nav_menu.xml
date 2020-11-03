@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/notif_menu"
-        android:icon="@drawable/ic_google_logo"
+        android:icon="@drawable/ic_alert"
         android:title="@string/activity" />
 
     <item

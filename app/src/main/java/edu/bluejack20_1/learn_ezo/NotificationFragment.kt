@@ -67,6 +67,7 @@ class NotificationFragment : Fragment() {
     override fun onResume() {
 
         val cal = Calendar.getInstance()
+        arPair.clear()
 
         val databaseNotif = FirebaseDatabase.getInstance().getReference("notifications")
         databaseNotif.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -75,7 +76,6 @@ class NotificationFragment : Fragment() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                arPair.clear()
 
                 val arFollowed = ArrayList<String>()
 

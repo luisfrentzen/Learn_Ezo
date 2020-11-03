@@ -126,5 +126,16 @@
     <string name="follow">Ikuti</string>
     <string name="followed">Pengikut</string>
     <string name="gto_desc">Tebak objek sebanyak yang kamu bisa dalam 60 detik</string>
+    <string name="minutes_ago">menit yang lalu</string>
+    <string name="hours_ago">jam yang lalu</string>
+    <string name="days_ago">hari yang lalu</string>
+    <string name="less_than_a_minute">menit yang lalu</string>
+    <string name="months_ago">bulan yang lalu</string>
+    <string name="total_completed">Total Penyelesaian</string>
+    <string name="activity">Aktivitas</string>
+    <string name="memorize_how_to">Balik kartu untuk membuka kata dalam bahasa jepang</string>
+    <string name="set_goal">Atur Target</string>
+    <string name="has_completed_lesson">telah menyelesaikan pembelajaran</string>
+    <string name="followed_you">mengikuti anda kembali</string>
 
 </resources>
