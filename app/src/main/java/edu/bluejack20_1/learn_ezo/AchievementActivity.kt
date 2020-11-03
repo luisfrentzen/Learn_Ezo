@@ -44,6 +44,9 @@ class AchievementActivity : AppCompatActivity() {
 
                     var temp = listAchievement.get(data.key?.toInt()?.minus(1) as Int)
 
+                    if(data.child("currentProgress").value.toString() == "null"){
+                        temp.currentProgress = 0
+                    }
                     temp.currentProgress = data.child("currentProgress").value.toString().toInt()
 
                     listAchievement.set(data.key?.toInt()!!.minus(1) as Int, temp)
