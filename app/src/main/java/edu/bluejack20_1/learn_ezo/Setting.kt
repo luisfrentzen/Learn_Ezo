@@ -77,7 +77,7 @@ class Setting : Fragment() {
         var tv_reminder : TextView = root.findViewById(R.id.tv_reminder)
         var tv_goal : TextView = root.findViewById(R.id.tv_goal)
 
-        var databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(temp.id)
+        var databaseP : DatabaseReference = databaseU.child(temp.id)
 
         databaseP.addValueEventListener(object: ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
@@ -96,11 +96,21 @@ class Setting : Fragment() {
                     tv_goal.setText(R.string._45_minutes)
                 }
 
-                reminderSwitch.isChecked = p.reminder == "on"
             }
 
         })
 
+        reminderSwitch = root.findViewById(R.id.reminder_switch)
+
+        databaseP.child("reminder").addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                reminderSwitch.isChecked = snapshot.value.toString() == "on"
+            }
+
+        })
 
         val goalTextView : TextView = root.findViewById(R.id.tv_goal)
         goalTextView.setOnClickListener {
@@ -114,7 +124,6 @@ class Setting : Fragment() {
             dialog.show()
         }
 
-        reminderSwitch = root.findViewById(R.id.reminder_switch)
         reminderSwitch.setOnCheckedChangeListener { view, isChecked ->
             if(isChecked){
                 onReminder(reminderTextView.text as String, activity_nav!!)
