@@ -15,6 +15,7 @@ public class Player implements Parcelable {
     private int following;
     private int practiceGoal;
     private String dailyReminder;
+    private String reminder;
 
     public Player(String id, String name) {
         this.id = id;
@@ -26,6 +27,7 @@ public class Player implements Parcelable {
         this.following = 0;
         this.practiceGoal = 10;
         this.dailyReminder = "05:00 PM";
+        this.reminder = "off";
     }
 
     public Player(){
@@ -54,6 +56,7 @@ public class Player implements Parcelable {
         following = in.readInt();
         this.practiceGoal = in.readInt();
         this.dailyReminder = in.readString();
+        this.reminder = in.readString();
     }
 
     public String getId() {
@@ -92,6 +95,8 @@ public class Player implements Parcelable {
         return dailyReminder;
     }
 
+    public String getReminder() { return reminder; }
+
     @Override
     public int describeContents() {
         return 0;
@@ -108,6 +113,7 @@ public class Player implements Parcelable {
         dest.writeInt(following);
         dest.writeInt(practiceGoal);
         dest.writeString(dailyReminder);
+        dest.writeString(reminder);
     }
 
     public static final Creator<Player> CREATOR = new Creator<Player>() {

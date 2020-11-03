@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.*
 import com.wajahatkarim3.easyflipview.EasyFlipView
 import com.wajahatkarim3.easyflipview.EasyFlipView.OnFlipAnimationListener
 import kotlinx.android.synthetic.main.activity_memorize.*
@@ -18,6 +19,8 @@ class MemorizeActivity : AppCompatActivity() {
 
         val backLayouts = ArrayList<View>()
         val flipViews = ArrayList<EasyFlipView>()
+
+        val player : Player = intent.getParcelableExtra<Player>("user") as Player
 
         object: CountDownTimer(90000, 1000){
             override fun onFinish() {
@@ -34,6 +37,8 @@ class MemorizeActivity : AppCompatActivity() {
 
         var pooljpn = intent.getStringArrayListExtra("pooljpn")
         var poolrom = intent.getStringArrayListExtra("poolrom")
+
+
 
         val seed : Long = System.nanoTime()
         pooljpn!!.shuffle(Random(seed))
@@ -108,7 +113,7 @@ class MemorizeActivity : AppCompatActivity() {
                             fv2.visibility = View.INVISIBLE
                             score++
                             if(score == 10){
-                                winGame()
+                                winGame(player)
                             }
                         }
                         fv2.isFlipOnTouch = true
@@ -133,7 +138,28 @@ class MemorizeActivity : AppCompatActivity() {
         }
     }
 
-    fun winGame(){
+    fun winGame(player: Player){
         finish()
+
+        addExp(player)
     }
+
+    fun addExp(player: Player){
+        val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(
+            player.id.toString()
+        )
+
+        databaseP.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var currExp : Int = snapshot.child("exp").value.toString().toInt()
+
+                databaseP.child("exp").setValue(currExp+10)
+            }
+
+        })
+    }
+
 }

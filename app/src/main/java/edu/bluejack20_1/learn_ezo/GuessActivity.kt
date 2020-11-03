@@ -23,12 +23,34 @@ class GuessActivity : AppCompatActivity() {
         vpProblem = findViewById(R.id.vp_problems)
 
         val arProblem = intent.getSerializableExtra("probs") as ArrayList<Problem>
+        val player = intent.getParcelableExtra<Player>("user")
 
         val tv_timer = findViewById<TextView>(R.id.timer)
+
+        val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(
+            player?.id.toString()
+        )
+
+        Log.d("see user", player?.id.toString())
+        Log.d("see user", databaseP.toString())
+
 
         object: CountDownTimer(60000, 1000){
             override fun onFinish() {
                 finish()
+
+                //add exp
+                databaseP.addListenerForSingleValueEvent(object: ValueEventListener{
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        var currExp : Int = snapshot.child("exp").value.toString().toInt()
+
+                        databaseP.child("exp").setValue(currExp+10)
+                    }
+
+                })
             }
 
             override fun onTick(millisUntilFinished: Long) {

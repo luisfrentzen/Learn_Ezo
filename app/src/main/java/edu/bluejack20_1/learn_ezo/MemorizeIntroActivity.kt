@@ -25,6 +25,8 @@ class MemorizeIntroActivity : AppCompatActivity() {
         val pooljpn = ArrayList<String>()
         val poolrom = ArrayList<String>()
 
+        var player : Player = intent.getParcelableExtra<Player>("user") as Player
+
         dbhira.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
@@ -64,6 +66,7 @@ class MemorizeIntroActivity : AppCompatActivity() {
             val intent = Intent(this, MemorizeActivity::class.java)
             intent.putExtra("pooljpn", pooljpn)
             intent.putExtra("poolrom", poolrom)
+            intent.putExtra("user", player)
             startActivity(intent)
             finish()
         }
