@@ -3,6 +3,7 @@ package edu.bluejack20_1.learn_ezo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -28,12 +29,16 @@ class AchievementActivity : AppCompatActivity() {
             user.id.toString()
         ).child("achievements")
 
+        val total_completed = findViewById<TextView>(R.id.total_completed_count)
+
+
         databaseO.addValueEventListener(object: ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
 
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                var count = 0
                 for(data in snapshot.children){
                     val u = data.getValue(Achievement::class.java) as Achievement
 
@@ -45,7 +50,12 @@ class AchievementActivity : AppCompatActivity() {
 
                     rvAdapter.notifyDataSetChanged()
 
+                    if(data.child("isComplete").value.toString() == "1"){
+                        count++
+                    }
+
                 }
+                total_completed.setText(count.toString())
             }
 
         })
