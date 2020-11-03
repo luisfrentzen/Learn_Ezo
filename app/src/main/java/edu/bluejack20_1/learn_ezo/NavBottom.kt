@@ -113,13 +113,8 @@ class NavBottom : AppCompatActivity() {
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                if(position == 4) {
-                    super.onPageSelected(3)
-                    btm_nav.getMenu().getItem(3).setChecked(true);
-                }else{
-                    super.onPageSelected(position)
-                    btm_nav.getMenu().getItem(position).setChecked(true);
-                }
+                super.onPageSelected(position)
+                btm_nav.getMenu().getItem(position).setChecked(true);
             }
         })
 
@@ -256,10 +251,13 @@ class NavBottom : AppCompatActivity() {
                         viewPager.setCurrentItem(1)
                     }
                     R.id.game_menu -> {
-                        viewPager.setCurrentItem(2)
+                        viewPager.setCurrentItem(3)
                     }
                     R.id.user_menu -> {
-                        viewPager.setCurrentItem(3)
+                        viewPager.setCurrentItem(4)
+                    }
+                    R.id.notif_menu -> {
+                        viewPager.setCurrentItem(2)
                     }
                 }
 

@@ -1,16 +1,16 @@
 package edu.bluejack20_1.learn_ezo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.ArrayList
-import org.w3c.dom.Text
 
 class ProblemActivity : AppCompatActivity(){
     lateinit var vpProblem : ViewPager2
@@ -101,6 +101,17 @@ class ProblemActivity : AppCompatActivity(){
         if(lesson_id == "dummy1" || lesson_id == "dummy2"){
             return
         }
+
+        val databaseNotif = FirebaseDatabase.getInstance().getReference("notifications")
+
+        val curNotif = databaseNotif.child(UUID.randomUUID().toString())
+        curNotif.child("userid").setValue(user.id.toString())
+        curNotif.child("type").setValue("lesson")
+        curNotif.child("lesson").setValue(lesson_id)
+
+        val parser = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val date = parser.format(Calendar.getInstance().time)
+        curNotif.child("timestamp").setValue(date)
 
         val databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
             user.id.toString()).child("lessons")
