@@ -115,20 +115,17 @@ class Setting : Fragment() {
         }
 
         reminderSwitch = root.findViewById(R.id.reminder_switch)
-        reminderSwitch.setOnCheckedChangeListener(object: SwitchButton.OnCheckedChangeListener{
-            override fun onCheckedChanged(view: SwitchButton?, isChecked: Boolean) {
-                if(isChecked){
-                    onReminder(reminderTextView.text as String, (activity as NavBottom))
+        reminderSwitch.setOnCheckedChangeListener { view, isChecked ->
+            if(isChecked){
+                onReminder(reminderTextView.text as String, activity_nav!!)
 
-                    databaseU.child(activity_nav?.u?.id.toString()).child("reminder").setValue("on")
-                }else{
-                    offReminder((activity as NavBottom))
+                databaseU.child(activity_nav?.u?.id.toString()).child("reminder").setValue("on")
+            }else{
+                offReminder(activity_nav)
 
-                    databaseU.child(activity_nav?.u?.id.toString()).child("reminder").setValue("off")
-                }
+                databaseU.child(activity_nav?.u?.id.toString()).child("reminder").setValue("off")
             }
-
-        })
+        }
 
         val btnBack : ImageButton = root.findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
@@ -145,7 +142,6 @@ class Setting : Fragment() {
         val c = Calendar.getInstance()
 
         var tempHour = g.split(":")
-
 
         var tempMin = tempHour[1].split(" ")
 
@@ -171,12 +167,12 @@ class Setting : Fragment() {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
     }
 
-    fun offReminder(ctx: Context){
+    fun offReminder(ctx: Context?){
         var intent = Intent(ctx, AlertReceiver::class.java)
 
         var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        var alarmManager : AlarmManager = ctx.getSystemService(ALARM_SERVICE) as AlarmManager
+        var alarmManager : AlarmManager = ctx?.getSystemService(ALARM_SERVICE) as AlarmManager
 
         alarmManager.cancel(pendingIntent)
     }
