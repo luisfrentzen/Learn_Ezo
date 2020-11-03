@@ -20,15 +20,12 @@ class NotificationHelper : ContextWrapper{
     constructor(base: Context) : super(base) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             createChannel()
-//            Log.d("masuk sini", "masuk kondisi")
         }
-//        Log.d("masuk sini", "lalala")
     }
 
     @TargetApi(Build.VERSION_CODES.O)
     fun createChannel(){
         val channel1  = NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH)
-
 
         getManager().createNotificationChannel(channel1)
 
@@ -47,5 +44,6 @@ class NotificationHelper : ContextWrapper{
             .setContentTitle("Daily Reminder~")
             .setContentText("Don't forget to learn today!")
             .setSmallIcon(R.drawable.ic_maskotmobile)
+            .setAutoCancel(true)
     }
 }

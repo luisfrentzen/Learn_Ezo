@@ -18,8 +18,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.suke.widget.SwitchButton
 import org.w3c.dom.Text
 import java.util.*
@@ -55,6 +54,8 @@ class Setting : Fragment() {
 
     lateinit var reminderSwitch : SwitchButton
 
+    lateinit var p : Player
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,21 +70,36 @@ class Setting : Fragment() {
             (activity as NavBottom?)?.signOut()
         }
 
-        val p : Player = activity_nav?.u as Player
+        val temp : Player = activity_nav?.u as Player
+
+        p = temp
 
         var tv_reminder : TextView = root.findViewById(R.id.tv_reminder)
         var tv_goal : TextView = root.findViewById(R.id.tv_goal)
 
+        var databaseP : DatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(temp.id)
 
-        tv_reminder.setText(p.dailyReminder)
+        databaseP.addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+            }
 
-        if(p.practiceGoal == 15){
-            tv_goal.setText(R.string._15_minutes)
-        }else if(p.practiceGoal == 30){
-            tv_goal.setText(R.string._30_minutes)
-        }else{
-            tv_goal.setText(R.string._45_minutes)
-        }
+            override fun onDataChange(snapshot: DataSnapshot) {
+                p = snapshot.getValue(Player::class.java) as Player
+
+                tv_reminder.setText(p.dailyReminder)
+
+                if(p.practiceGoal == 15){
+                    tv_goal.setText(R.string._15_minutes)
+                }else if(p.practiceGoal == 30){
+                    tv_goal.setText(R.string._30_minutes)
+                }else{
+                    tv_goal.setText(R.string._45_minutes)
+                }
+
+                reminderSwitch.isChecked = p.reminder == "on"
+            }
+
+        })
 
 
         val goalTextView : TextView = root.findViewById(R.id.tv_goal)
@@ -113,11 +129,6 @@ class Setting : Fragment() {
             }
 
         })
-
-        Log.d("tes", p.reminder)
-
-        reminderSwitch.isChecked = p.reminder == "on"
-
 
         val btnBack : ImageButton = root.findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
@@ -151,22 +162,21 @@ class Setting : Fragment() {
         c.set(Calendar.MINUTE, minute.toInt())
         c.set(Calendar.SECOND, 0)
 
-//        Log.d("waktu", hour.plus(" ").plus(minute))
-
         var intent = Intent(ctx, AlertReceiver::class.java)
-        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, 0)
+
+        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         var alarmManager : AlarmManager = ctx.getSystemService(ALARM_SERVICE) as AlarmManager
 
-//        Log.d("time milis", System.currentTimeMillis().toString().plus(" ").plus(c.timeInMillis))
-
-        alarmManager.set(AlarmManager.RTC_WAKEUP, c.timeInMillis, pendingIntent)
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
     }
 
     fun offReminder(ctx: Context){
-        var alarmManager : AlarmManager = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         var intent = Intent(ctx, AlertReceiver::class.java)
-        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, 0)
+
+        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        var alarmManager : AlarmManager = ctx.getSystemService(ALARM_SERVICE) as AlarmManager
 
         alarmManager.cancel(pendingIntent)
     }
@@ -194,7 +204,7 @@ class Setting : Fragment() {
 
         databaseU.child(activity_nav?.u?.id.toString()).child("dailyReminder").setValue(g)
 
-        if(reminderSwitch.isEnabled){
+        if(p.reminder == "on"){
             offReminder((activity as NavBottom))
             onReminder(g, (activity as NavBottom))
         }
