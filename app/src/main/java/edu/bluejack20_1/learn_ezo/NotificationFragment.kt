@@ -45,8 +45,7 @@ class NotificationFragment : Fragment() {
         }
     }
 
-    val arAct = ArrayList<SpannableStringBuilder>()
-    val arTime = ArrayList<Calendar>()
+    val arPair = ArrayList<Pair<SpannableStringBuilder,Calendar>>()
 
     lateinit var rvAdapter : NotificationCardAdapter
 
@@ -57,7 +56,7 @@ class NotificationFragment : Fragment() {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_notification, container, false)
 
-        rvAdapter = NotificationCardAdapter(arAct, arTime)
+        rvAdapter = NotificationCardAdapter(arPair)
         root.rvNotif.adapter = rvAdapter
         root.rvNotif.hasFixedSize()
         root.rvNotif.layoutManager = LinearLayoutManager(root.context)
@@ -76,8 +75,7 @@ class NotificationFragment : Fragment() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                arAct.clear()
-                arTime.clear()
+                arPair.clear()
 
                 val arFollowed = ArrayList<String>()
 
@@ -97,12 +95,13 @@ class NotificationFragment : Fragment() {
                                 continue;
                             }
 
+
                             val date = data.child("timestamp").value.toString()
                             val cal2 = Calendar.getInstance()
                             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                             val date2 = sdf.parse(date) as Date
                             cal2.time = date2
-                            arTime.add(cal2)
+
 
                             val databaseUser = FirebaseDatabase.getInstance().getReference("users").child(data.child("userid").value.toString())
                             databaseUser.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -128,13 +127,18 @@ class NotificationFragment : Fragment() {
                                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                                     )
 
-                                    arAct.add(str)
+                                    arPair.add(Pair(str, cal2))
+
+                                    arPair.sortByDescending { it.second.time }
 
                                     rvAdapter.notifyDataSetChanged()
                                 }
 
                             })
                         }
+
+
+
                     }
 
                 })

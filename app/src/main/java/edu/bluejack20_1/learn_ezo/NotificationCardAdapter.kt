@@ -1,8 +1,10 @@
 package edu.bluejack20_1.learn_ezo
 
 import android.content.Context
+import android.provider.CalendarContract
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,7 @@ import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NotificationCardAdapter(val notification : ArrayList<SpannableStringBuilder>, val timestamp: ArrayList<Calendar>) : RecyclerView.Adapter<NotificationCardAdapter.ViewHolder>() {
+class NotificationCardAdapter(val notification : ArrayList<Pair<SpannableStringBuilder, Calendar>>) : RecyclerView.Adapter<NotificationCardAdapter.ViewHolder>() {
     lateinit var ctx : Context
 
     override fun onCreateViewHolder(
@@ -38,31 +40,38 @@ class NotificationCardAdapter(val notification : ArrayList<SpannableStringBuilde
     }
 
     override fun onBindViewHolder(holder: NotificationCardAdapter.ViewHolder, position: Int) {
-        holder.acttv.text = notification.get(position)
+        holder.acttv.text = notification.get(position).first
+        val notdate = notification.get(position).second
 
         val cal = Calendar.getInstance()
-        val timestm = timestamp.get(position)
+        val timestm = notdate
 
         var diff = ""
 
-        if(cal.get(Calendar.YEAR) - timestm.get(Calendar.YEAR) > 0){
-            diff = (cal.get(Calendar.YEAR) - timestm.get(Calendar.YEAR)).toString() + " " + ctx.resources.getString(R.string.years_ago)
+        val timenow: Long = ((cal.get(Calendar.DAY_OF_YEAR).toLong() + cal.get(Calendar.YEAR).toLong() * 365.toLong()) *24*60*60) + cal.get(Calendar.MINUTE) * 60 + cal.get(Calendar.SECOND)
+        val timethen: Long = ((timestm.get(Calendar.DAY_OF_YEAR).toLong() + timestm.get(Calendar.YEAR).toLong() * 365.toLong()) *24*60*60) + timestm.get(Calendar.MINUTE) * 60 + timestm.get(Calendar.SECOND)
+
+        if(timenow - timethen < 60){
+            //less than a minute
+            diff = ctx.resources.getString(R.string.less_than_a_minute)
         }
-        else if(cal.get(Calendar.MONTH) - timestm.get(Calendar.MONTH) > 0){
-            diff = (cal.get(Calendar.MONTH) - timestm.get(Calendar.MONTH)).toString() + " " + ctx.resources.getString(R.string.months_ago)
+        else if(timenow - timethen < 60 * 60){
+            //less than an hour
+            diff = ((timenow - timethen) / 60).toString() + " " + ctx.resources.getString(R.string.minutes_ago)
         }
-        else if(cal.get(Calendar.DAY_OF_MONTH) - timestm.get(Calendar.DAY_OF_MONTH) > 0){
-            diff = (cal.get(Calendar.DAY_OF_MONTH) - timestm.get(Calendar.DAY_OF_MONTH)).toString() + " " + ctx.resources.getString(R.string.days_ago)
+        else if(timenow - timethen < 60 * 60 * 24){
+            //less than a day
+            diff = ((timenow - timethen) / ( 60*60)).toString() + " " + ctx.resources.getString(R.string.hours_ago)
         }
-        else if(cal.get(Calendar.HOUR_OF_DAY) - timestm.get(Calendar.HOUR_OF_DAY) > 0){
-            diff = (cal.get(Calendar.HOUR_OF_DAY) - timestm.get(Calendar.HOUR_OF_DAY)).toString() + " " + ctx.resources.getString(R.string.hours_ago)
+        else if(timenow - timethen < 60 * 60 * 24 * 30){
+            //less than a month
+            diff = ((timenow - timethen) / (60*60*24)).toString() + " " + ctx.resources.getString(R.string.days_ago)
         }
-        else if(cal.get(Calendar.MINUTE) - timestm.get(Calendar.MINUTE) > 0){
-            diff = (cal.get(Calendar.MINUTE) - timestm.get(Calendar.MINUTE)).toString() + " " + ctx.resources.getString(R.string.minutes_ago)
+        else if(timenow - timethen < 60 * 60 * 24 * 365){
+            //less than a month
+            diff = ((timenow - timethen) / (60*60*24*30)).toString() + " " + ctx.resources.getString(R.string.months_ago)
         }
-        else{
-            diff = "1 " + ctx.resources.getString(R.string.minutes_ago)
-        }
+
         holder.timetv.text = diff
 
     }
