@@ -105,7 +105,7 @@ class SearchCardAdapter(val result : ArrayList<Player>, var user : Player, var f
                                 databaseA.child("currentProgress").setValue(snapshot.child("currentProgress").value.toString().toInt() + 1)
                             }
 
-                            if(snapshot.child("currentProgress").value.toString().toInt() == 3){
+                            else{
                                 databaseA.child("isComplete").setValue(1)
                             }
                         }
