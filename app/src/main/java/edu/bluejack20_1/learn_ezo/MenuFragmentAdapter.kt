@@ -10,7 +10,7 @@ class MenuFragmentAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int {
-        return 4
+        return 5
     }
 
     override fun createFragment(position: Int): Fragment {
@@ -20,9 +20,12 @@ class MenuFragmentAdapter(fragmentActivity: FragmentActivity) :
                 return Practice()
             }
             2 -> {
-                return Game()
+                return NotificationFragment()
             }
             3 -> {
+                return Game()
+            }
+            4 -> {
                 return Profile()
             }
             else -> {
