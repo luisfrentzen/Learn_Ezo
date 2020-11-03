@@ -76,15 +76,15 @@ class SearchCardAdapter(val result : ArrayList<Player>, var user : Player, var f
                 val reffollower = db.getReference("users").child(u.id.toString()).child("follower-list").child(user.id.toString())
                 reffollower.setValue(1)
 
-                val databaseNotif = FirebaseDatabase.getInstance().getReference("notifications")
-
-                val curNotif = databaseNotif.child(UUID.randomUUID().toString())
-                curNotif.child("userid").setValue(user.id.toString())
-                curNotif.child("type").setValue("follow")
-
-                val parser = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-                val date = parser.format(Calendar.getInstance().time)
-                curNotif.child("timestamp").setValue(date)
+//                val databaseNotif = FirebaseDatabase.getInstance().getReference("notifications")
+//
+//                val curNotif = databaseNotif.child(UUID.randomUUID().toString())
+//                curNotif.child("userid").setValue(user.id.toString())
+//                curNotif.child("type").setValue("follow")
+//
+//                val parser = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+//                val date = parser.format(Calendar.getInstance().time)
+//                curNotif.child("timestamp").setValue(date)
 
                 val databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
                 user.id.toString()).child("achievements").child("4")

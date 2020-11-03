@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.achievement_card.view.*
 import kotlinx.android.synthetic.main.fragment_user.*
 import org.w3c.dom.Text
 
@@ -93,11 +94,13 @@ class User : Fragment() {
 
         val level_progress : ProgressBar = root.findViewById(R.id.level_progress)
         val leagueTv = root.findViewById<TextView>(R.id.tv_league)
+        val league_now = root.findViewById<TextView>(R.id.league_now)
         val day_streak_count : TextView = root.findViewById(R.id.day_streak_count)
         val exp_count : TextView = root.findViewById(R.id.exp_count)
         val tv_follower : TextView = root.findViewById(R.id.follower)
         val level_tv : TextView = root.findViewById(R.id.level_count)
         val tv_lesson_mastered : TextView = root.findViewById(R.id.tv_lesson_mastered)
+        val league_progress = root.findViewById<ProgressBar>(R.id.league_progress)
 
 
         val databaseUser : DatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(
@@ -121,16 +124,21 @@ class User : Fragment() {
                 temp_exp -= (level_count - 1) * 25
 
                 if(activity != null) {
-                    if (level_count < 5) {
+                    if (level_count < 10) {
                         leagueTv.text = resources.getString(R.string.lg_apprentice)
-                    } else if (level_count < 10) {
+                        league_now.text = resources.getString(R.string.lg_apprentice)
+                    } else if (level_count < 20) {
                         leagueTv.text = resources.getString(R.string.lg_disciple)
-                    } else if (level_count < 25) {
+                        league_now.text = resources.getString(R.string.lg_disciple)
+                    } else if (level_count < 35) {
                         leagueTv.text = resources.getString(R.string.lg_teacher)
-                    } else if (level_count < 50) {
+                        league_now.text = resources.getString(R.string.lg_teacher)
+                    } else if (level_count < 40) {
                         leagueTv.text = resources.getString(R.string.lg_master)
+                        league_now.text = resources.getString(R.string.lg_master)
                     } else {
                         leagueTv.text = resources.getString(R.string.lg_scholar)
+                        league_now.text = resources.getString(R.string.lg_scholar)
                     }
                 }
 
@@ -138,6 +146,9 @@ class User : Fragment() {
 
                 day_streak_count.setText(p.dayStreak.toString())
                 exp_count.text = p.exp.toString()
+
+                league_progress.max = 50 * 25
+                league_progress.progress = p.exp
 
                 val followerref = databaseUser.child("follower-list")
                 followerref.addValueEventListener(object : ValueEventListener {

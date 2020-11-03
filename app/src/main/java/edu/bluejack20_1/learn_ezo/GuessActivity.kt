@@ -48,6 +48,38 @@ class GuessActivity : AppCompatActivity() {
                         var currExp : Int = snapshot.child("exp").value.toString().toInt()
 
                         databaseP.child("exp").setValue(currExp+10)
+                        if (player != null) {
+                            player.exp = currExp + 10
+                        }
+
+                        val databaseA : DatabaseReference = FirebaseDatabase.getInstance().getReference("accomplishment").child(
+                            player?.id.toString()).child("achievements").child("2")
+
+                        databaseA.addListenerForSingleValueEvent(object: ValueEventListener {
+                            override fun onCancelled(error: DatabaseError) {
+                            }
+
+                            override fun onDataChange(snapshot: DataSnapshot) {
+
+                                val temp_snapshot = snapshot.value.toString()
+
+                                if(temp_snapshot == "null"){
+                                    databaseA.child("isComplete").setValue(0)
+                                }
+                                else if(snapshot.child("isComplete").value == 1){
+                                    return
+                                }
+
+                                if((player?.exp?.div(25))?.plus(1)!! >= 5){
+                                    databaseA.child("currentProgress").setValue(5)
+                                    databaseA.child("isComplete").setValue(1)
+                                    return
+                                }
+
+                                databaseA.child("currentProgress").setValue(player.exp/25+1)
+                            }
+
+                        })
                     }
 
                 })
