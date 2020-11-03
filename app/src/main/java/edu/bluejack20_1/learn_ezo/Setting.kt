@@ -1,6 +1,11 @@
 package edu.bluejack20_1.learn_ezo
 
+import android.app.AlarmManager
 import android.app.Dialog
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Context.ALARM_SERVICE
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,10 +16,13 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.suke.widget.SwitchButton
 import org.w3c.dom.Text
+import java.util.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,6 +52,8 @@ class Setting : Fragment() {
 
     var databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
     var activity_nav: NavBottom ?= null
+
+    lateinit var reminderSwitch : SwitchButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,6 +98,27 @@ class Setting : Fragment() {
             dialog.show()
         }
 
+        reminderSwitch = root.findViewById(R.id.reminder_switch)
+        reminderSwitch.setOnCheckedChangeListener(object: SwitchButton.OnCheckedChangeListener{
+            override fun onCheckedChanged(view: SwitchButton?, isChecked: Boolean) {
+                if(isChecked){
+                    onReminder(reminderTextView.text as String, (activity as NavBottom))
+
+                    databaseU.child(activity_nav?.u?.id.toString()).child("reminder").setValue("on")
+                }else{
+                    offReminder((activity as NavBottom))
+
+                    databaseU.child(activity_nav?.u?.id.toString()).child("reminder").setValue("off")
+                }
+            }
+
+        })
+
+        Log.d("tes", p.reminder)
+
+        reminderSwitch.isChecked = p.reminder == "on"
+
+
         val btnBack : ImageButton = root.findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
             val fragment : Profile = this@Setting.getParentFragment() as Profile
@@ -96,6 +127,48 @@ class Setting : Fragment() {
         }
 
         return root
+
+    }
+
+    fun onReminder(g : String, ctx: Context){
+        val c = Calendar.getInstance()
+
+        var tempHour = g.split(":")
+
+
+        var tempMin = tempHour[1].split(" ")
+
+        val hour = tempHour[0]
+        val minute = tempMin[0]
+
+        if(tempMin[1] == "AM"){
+            c.set(Calendar.AM_PM, Calendar.AM)
+        }else{
+            c.set(Calendar.AM_PM, Calendar.PM)
+        }
+
+        c.set(Calendar.HOUR, hour.toInt())
+        c.set(Calendar.MINUTE, minute.toInt())
+        c.set(Calendar.SECOND, 0)
+
+//        Log.d("waktu", hour.plus(" ").plus(minute))
+
+        var intent = Intent(ctx, AlertReceiver::class.java)
+        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, 0)
+
+        var alarmManager : AlarmManager = ctx.getSystemService(ALARM_SERVICE) as AlarmManager
+
+//        Log.d("time milis", System.currentTimeMillis().toString().plus(" ").plus(c.timeInMillis))
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, c.timeInMillis, pendingIntent)
+    }
+
+    fun offReminder(ctx: Context){
+        var alarmManager : AlarmManager = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        var intent = Intent(ctx, AlertReceiver::class.java)
+        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, 0)
+
+        alarmManager.cancel(pendingIntent)
     }
 
     fun setGoal(g : String){
@@ -111,17 +184,20 @@ class Setting : Fragment() {
         }else{
             goalTextView?.setText(R.string._45_minutes)
         }
-        activity_nav?.u?.practiceGoal = temp[0].toInt()
 
-        databaseU.child(activity_nav?.u?.id.toString()).setValue(activity_nav?.u as Player)
+        databaseU.child(activity_nav?.u?.id.toString()).child("practiceGoal").setValue(temp[0].toInt())
     }
 
     fun setReminder(g : String){
         val reminderTextView = view?.findViewById<TextView>(R.id.tv_reminder)
         reminderTextView?.setText(g)
-        activity_nav?.u?.dailyReminder = g
 
-        databaseU.child(activity_nav?.u?.id.toString()).setValue(activity_nav?.u as Player)
+        databaseU.child(activity_nav?.u?.id.toString()).child("dailyReminder").setValue(g)
+
+        if(reminderSwitch.isEnabled){
+            offReminder((activity as NavBottom))
+            onReminder(g, (activity as NavBottom))
+        }
     }
 
     companion object {

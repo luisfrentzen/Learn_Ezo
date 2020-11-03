@@ -42,7 +42,6 @@ class Game : Fragment() {
         val memoBtn = root.findViewById<Button>(R.id.play_memorize)
         val guessBtn = root.findViewById<Button>(R.id.play_image)
 
-
         if((activity as NavBottom).lessons_mastered_count <= 2){
             memoBtn.isEnabled = false
             memoBtn.alpha = 0.7F
@@ -83,11 +82,11 @@ class Game : Fragment() {
         })
 
         memoBtn.setOnClickListener {
-            (activity as NavBottom).moveToMemorizePage()
+            (activity as NavBottom).moveToMemorizePage((activity as NavBottom).u as Player)
         }
 
         guessBtn.setOnClickListener {
-            (activity as NavBottom).moveToGuessPage()
+            (activity as NavBottom).moveToGuessPage((activity as NavBottom).u as Player)
         }
 
 

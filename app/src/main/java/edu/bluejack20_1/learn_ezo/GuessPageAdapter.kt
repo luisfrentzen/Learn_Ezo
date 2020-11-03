@@ -96,6 +96,7 @@ class GuessPageAdapter(private var problemList: ArrayList<Problem>, var act : Co
                 holder.nextBtn.text = act.getString(R.string.finish)
                 holder.nextBtn.setOnClickListener {
                     (act as GuessActivity).finish()
+
                 }
             }
             else {

@@ -73,13 +73,15 @@ class NavBottom : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun moveToMemorizePage(){
+    fun moveToMemorizePage(player: Player){
         val intent = Intent(this, MemorizeIntroActivity::class.java)
+        intent.putExtra("user", player)
         startActivity(intent)
     }
 
-    fun moveToGuessPage(){
+    fun moveToGuessPage(player: Player){
         val intent = Intent(this, GuessIntroActivity::class.java)
+        intent.putExtra("user", player)
         startActivity(intent)
     }
 

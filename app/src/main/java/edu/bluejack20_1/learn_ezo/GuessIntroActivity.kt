@@ -28,6 +28,8 @@ class GuessIntroActivity : AppCompatActivity() {
 
         lateinit var arProblem : ArrayList<Problem>
 
+        var player : Player = intent.getParcelableExtra<Player>("user") as Player
+
         databaseG.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
             }
@@ -49,6 +51,7 @@ class GuessIntroActivity : AppCompatActivity() {
         startBtn.setOnClickListener {
             val intent = Intent(this, GuessActivity::class.java)
             intent.putExtra("probs", arProblem)
+            intent.putExtra("user", player)
             startActivity(intent)
             finish()
         }
