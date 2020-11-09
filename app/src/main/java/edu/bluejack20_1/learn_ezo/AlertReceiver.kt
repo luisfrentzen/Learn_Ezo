@@ -11,9 +11,8 @@ class AlertReceiver : BroadcastReceiver() {
         val notificationHelper = NotificationHelper(context)
 
         var repeating_intent = Intent(context, MainActivity::class.java)
-        repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-        var pendingIntent = PendingIntent.getActivity(context, 1, repeating_intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        var pendingIntent = PendingIntent.getActivity(context, 1, repeating_intent, 0)
 
         val nb : NotificationCompat.Builder = notificationHelper.getChannelNotification().setContentIntent(pendingIntent)
 
