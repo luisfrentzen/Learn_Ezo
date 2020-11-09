@@ -1,5 +1,8 @@
 package edu.bluejack20_1.learn_ezo
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager;
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -111,6 +114,8 @@ class Home : Fragment() {
         val calendarView : CalendarView = root.findViewById(R.id.calendarView) as CalendarView
         calendars = calendarView
 
+
+
         databaseRecord.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(events.isNotEmpty()){
@@ -217,19 +222,29 @@ class Home : Fragment() {
             }
 
 
-        fun getTodayDateFormat(): String{
-            val cal : Calendar = Calendar.getInstance()
-
-            val day : String = cal.get(Calendar.DATE).toString()
-            val month : String = cal.get(Calendar.MONTH).toString()
-            val year : String = cal.get(Calendar.YEAR).toString()
+        fun getTodayDateFormat(day: String, month: String, year: String): String{
 
             val date : String = day.plus("-").plus(month).plus("-").plus(year)
 
             return date
         }
+        
+        fun setExp(ctx: Context, exp: Int){
+            var sharedPref : SharedPreferences = ctx.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+            val editor : SharedPreferences.Editor = sharedPref.edit()
 
-        fun addUserRecord(id: String, value: Int){
+            var expPrev = sharedPref.getInt("expToday", 0)
+
+            if(exp == 0){
+                editor.putInt("expToday", 0)
+            }else{
+                editor.putInt("expToday", expPrev + exp)
+            }
+
+            editor.apply()
+        }
+
+        fun addUserRecord(id: String, value: Int, ctx: Context){
 
             val cal : Calendar = Calendar.getInstance()
 
@@ -237,7 +252,8 @@ class Home : Fragment() {
             val month : String = cal.get(Calendar.MONTH).toString()
             val year : String = cal.get(Calendar.YEAR).toString()
 
-            val date : String = day.plus("-").plus(month).plus("-").plus(year)
+            val date : String = getTodayDateFormat(day, month, year)
+            Log.d("date", date)
 
             var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
 
@@ -251,10 +267,36 @@ class Home : Fragment() {
                     var before = 0
                     if(temp == "null"){
                         databaseR.child(id).child(date).setValue(value)
+
+                        setExp(ctx, 0)
+
                     }else{
                         if(value != 0){
                             before = snapshot.value.toString().toInt()
-                            databaseR.child(id).child(date).setValue(value)
+
+                            var expToday = ctx.getSharedPreferences("sharedPref", Context.MODE_PRIVATE).getInt("expToday", 0)
+
+                            var databaseU : DatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(id).child("practiceGoal")
+
+                            Log.d("test exp today", expToday.toString())
+                            Log.d("database U", databaseU.toString())
+
+                            databaseU.addListenerForSingleValueEvent(object: ValueEventListener{
+                                override fun onCancelled(error: DatabaseError) {
+                                }
+
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    Log.d("hehe", snapshot.value.toString())
+                                    if((snapshot.value.toString().toInt() == 15 && expToday >= 30) || (snapshot.value.toString().toInt() == 30 && expToday >= 60) ||
+                                        (snapshot.value.toString().toInt() == 45 && expToday >= 90)){
+                                        Log.d("asd", "masuk sini")
+                                        databaseR.child(id).child(date).setValue(value)
+                                    }
+                                }
+
+                            })
+
+
                         }
                     }
 
@@ -264,7 +306,7 @@ class Home : Fragment() {
 
                         val yesterday = yesterdayCal.get(Calendar.DATE).toString()
 
-                        val yesterdayDate : String = yesterday.plus("-").plus(month).plus("-").plus(year)
+                        val yesterdayDate : String = getTodayDateFormat(yesterday, month, year)
 
                         var curStreak = 1
 

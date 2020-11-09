@@ -201,7 +201,8 @@ class ProblemPageAdapter(private var problemList: ArrayList<Problem>, private va
 
 
                     //update achievement
-                    Home.addUserRecord(user.id, 1)
+                    Home.setExp(act, 10)
+                    Home.addUserRecord(user.id, 1, act)
 
                     //update lesson cleared
                     (act as ProblemActivity).updateAccomplishment()

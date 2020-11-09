@@ -34,12 +34,17 @@ class GuessActivity : AppCompatActivity() {
         Log.d("see user", player?.id.toString())
         Log.d("see user", databaseP.toString())
 
+        var ctx = this
+
 
         object: CountDownTimer(60000, 1000){
             override fun onFinish() {
                 finish()
 
                 //add exp
+                Home.setExp(ctx, 10)
+                Home.addUserRecord(player?.id.toString(), 1, ctx)
+
                 databaseP.addListenerForSingleValueEvent(object: ValueEventListener{
                     override fun onCancelled(error: DatabaseError) {
                     }

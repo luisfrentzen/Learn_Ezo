@@ -8,6 +8,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -100,6 +101,13 @@ class Setting : Fragment() {
         })
 
         darkmodeSwitch = root.darkmode_switch
+
+        val reminderTextView : TextView = root.findViewById(R.id.tv_reminder)
+        reminderTextView.setOnClickListener {
+            val dialog = SetGoalDialog(activity_nav!!, this, "reminder")
+            dialog.show()
+        }
+
         reminderSwitch = root.findViewById(R.id.reminder_switch)
 
         databaseP.child("reminder").addListenerForSingleValueEvent(object: ValueEventListener{
@@ -111,18 +119,6 @@ class Setting : Fragment() {
             }
 
         })
-
-        val goalTextView : TextView = root.findViewById(R.id.tv_goal)
-        goalTextView.setOnClickListener {
-            val dialog = SetGoalDialog(activity_nav!!, this, "goal")
-            dialog.show()
-        }
-
-        val reminderTextView : TextView = root.findViewById(R.id.tv_reminder)
-        reminderTextView.setOnClickListener {
-            val dialog = SetGoalDialog(activity_nav!!, this, "reminder")
-            dialog.show()
-        }
 
         reminderSwitch.setOnCheckedChangeListener { view, isChecked ->
             if(isChecked){
@@ -164,6 +160,12 @@ class Setting : Fragment() {
             }
         }
 
+        val goalTextView : TextView = root.findViewById(R.id.tv_goal)
+        goalTextView.setOnClickListener {
+            val dialog = SetGoalDialog(activity_nav!!, this, "goal")
+            dialog.show()
+        }
+
         val btnBack : ImageButton = root.findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
             val fragment : Profile = this@Setting.getParentFragment() as Profile
@@ -178,20 +180,23 @@ class Setting : Fragment() {
     }
 
     fun onReminder(g : String, ctx: Context){
-        val c = Calendar.getInstance()
+        var c = Calendar.getInstance()
+        var rNow = Calendar.getInstance()
 
         var tempHour = g.split(":")
 
         var tempMin = tempHour[1].split(" ")
 
-        val hour = tempHour[0]
-        val minute = tempMin[0]
+        var hour = tempHour[0]
+        var minute = tempMin[0]
 
         if(tempMin[1] == "AM"){
             c.set(Calendar.AM_PM, Calendar.AM)
         }else{
             c.set(Calendar.AM_PM, Calendar.PM)
         }
+
+        Log.d("hehe", hour.plus(minute))
 
         c.set(Calendar.HOUR, hour.toInt())
         c.set(Calendar.MINUTE, minute.toInt())
@@ -203,15 +208,18 @@ class Setting : Fragment() {
 
         var alarmManager : AlarmManager = ctx.getSystemService(ALARM_SERVICE) as AlarmManager
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, c.timeInMillis, pendingIntent)
+        offReminder(ctx)
 
-//        asd
+        if(c.timeInMillis > rNow.timeInMillis){
+            alarmManager.set(AlarmManager.RTC_WAKEUP, c.timeInMillis, pendingIntent)
+        }
+
     }
 
     fun offReminder(ctx: Context?){
         var intent = Intent(ctx, AlertReceiver::class.java)
 
-        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, 0)
 
         var alarmManager : AlarmManager = ctx?.getSystemService(ALARM_SERVICE) as AlarmManager
 
