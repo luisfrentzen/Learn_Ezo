@@ -14,9 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="android:screenOrientation">portrait</item>
         <item name="android:textViewStyle">@style/NunitoFontViewStyle</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/background</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/white</item>
     </style>

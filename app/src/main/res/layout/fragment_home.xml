@@ -64,10 +64,14 @@
                         android:id="@+id/calendarView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:headerColor="@color/colorPrimary"
-                        app:todayLabelColor="@color/colorPrimary"
+                        app:abbreviationsBarColor="@color/white"
+                        app:abbreviationsLabelsColor="@color/black"
+                        app:headerColor="@color/lightGray"
+                        app:headerLabelColor="@color/black"
+                        app:selectionColor="@color/black"
+                        app:pagesColor="@color/white"
                         tools:layout_editor_absoluteX="0dp"
-                        tools:layout_editor_absoluteY="142dp" />
+                        tools:layout_editor_absoluteY="0dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

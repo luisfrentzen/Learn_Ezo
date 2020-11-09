@@ -55,7 +55,11 @@ class User : Fragment() {
 
         var ach_list = (activity as NavBottom).getAchList()
 
-        var ach_overview = ArrayList<Achievement>(ach_list.subList(0, 3))
+        var ach_overview = ArrayList<Achievement>()
+
+        if(ach_list.size >= 3){
+            ach_overview.addAll(ach_list.subList(0, 3))
+        }
 
         val rvAdapter = AchievementCardAdapter(ach_overview)
         rvAchievement.adapter = rvAdapter
@@ -76,6 +80,9 @@ class User : Fragment() {
                 for(data in snapshot.children){
                     val u = data.getValue(Achievement::class.java) as Achievement
 
+                    if(ach_list.size < 1){
+                        continue
+                    }
 
                     var temp = ach_list.get(data.key?.toInt()?.minus(1) as Int)
 

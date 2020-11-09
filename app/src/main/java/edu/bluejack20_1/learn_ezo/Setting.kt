@@ -1,26 +1,24 @@
 package edu.bluejack20_1.learn_ezo
 
 import android.app.AlarmManager
-import android.app.Dialog
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.ALARM_SERVICE
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.*
 import com.suke.widget.SwitchButton
-import org.w3c.dom.Text
+import kotlinx.android.synthetic.main.fragment_setting.view.*
 import java.util.*
 
 
@@ -53,6 +51,7 @@ class Setting : Fragment() {
     var activity_nav: NavBottom ?= null
 
     lateinit var reminderSwitch : SwitchButton
+    lateinit var darkmodeSwitch : SwitchButton
 
     lateinit var p : Player
 
@@ -100,6 +99,7 @@ class Setting : Fragment() {
 
         })
 
+        darkmodeSwitch = root.darkmode_switch
         reminderSwitch = root.findViewById(R.id.reminder_switch)
 
         databaseP.child("reminder").addListenerForSingleValueEvent(object: ValueEventListener{
@@ -136,12 +136,42 @@ class Setting : Fragment() {
             }
         }
 
+        val sharedPreferences: SharedPreferences? = this.activity?.getSharedPreferences(
+            "sharedPrefs", MODE_PRIVATE
+        )
+        val editor = sharedPreferences?.edit()
+
+        darkmodeSwitch.setOnCheckedChangeListener { view, isChecked ->
+            if(isChecked){
+                    AppCompatDelegate
+                        .setDefaultNightMode(
+                            AppCompatDelegate
+                                .MODE_NIGHT_YES);
+
+                editor!!.putBoolean(
+                    "isDarkModeOn", true);
+                editor.apply();
+            }
+            else{
+                    AppCompatDelegate
+                        .setDefaultNightMode(
+                            AppCompatDelegate
+                                .MODE_NIGHT_NO);
+
+                editor!!.putBoolean(
+                    "isDarkModeOn", false);
+                editor.apply();
+            }
+        }
+
         val btnBack : ImageButton = root.findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
             val fragment : Profile = this@Setting.getParentFragment() as Profile
 
             fragment.loadFragment(User())
         }
+
+
 
         return root
 

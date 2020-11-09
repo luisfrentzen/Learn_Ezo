@@ -10,6 +10,7 @@ import com.google.firebase.database.*
 import com.wajahatkarim3.easyflipview.EasyFlipView
 import com.wajahatkarim3.easyflipview.EasyFlipView.OnFlipAnimationListener
 import kotlinx.android.synthetic.main.activity_memorize.*
+import kotlinx.android.synthetic.main.fragment_reminder_preferences.*
 import kotlin.random.Random
 
 class MemorizeActivity : AppCompatActivity() {
@@ -39,6 +40,10 @@ class MemorizeActivity : AppCompatActivity() {
         var poolrom = intent.getStringArrayListExtra("poolrom")
 
 
+
+        btn_backMem.setOnClickListener{
+            finish()
+        }
 
         val seed : Long = System.nanoTime()
         pooljpn!!.shuffle(Random(seed))
