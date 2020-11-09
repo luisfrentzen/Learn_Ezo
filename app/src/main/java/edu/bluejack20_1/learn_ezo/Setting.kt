@@ -169,11 +169,13 @@ class Setting : Fragment() {
 
         var intent = Intent(ctx, AlertReceiver::class.java)
 
-        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        var pendingIntent :PendingIntent = PendingIntent.getBroadcast(ctx, 1, intent, 0)
 
         var alarmManager : AlarmManager = ctx.getSystemService(ALARM_SERVICE) as AlarmManager
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+        alarmManager.set(AlarmManager.RTC_WAKEUP, c.timeInMillis, pendingIntent)
+
+//        asd
     }
 
     fun offReminder(ctx: Context?){
