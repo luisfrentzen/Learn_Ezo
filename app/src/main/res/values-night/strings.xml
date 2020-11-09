@@ -1,0 +1,233 @@
+<resources>
+    <string name="app_name">Learn! Ezo</string>
+    <string name="tv_setting">Settings</string>
+    <string name="tv_home">Home</string>
+    <string name="tv_profile">Profile</string>
+    <string name="tv_play">Play</string>
+    <string name="tv_learn">Learn</string>
+    <string name="google">Login with Google</string>
+    <string name="please_sign_in">Please sign in</string>
+    <string name="we_would_like_to_remember_you">We would like to remember you</string>
+    <string name="tv_dark_mode">Dark Mode</string>
+    <string name="tv_practice_reminder">Practice Reminder</string>
+    <string name="tv_set_time">Set Time</string>
+    <string name="tv_user_preference">User Preference</string>
+    <string name="tv_language">Language</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="statistics">Statistics</string>
+    <string name="day_streak">Day streak</string>
+    <string name="league">League</string>
+    <string name="total_exp" translatable="false">Total EXP</string>
+    <string name="lessons_mastered">Lessons Mastered</string>
+    <string name="social">Social</string>
+    <string name="find_friends">Find Friends</string>
+    <string name="achievements">Achievements</string>
+    <string name="view_more">View More</string>
+    <string name="review" translatable="false">Review</string>
+    <string name="quick_review">Quick Review</string>
+    <string name="learning_review">Learning Review</string>
+    <string name="memorize" translatable="false">Memorize!</string>
+    <string name="_15_minutes">15 minutes</string>
+    <string name="_30_minutes">30 minutes</string>
+    <string name="_45_minutes">45 minutes</string>
+    <string name="set_your_daily_goal">Set your daily goal</string>
+    <string name="daily_goal_helps_you_learn_more_consistently_everyday_don_t_worry_you_can_change_it_anytime_later_on">Daily goal helps you learn more consistently everyday. Don\'t worry, you can change it anytime later on</string>
+    <string name="set_your_daily_reminder">Set your daily reminder</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="we_can_also_remind_you_to_practice_everyday">We can also remind you to practice everyday!</string>
+    <string name="finish">Finish</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="language">Language</string>
+    <string name="reminder">Reminder</string>
+    <string name="reminder_time">Reminder time</string>
+    <string name="select_goal">Select goal</string>
+    <string name="bahasa" translatable="false">Bahasa</string>
+    <string name="english">English</string>
+    <string name="select_language">Select Language</string>
+    <string name="confirm">Confirm</string>
+    <string name="play">Play</string>
+    <string name="practice_your_japanese_by_memorizing_set_of_characters_flip_all_the_right_pair_to_win_the_game">Practice your japanese by memorizing set of characters. Flip all the right pair to win the game.</string>
+    <string name="guess_the_image" translatable="false">Guess the Image</string>
+    <string name="learn_by_guessing_various_objects_in_japanese_be_quick_before_the_time_runs_out">Learn by guessing various objects in japanese. Be quick before the time runs out!</string>
+    <string name="title_activity_base" translatable="false">BaseActivity</string>
+
+    <string name="tv_ach_1_title">Hardwork</string>
+    <string name="tv_ach_2_title">Intermediate Student</string>
+    <string name="tv_ach_3_title">Conqueror</string>
+    <string name="tv_ach_4_title">Social Person</string>
+    <string name="tv_ach_5_title">Big Brain</string>
+    <string name="tv_ach_6_title">Popular One</string>
+    <string name="tv_ach_7_title">Genius</string>
+
+    <string name="tv_ach_1_desc">Reach 10 days streak</string>
+    <string name="tv_ach_2_desc">Reach level 5</string>
+    <string name="tv_ach_3_desc">Complete all lessons</string>
+    <string name="tv_ach_4_desc">Follow 3 friends</string>
+    <string name="tv_ach_5_desc">Complete 3 reviews</string>
+    <string name="tv_ach_6_desc">Have 3 followers</string>
+    <string name="tv_ach_7_desc">Complete a lesson with no mistake</string>
+    <string name="search">Search</string>
+
+    <string name="tv_date">Date</string>
+    <string name="tv_hiragana" translatable="false">Hiragana</string>
+    <string name="tv_katakana" translatable="false">Katakana</string>
+    <string name="tv_number">Number</string>
+    <string name="tv_time">Time</string>
+    <string name="start">Start</string>
+
+    <string name="for_example">Example: </string>
+
+    <string name="tv_lesson_hiragana">
+        Hiragana is the basic Japanese alphabet. It represents every sound in the Japanese language.
+
+        \n\nIn English, each letter usually represents one sound, like k or b. But hiragana characters each represents as syllable. Japanese syllables are usually just a consonant followed by a vowel.
+        \n\nThere are 46 hiragana symbols in Japanese, each with a particular sound but with no independent meaning.
+
+    </string>
+
+    <string name="tv_example_hiragana" translatable="false">
+        き - KI
+        \nも - MO
+        \nに - NI
+        \nれ - RE
+        \nか - KA
+    </string>
+    <string name="tv_lesson_katakana">
+        Katakana is mainly used for words imported from foreign languages. Katakana represents the same set of phonetic sounds as Hiragana, but all the characters are different from Hiragana.
+
+        \n\nKatakana is tougher to master compared to Hiragana because it is only used for certain words and you do not get nearly as much practice as you do with Hiragana.
+
+    </string>
+
+    <string name="tv_example_katakana" translatable="false">
+        ダ - DA
+        \nカ - KA
+        \nガ - GA
+        \nツ - TSU
+        \nフ - FU
+    </string>
+
+    <string name="tv_lesson_number">
+        Japanese Numbers are fairly simple. It advances on a base ten system, so you’ll be able to use the numbers by learning 1 to 10 and then learning expressions for the digits such as 10, 100 and 1,000.
+    </string>
+
+    <string name="tv_example_number" translatable="false">
+        1 ichi 「いち」
+        \n2 ni 「に」
+        \n3 san 「さん」
+        \n4 yon/shi 「よん/し」
+        \n5 go 「ご」
+        \n6 roku 「ろく」
+        \n7 nana/shichi 「なな/しち」
+        \n8 hachi 「はち」
+        \n9 kyuu/ku 「きゅう/く」
+        \n10 juu 「じゅう」
+        \n100 hyaku「ひゃく」
+        \n1,000 sen「せん」
+        \n10,000 man「まん」
+
+        \n\n12 = 10 + 2 = juuni 「じゅうに」
+        \n43 = 4 + 10 + 3 = yonjuusan 「よんじゅうさん」
+        \n111 = 100 + 10 + 1 = hyakujuuichi 「ひゃくじゅういち」
+
+    </string>
+
+    <string name="tv_lesson_time">
+        Once you know about Japanese number, it becomes easier to give time in Japanese.
+
+        \n\nAppend じ (ji) to the number for hour.
+        \nAppend ふん/ぷん (fun/pun it depends on the number) to the number for minute.
+        \nAppend びょう (byou) to the number for second. However most of the time you will not need to give the seconds of the time.
+        \nごぜん(gozen) for AM
+        \nごご(gogo) for PM
+    </string>
+
+    <string name="tv_example_time" translatable="false">
+        01:00 ichiji 「いちじ」
+        \n03:30 PM gogosanjihan 「ごごさんじはん」
+        \n04:00 AM gozenyoji 「ごぜんよじ」
+    </string>
+
+    <string name="tv_lesson_date">
+        To say date in Japanese, you can for example say:
+
+        \n\n今日は２０２０年２月１１日です
+
+        \n\n今日は(kyou wa) -> today
+        \n２０２０年 (nisennijuunen) -> year 2020
+        \n２月 (nigatsu) -> February
+        \n１１日 (juuichinichi) -> 11th
+        \nです (desu) -> is the polite form of the copula verb meaning "to be" or "is"
+        \n\nFor year, just write the year concerned and then add 年/ねん (nen)
+        \nFor month, just write the month concerned and then add 月/がつ (gatsu)
+        \nFor days of month, just use (number + 日/にち nichi) but it is different for 1-10, 14, 20, 24
+    </string>
+
+    <string name="tv_example_date" translatable="false">
+        1st tsuitachi 「ついたち」
+        \n2nd futsuka 「ふつか」
+        \n3rd mikka 「みっか」
+        \n4th yokka 「よっか」
+        \n5th itsuka 「いつか」
+        \n6th muika 「むいか」
+        \n7th nanoka 「なのか」
+        \n8th youka 「ようか」
+        \n9th kokonoka 「ここのか」
+        \n10th tooka 「とおか」
+        \n14th juuyokka 「じゅうよっか」
+        \n20th hatsuka 「はつか」
+        \n24th nijuuyokka 「にじゅうよっか」
+        \n12th juuninichi 「じゅうににち」
+    </string>
+
+
+    <string name="memorize_game" translatable="false">Memorize</string>
+
+    <string name="how_to_play">How To Play</string>
+
+
+    <string name="gto_desc">Guess the object as many as you can in 60 seconds</string>
+    <string name="memorize_desc">Memorize game desc</string>
+
+    <string name="months_ago">month ago</string>
+    <string name="less_than_a_minute">less than a minute ago</string>
+    <string name="days_ago">day ago</string>
+    <string name="hours_ago">hour ago</string>
+    <string name="minutes_ago">minute ago</string>
+
+    <string name="learning_review_desc">
+        It\'s time to review it all!
+        \n\nIn this section, we will randomly ask 20 questions from all of the lessons that you\'ve cleared.
+        \n\nGood Luck!
+    </string>
+
+    <string name="has_completed_lesson"> has completed lesson </string>
+    <string name="followed_you"> followed you back</string>
+
+    <string name="lg_apprentice">Apprentice</string>
+    <string name="lg_disciple">Disciple</string>
+    <string name="lg_teacher">Teacher</string>
+    <string name="lg_master">Master</string>
+    <string name="lg_scholar">Scholar</string>
+    <string name="check">Check</string>
+
+    <string name="quick_review_desc">
+        It\'s time to review it all!
+
+        \n\nIn this section, you will be reviewing all of the lessons that you\'ve cleared.
+        \nWe will give you 60 seconds to answer all of the questions!
+
+        \n\nGood Luck!
+
+    </string>
+    <string name="set_goal">Set Goal</string>
+    <string name="follow">Follow</string>
+    <string name="followed">Followed</string>
+    <string name="memorize_how_to">Flip the card to reveal a word in japanese or in alphabeth. If you reveal the correct pair then that pair of card will be discarded.\n\nClear all card within 90 seconds in order to win. Don\'t run out of time!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="activity">Activity</string>
+    <string name="total_completed">Total Completed</string>
+
+</resources>
