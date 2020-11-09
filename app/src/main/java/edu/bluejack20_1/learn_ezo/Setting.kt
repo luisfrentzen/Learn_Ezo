@@ -136,6 +136,14 @@ class Setting : Fragment() {
             "sharedPrefs", MODE_PRIVATE
         )
         val editor = sharedPreferences?.edit()
+        val isDarkModeOn = sharedPreferences
+            ?.getBoolean(
+                "isDarkModeOn", false
+            )
+
+        if (isDarkModeOn != null) {
+            darkmodeSwitch.isChecked = isDarkModeOn
+        }
 
         darkmodeSwitch.setOnCheckedChangeListener { view, isChecked ->
             if(isChecked){
