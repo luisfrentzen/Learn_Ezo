@@ -108,7 +108,7 @@ class NavBottom : AppCompatActivity() {
 
         Log.d("desuu", u?.name.toString())
 
-        Home.addUserRecord(u!!.id, 0)
+        Home.addUserRecord(u!!.id, 0, this)
 
         val viewPager : ViewPager2 = findViewById(R.id.viewPager)
         viewPager.adapter = MenuFragmentAdapter(this)

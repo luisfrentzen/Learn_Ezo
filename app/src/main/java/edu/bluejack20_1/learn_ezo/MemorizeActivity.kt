@@ -142,6 +142,8 @@ class MemorizeActivity : AppCompatActivity() {
         finish()
 
         addExp(player)
+        Home.setExp( this, 10)
+        Home.addUserRecord(player.id, 1, this)
     }
 
     fun addExp(player: Player){
