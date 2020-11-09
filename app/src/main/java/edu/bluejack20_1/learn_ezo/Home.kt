@@ -217,12 +217,7 @@ class Home : Fragment() {
             }
 
 
-        fun getTodayDateFormat(): String{
-            val cal : Calendar = Calendar.getInstance()
-
-            val day : String = cal.get(Calendar.DATE).toString()
-            val month : String = cal.get(Calendar.MONTH).toString()
-            val year : String = cal.get(Calendar.YEAR).toString()
+        fun getTodayDateFormat(day: String, month: String, year: String): String{
 
             val date : String = day.plus("-").plus(month).plus("-").plus(year)
 
@@ -237,7 +232,7 @@ class Home : Fragment() {
             val month : String = cal.get(Calendar.MONTH).toString()
             val year : String = cal.get(Calendar.YEAR).toString()
 
-            val date : String = day.plus("-").plus(month).plus("-").plus(year)
+            val date : String = getTodayDateFormat(day, month, year)
 
             var databaseR : DatabaseReference = FirebaseDatabase.getInstance().getReference("records")
 
